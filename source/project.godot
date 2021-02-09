@@ -15,8 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="learning-3d"
-run/main_scene="res://normal-3d-demo/demo.tscn"
+config/name="3D Toon Resources"
+run/main_scene="res://scene.tscn"
 config/icon="res://icon.png"
 
 [debug]

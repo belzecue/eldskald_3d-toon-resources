@@ -1,0 +1,136 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/models/palm-trees/palm-1/palm-stem-1.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/models/palm-trees/coconut/coconut.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/models/palm-trees/palm-leaf-1/palm-leaf.obj" type="ArrayMesh" id=5]
+
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.423529, 0.313726, 0.160784, 1 )
+roughness = 0.8
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_name = "Material.002"
+albedo_color = Color( 0.0823529, 0.172549, 0.027451, 1 )
+metallic_specular = 0.0
+roughness = 0.5
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.141176, 0.262745, 0.0509804, 1 )
+roughness = 0.5
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.258824, 0.376471, 0.184314, 1 )
+metallic_specular = 0.0
+roughness = 0.6
+
+[node name="PalmTree" type="Spatial"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+
+[node name="palm-stem-1" type="MeshInstance" parent="."]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -0.0962913, 2.38419e-07, -0.0206362 )
+material_override = SubResource( 1 )
+mesh = ExtResource( 1 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+
+[node name="palm-leaf" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.994482, 0.10491, 0, -0.10491, 0.994482, -0.554464, 3.74665, -0.00366247 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf2" type="MeshInstance" parent="."]
+transform = Transform( 0.673941, 0.178728, -0.71684, 0, 0.970296, 0.241922, 0.738785, -0.163041, 0.653922, -0.573065, 3.74665, 0.0336044 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf3" type="MeshInstance" parent="."]
+transform = Transform( 0.145824, -0.242484, -0.959133, 0, 0.969497, -0.245104, 0.98931, 0.0357421, 0.141376, -0.554464, 3.74665, -0.00366247 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf4" type="MeshInstance" parent="."]
+transform = Transform( 0.665582, 0.0529575, 0.744443, 0, 0.997479, -0.0709578, -0.746325, 0.0472282, 0.663904, -0.554464, 3.74665, -0.0036625 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf5" type="MeshInstance" parent="."]
+transform = Transform( -0.709608, 0, -0.704597, 0, 1, 0, 0.704597, 0, -0.709608, -0.53381, 3.74375, 0.0181521 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf6" type="MeshInstance" parent="."]
+transform = Transform( -0.995447, -0.0192773, 0.0933527, 0.0130224, 0.942653, 0.33352, -0.0944286, 0.333217, -0.93811, -0.536597, 3.74375, 0.0514324 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf7" type="MeshInstance" parent="."]
+transform = Transform( -0.631515, -0.0813436, 0.771085, 0, 0.994482, 0.10491, -0.775363, 0.0662525, -0.62803, -0.554464, 3.74665, -0.00366247 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf8" type="MeshInstance" parent="."]
+transform = Transform( 0.902006, -0.161727, -0.400287, 0, 0.927184, -0.374607, 0.431724, 0.337897, 0.836325, -0.554464, 3.74665, -0.00366247 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf9" type="MeshInstance" parent="."]
+transform = Transform( -0.989147, -0.0550407, -0.13623, 0, 0.927184, -0.374607, 0.146929, -0.370541, -0.917121, -0.554464, 3.74665, -0.00366247 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf10" type="MeshInstance" parent="."]
+transform = Transform( -0.383812, 0.254527, 0.88764, 0, 0.961262, -0.275637, -0.923411, -0.105793, -0.368944, -0.554464, 3.74665, -0.00366247 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="palm-leaf11" type="MeshInstance" parent="."]
+transform = Transform( 0.290626, -0.322717, 0.900772, 0.0130224, 0.942653, 0.33352, -0.956748, -0.0851992, 0.278162, -0.535843, 3.74375, -0.026035 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 3 )
+
+[node name="coconut2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700862, 3.15809, 0.252747 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 4 )
+
+[node name="coconut3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68831, 3.00965, -0.155715 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 4 )
+
+[node name="coconut7" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.707486, 3.3797, -0.322634 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 4 )
+
+[node name="coconut8" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24892, 3.00738, -0.451957 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 4 )
+
+[node name="coconut4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643574, 3.07069, -0.591128 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 4 )
+
+[node name="coconut5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00368649, 3.23372, -0.211554 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 4 )
