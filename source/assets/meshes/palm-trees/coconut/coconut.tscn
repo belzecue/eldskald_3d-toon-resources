@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/meshes/palm-trees/coconut/coconut.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.258824, 0.376471, 0.184314, 1 )
+metallic_specular = 0.0
+roughness = 0.6
+
+[node name="Coconut" type="MeshInstance"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Terrain_Hill_Side_Sharp.obj-8c3e72f95131a84f2dc93bfc3585c358.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Terrain_Hill_Side_Sharp.obj-8c3e72f95131a84f2dc93bfc3585c358.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_terrain_collection/Hilly_Terrain_Hill_Side_Sharp.obj"
+dest_files=[ "res://.import/Hilly_Terrain_Hill_Side_Sharp.obj-8c3e72f95131a84f2dc93bfc3585c358.mesh", "res://.import/Hilly_Terrain_Hill_Side_Sharp.obj-8c3e72f95131a84f2dc93bfc3585c358.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

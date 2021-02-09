@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/boulder-3.obj-550bbc39a814327a07b8808d7d27c615.mesh"
+
+[deps]
+
+files=[ "res://.import/boulder-3.obj-550bbc39a814327a07b8808d7d27c615.mesh" ]
+
+source_file="res://assets/meshes/stones/large-rocks/boulder-3.obj"
+dest_files=[ "res://.import/boulder-3.obj-550bbc39a814327a07b8808d7d27c615.mesh", "res://.import/boulder-3.obj-550bbc39a814327a07b8808d7d27c615.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

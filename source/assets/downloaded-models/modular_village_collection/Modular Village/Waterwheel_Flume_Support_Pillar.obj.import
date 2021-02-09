@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Waterwheel_Flume_Support_Pillar.obj-078e301ad8b1ebb3cb6d638f86448635.mesh"
+
+[deps]
+
+files=[ "res://.import/Waterwheel_Flume_Support_Pillar.obj-078e301ad8b1ebb3cb6d638f86448635.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_village_collection/Modular Village/Waterwheel_Flume_Support_Pillar.obj"
+dest_files=[ "res://.import/Waterwheel_Flume_Support_Pillar.obj-078e301ad8b1ebb3cb6d638f86448635.mesh", "res://.import/Waterwheel_Flume_Support_Pillar.obj-078e301ad8b1ebb3cb6d638f86448635.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

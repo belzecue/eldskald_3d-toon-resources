@@ -1,0 +1,384 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://player.gd" type="Script" id=1]
+[ext_resource path="res://assets/meshes/tools/axe/axe.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/meshes/campfire/campfire.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/flames/smoke.tscn" type="PackedScene" id=4]
+[ext_resource path="res://normal-3d-demo/night.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/flames/FireMask.png" type="Texture" id=6]
+[ext_resource path="res://assets/flames/WispyNoise.png" type="Texture" id=7]
+[ext_resource path="res://assets/meshes/food/skewered-fish/skewered-fish.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/flames/flames.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/meshes/tools/bottles/bottle-1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/meshes/logs/log-2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/meshes/logs/log-1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/meshes/palm-trees/palm-3/palm-tree.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/meshes/palm-trees/palm-1/palm-tree.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/meshes/palm-trees/palm-2/palm-tree.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/meshes/palm-trees/coconut/coconut.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/meshes/tools/bottles/bottle-2.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/meshes/tools/bottles/bottle-3.tscn" type="PackedScene" id=18]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
+sky_horizon_color = Color( 0.352941, 0.45098, 0.52549, 1 )
+ground_bottom_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
+ground_horizon_color = Color( 0.352941, 0.45098, 0.52549, 1 )
+sun_color = Color( 0.776471, 0.862745, 0.964706, 1 )
+sun_latitude = 30.0
+sun_longitude = -180.0
+sun_curve = 0.000612955
+sun_energy = 2.0
+
+[sub_resource type="Environment" id=2]
+resource_local_to_scene = true
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
+background_canvas_max_layer = 1
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.25
+fog_enabled = true
+fog_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
+fog_sun_color = Color( 0.564706, 0.729412, 0.92549, 1 )
+fog_sun_amount = 0.13
+fog_depth_begin = 0.0
+fog_depth_end = 1024.7
+fog_depth_curve = 0.615572
+fog_height_min = 148.2
+fog_height_max = -171.5
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_blend_mode = 1
+glow_hdr_threshold = 0.44
+glow_bicubic_upscale = true
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.231373, 0.145098, 0.0901961, 1 )
+roughness = 0.7
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.247059, 0.219608, 0.196078, 1 )
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="SpatialMaterial" id=5]
+resource_local_to_scene = true
+albedo_color = Color( 0.670588, 0.423529, 0.156863, 0.784314 )
+metallic = 0.5
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=6]
+resource_local_to_scene = true
+albedo_color = Color( 0.670588, 0.423529, 0.156863, 0.784314 )
+metallic = 0.5
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=7]
+resource_local_to_scene = true
+albedo_color = Color( 0.670588, 0.423529, 0.156863, 0.784314 )
+metallic = 0.5
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=8]
+resource_local_to_scene = true
+albedo_color = Color( 0.262745, 0.592157, 0.592157, 0.784314 )
+metallic = 0.5
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=9]
+resource_local_to_scene = true
+albedo_color = Color( 0.632363, 0.352646, 0.746094, 0.784314 )
+metallic = 0.5
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=10]
+resource_local_to_scene = true
+albedo_color = Color( 0.632363, 0.352646, 0.746094, 0.784314 )
+metallic = 0.5
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=11]
+resource_local_to_scene = true
+albedo_color = Color( 0.262745, 0.592157, 0.592157, 0.784314 )
+metallic = 0.5
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture_channel = 0
+
+[sub_resource type="QuadMesh" id=12]
+size = Vector2( 100, 100 )
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 0.901961, 0.803922, 0.564706, 1 )
+metallic = 0.5
+roughness = 0.5
+uv1_scale = Vector3( 50, 50, 1 )
+
+[sub_resource type="Shader" id=14]
+code = "// This shader is based on Minionsart's stylized fire
+// https://twitter.com/minionsart/status/1132593681452683264?s=20
+
+shader_type spatial;
+render_mode blend_mix;
+
+// This texture must be seamless!
+// Experiment with the different noises provided in the res://Demos/StylizedFire/ folder
+uniform sampler2D noise_texture;
+
+uniform sampler2D texture_mask;
+uniform float emission_intensity = 2.0;
+uniform float time_scale = 3.0;
+uniform vec2 texture_scale = vec2(1.0);
+uniform float edge_softness = 0.1;
+
+varying vec3 world_coord;
+varying float world_x_dot;
+
+
+void vertex() {
+	// Billboard code, taken directly from a spatial material
+	// create a spatial material, enable billboard with billboard keep scale, and then convert
+	// to shader material, and it will create a shader with this code.
+	mat4 mat_world = mat4(normalize(CAMERA_MATRIX[0])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[1])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[2])*length(WORLD_MATRIX[2]),WORLD_MATRIX[3]);
+	mat_world = mat_world * mat4( vec4(cos(INSTANCE_CUSTOM.x),-sin(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(sin(INSTANCE_CUSTOM.x), cos(INSTANCE_CUSTOM.x), 0.0, 0.0),vec4(0.0, 0.0, 1.0, 0.0),vec4(0.0, 0.0, 0.0, 1.0));
+	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat_world;
+	
+	// We map the coordinates on the vertical planes xy and zy
+	// we also calculate how to blend between the two based on where the world space normal
+	// is pointing.
+	world_coord = (mat_world * vec4(VERTEX, 1.0)).rgb;
+	vec4 world_normal = (mat_world * vec4(NORMAL, 0.0));
+	world_x_dot =  abs(dot(normalize(world_normal.rgb), vec3(1.0,0.0,0.0)));
+}
+
+
+void fragment() {
+	
+	// We sample the mask texture based on regular UV
+	// We don't want the particles to show their square shape
+	// so we use a round, black and white, mask texture
+	float mask = texture(texture_mask, UV).r;
+	
+	// We sample the noise both from the xy plane and from the zy plane, adding a time-based
+	// panning. If we didn't do this, we would see the holes of the noise will always be in the
+	// same space in global coordinates. Set the time_scale to zero to see how it would look like.
+	// To add more variation, we could sample from another noise that has a different scale and panning speed.
+	// The additional offset on the zy noise is to avoid mirroring effects when
+	// the view vector is between same-sign x and z axes
+	vec2 time_based_pan = vec2(0.2, 1.0) * (- TIME * time_scale);
+	float noise_xy = texture(noise_texture, world_coord.xy * texture_scale + time_based_pan).r;
+	float noise_zy = texture(noise_texture, world_coord.zy * texture_scale + time_based_pan + vec2(0.7, 0.3)).r;
+	
+	// We blend the noise based on world_x_dot, which is the dot product between
+	// the normal of the billboard plane, and the global x axis. If we face the global
+	// x axis, then we sample from the xy plane, otherwise, we sample from the zy plane
+	float noise = mix(noise_xy, noise_zy, clamp(world_x_dot, 0.0, 1.0));
+	
+	// The particle color is assigned to the vertex color, which is called COLOR
+	ALBEDO = COLOR.rgb;
+	// Assign the same color for emission, multiplied by the emission intensity
+	EMISSION = ALBEDO * emission_intensity;
+	
+	// Instead of blending out the particle, we apply a technique called alpha erosion, where we
+	// subtract an erosion amount from the alpha.
+	float erosion_amount = (1.0 - COLOR.a);
+	float alpha = (noise * mask) - erosion_amount;
+	
+	// Because we perform a subtraction, we ensure that the alpha is always between 0 and 1.
+	// If the alpha goes negative or above 1, a number of visual artifacts appear.
+	alpha = clamp(alpha, 0.0, 1.0);
+	
+	// In order to give this fire a stylized vibe, we use smoothstep to remap the alpha value
+	// We could use step(0.1, alpha), but then there would be an abrupt cut between transparent and
+	// non transparent (exactly as if we discarded the fragment with discard)
+	// smoothstep gives a nice blend on the edges instead
+	ALPHA = smoothstep(0.0, edge_softness, alpha);
+}
+
+
+"
+
+[sub_resource type="ShaderMaterial" id=15]
+resource_local_to_scene = true
+shader = SubResource( 14 )
+shader_param/emission_intensity = 2.0
+shader_param/time_scale = 3.0
+shader_param/texture_scale = Vector2( 1, 1 )
+shader_param/edge_softness = 0.1
+shader_param/noise_texture = ExtResource( 7 )
+shader_param/texture_mask = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=16]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.253061, 1 )
+colors = PoolColorArray( 0.921875, 0.870269, 0.687805, 1, 0.996078, 0.482353, 0, 0.784314, 1, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=17]
+resource_local_to_scene = true
+gradient = SubResource( 16 )
+width = 128
+
+[sub_resource type="Curve" id=18]
+resource_local_to_scene = true
+_data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.597015, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+resource_local_to_scene = true
+width = 128
+curve = SubResource( 18 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+resource_local_to_scene = true
+lifetime_randomness = 0.81
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.5
+linear_accel = 4.0
+scale = 2.0
+scale_random = 1.0
+scale_curve = SubResource( 19 )
+color_ramp = SubResource( 17 )
+
+[node name="Demo" type="Spatial"]
+
+[node name="Night" parent="." instance=ExtResource( 5 )]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1000, 0 )
+light_color = Color( 0.776471, 0.862745, 0.964706, 1 )
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )
+script = ExtResource( 1 )
+speed = 3.5
+mouse_sensitivity = 1.0
+
+[node name="Camera" type="Camera" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="Meshes" type="Spatial" parent="."]
+
+[node name="Log" parent="Meshes" instance=ExtResource( 12 )]
+transform = Transform( 1.39891, 0, -0.0552811, 0, 1.4, 0, 0.0552811, 0, 1.39891, 1.40879, 0.15671, 0.245499 )
+
+[node name="Log2" parent="Meshes" instance=ExtResource( 11 )]
+transform = Transform( 0.362347, 0, 1.3523, 0, 1.4, 0, -1.3523, 0, 0.362347, 0.5, 0.16209, -1.5 )
+
+[node name="Log3" parent="Meshes" instance=ExtResource( 12 )]
+transform = Transform( -0.385802, 1.05998, -0.829212, -1.31557, -0.478828, -1.42702e-08, -0.283608, 0.779205, 1.12801, -1.19046, 0.199864, -0.905724 )
+
+[node name="PalmTree" parent="Meshes" instance=ExtResource( 13 )]
+transform = Transform( -0.351109, 0, -0.662738, 0, 0.75, 0, 0.662738, 0, -0.351109, -3.50683, -0.0850963, 0.866621 )
+
+[node name="PalmTree2" parent="Meshes" instance=ExtResource( 14 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 2.69627, 0.0528808, -4.4569 )
+
+[node name="PalmTree3" parent="Meshes" instance=ExtResource( 14 )]
+transform = Transform( 0.21855, 0, -0.769569, 0, 0.8, 0, 0.769569, 0, 0.21855, 2.78788, 0.0528808, 2.56672 )
+
+[node name="PalmTree4" parent="Meshes" instance=ExtResource( 15 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.48707, 0.114142, -4.4323 )
+
+[node name="Coconut" parent="Meshes" instance=ExtResource( 16 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1.6854, 0.0943154, -0.98734 )
+
+[node name="Coconut2" parent="Meshes" instance=ExtResource( 16 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.02082, 0.0943154, -0.914623 )
+
+[node name="Coconut7" parent="Meshes" instance=ExtResource( 16 )]
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 1.87077, 0.0943154, -1.2513 )
+
+[node name="Axe" parent="Meshes" instance=ExtResource( 2 )]
+transform = Transform( -0.414759, 0.778861, 0.470479, -0.0228998, -0.52582, 0.850288, 0.909643, 0.34189, 0.235924, -1.25583, 0.658107, -0.788975 )
+material/0 = SubResource( 3 )
+material/1 = SubResource( 4 )
+
+[node name="SkeweredFish" parent="Meshes" instance=ExtResource( 8 )]
+transform = Transform( 0.108452, 0.208082, 0.97208, -0.023072, 0.978111, -0.206799, -0.993834, 0, 0.110879, -0.951467, 0.450815, 0.342586 )
+
+[node name="SkeweredFish2" parent="Meshes" instance=ExtResource( 8 )]
+transform = Transform( 0.687639, 0.350762, 0.868468, -0.215, 1.14757, -0.260897, 0.83122, 0.00665212, -0.785936, -0.835977, 0.361217, 0.572569 )
+
+[node name="SkeweredFish3" parent="Meshes" instance=ExtResource( 8 )]
+transform = Transform( 0.32227, 0.184783, 0.941128, -0.186272, 0.876128, -0.168077, -1.14081, -0.090855, 0.293306, -0.874277, 0.414329, 0.138094 )
+
+[node name="Bottle" parent="Meshes" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.682487, 0.128119, 0.617397 )
+material/0 = SubResource( 5 )
+
+[node name="Bottle2" parent="Meshes" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866051, 0.128119, 0.422869 )
+material/0 = SubResource( 6 )
+
+[node name="Bottle3" parent="Meshes" instance=ExtResource( 17 )]
+transform = Transform( 0.91548, -0.402363, 6.55533e-08, 0, -1.62921e-07, -1, 0.402363, 0.91548, -1.49151e-07, 0.813403, 0.068335, 0.843352 )
+material/0 = SubResource( 7 )
+
+[node name="Bottle4" parent="Meshes" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.561125, 0.128119, -1.11865 )
+material/0 = SubResource( 8 )
+
+[node name="Bottle5" parent="Meshes" instance=ExtResource( 18 )]
+transform = Transform( -1.36646e-07, -0.838728, 0.544551, 1, -1.62921e-07, 0, 8.87187e-08, 0.544551, 0.838728, 1.05752, 0.0622248, -0.905277 )
+material/0 = SubResource( 9 )
+
+[node name="Bottle6" parent="Meshes" instance=ExtResource( 18 )]
+transform = Transform( 0.299241, 0, 0.954178, 0, 1, 0, -0.954178, 0, 0.299241, -0.377329, 0.128119, -1.06244 )
+material/0 = SubResource( 10 )
+
+[node name="Bottle7" parent="Meshes" instance=ExtResource( 10 )]
+transform = Transform( 0.935857, -0.352381, 5.74101e-08, 0, -1.62921e-07, -1, 0.352381, 0.935857, -1.5247e-07, -1.10439, 0.0733918, -0.176602 )
+material/0 = SubResource( 11 )
+
+[node name="Ground" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="Campfire" parent="." instance=ExtResource( 3 )]
+
+[node name="Flames" parent="Campfire" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+material_override = SubResource( 15 )
+amount = 32
+process_material = SubResource( 20 )
+
+[node name="Smoke" parent="Campfire" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="OmniLight" type="OmniLight" parent="Campfire"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, 0 )
+light_color = Color( 0.984314, 0.792157, 0.137255, 1 )
+light_energy = 3.0
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_reverse_cull_face = true

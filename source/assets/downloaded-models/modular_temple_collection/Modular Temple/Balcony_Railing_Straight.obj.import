@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Balcony_Railing_Straight.obj-bd0a4614b14fe6f6513a4abfa1eca739.mesh"
+
+[deps]
+
+files=[ "res://.import/Balcony_Railing_Straight.obj-bd0a4614b14fe6f6513a4abfa1eca739.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_temple_collection/Modular Temple/Balcony_Railing_Straight.obj"
+dest_files=[ "res://.import/Balcony_Railing_Straight.obj-bd0a4614b14fe6f6513a4abfa1eca739.mesh", "res://.import/Balcony_Railing_Straight.obj-bd0a4614b14fe6f6513a4abfa1eca739.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

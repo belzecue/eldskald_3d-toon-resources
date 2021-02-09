@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Puzzle_Floor_Conduit_Standard_Corner.obj-e3a70e191d3d719cb241b0e2ec226afa.mesh"
+
+[deps]
+
+files=[ "res://.import/Puzzle_Floor_Conduit_Standard_Corner.obj-e3a70e191d3d719cb241b0e2ec226afa.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_temple_collection/Modular Temple/Puzzle_Floor_Conduit_Standard_Corner.obj"
+dest_files=[ "res://.import/Puzzle_Floor_Conduit_Standard_Corner.obj-e3a70e191d3d719cb241b0e2ec226afa.mesh", "res://.import/Puzzle_Floor_Conduit_Standard_Corner.obj-e3a70e191d3d719cb241b0e2ec226afa.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

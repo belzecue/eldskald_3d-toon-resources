@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Fence_Hill_Gentle.obj-eb7ca3532ad4e043df85ecf134522ad4.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Fence_Hill_Gentle.obj-eb7ca3532ad4e043df85ecf134522ad4.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_terrain_collection/Hilly_Prop_Fence_Hill_Gentle.obj"
+dest_files=[ "res://.import/Hilly_Prop_Fence_Hill_Gentle.obj-eb7ca3532ad4e043df85ecf134522ad4.mesh", "res://.import/Hilly_Prop_Fence_Hill_Gentle.obj-eb7ca3532ad4e043df85ecf134522ad4.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

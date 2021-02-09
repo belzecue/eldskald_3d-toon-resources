@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Beach_Terrain_Sand_Corner_Inner_4x4.obj-db701e5efb006a37f6a40e158964c90e.mesh"
+
+[deps]
+
+files=[ "res://.import/Beach_Terrain_Sand_Corner_Inner_4x4.obj-db701e5efb006a37f6a40e158964c90e.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_terrain_collection/Beach_Terrain_Sand_Corner_Inner_4x4.obj"
+dest_files=[ "res://.import/Beach_Terrain_Sand_Corner_Inner_4x4.obj-db701e5efb006a37f6a40e158964c90e.mesh", "res://.import/Beach_Terrain_Sand_Corner_Inner_4x4.obj-db701e5efb006a37f6a40e158964c90e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

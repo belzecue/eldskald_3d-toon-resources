@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Terrain_Side_Top.obj-00a84190dcb579fdbc6fdefbb51785d9.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Terrain_Side_Top.obj-00a84190dcb579fdbc6fdefbb51785d9.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_terrain_collection/Cave_Terrain_Side_Top.obj"
+dest_files=[ "res://.import/Cave_Terrain_Side_Top.obj-00a84190dcb579fdbc6fdefbb51785d9.mesh", "res://.import/Cave_Terrain_Side_Top.obj-00a84190dcb579fdbc6fdefbb51785d9.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Balcony_Base_Straight.obj-0fd5919def232d18956413a69a6590ad.mesh"
+
+[deps]
+
+files=[ "res://.import/Balcony_Base_Straight.obj-0fd5919def232d18956413a69a6590ad.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_temple_collection/Modular Temple/Balcony_Base_Straight.obj"
+dest_files=[ "res://.import/Balcony_Base_Straight.obj-0fd5919def232d18956413a69a6590ad.mesh", "res://.import/Balcony_Base_Straight.obj-0fd5919def232d18956413a69a6590ad.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

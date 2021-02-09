@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Escarpment_Terrain_Side_Falloff_Edge.obj-7ff0324298ad10550ba920b0cbac4ce8.mesh"
+
+[deps]
+
+files=[ "res://.import/Escarpment_Terrain_Side_Falloff_Edge.obj-7ff0324298ad10550ba920b0cbac4ce8.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_terrain_collection/Escarpment_Terrain_Side_Falloff_Edge.obj"
+dest_files=[ "res://.import/Escarpment_Terrain_Side_Falloff_Edge.obj-7ff0324298ad10550ba920b0cbac4ce8.mesh", "res://.import/Escarpment_Terrain_Side_Falloff_Edge.obj-7ff0324298ad10550ba920b0cbac4ce8.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

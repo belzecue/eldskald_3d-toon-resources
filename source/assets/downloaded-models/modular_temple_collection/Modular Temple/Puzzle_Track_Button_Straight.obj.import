@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Puzzle_Track_Button_Straight.obj-3a014e3d114a19a95cabb597ff816c7e.mesh"
+
+[deps]
+
+files=[ "res://.import/Puzzle_Track_Button_Straight.obj-3a014e3d114a19a95cabb597ff816c7e.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_temple_collection/Modular Temple/Puzzle_Track_Button_Straight.obj"
+dest_files=[ "res://.import/Puzzle_Track_Button_Straight.obj-3a014e3d114a19a95cabb597ff816c7e.mesh", "res://.import/Puzzle_Track_Button_Straight.obj-3a014e3d114a19a95cabb597ff816c7e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

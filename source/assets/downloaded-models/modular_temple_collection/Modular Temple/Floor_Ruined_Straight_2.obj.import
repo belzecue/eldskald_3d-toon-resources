@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Floor_Ruined_Straight_2.obj-b8f65ef9abea94ff088f5efa8009d3f6.mesh"
+
+[deps]
+
+files=[ "res://.import/Floor_Ruined_Straight_2.obj-b8f65ef9abea94ff088f5efa8009d3f6.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_temple_collection/Modular Temple/Floor_Ruined_Straight_2.obj"
+dest_files=[ "res://.import/Floor_Ruined_Straight_2.obj-b8f65ef9abea94ff088f5efa8009d3f6.mesh", "res://.import/Floor_Ruined_Straight_2.obj-b8f65ef9abea94ff088f5efa8009d3f6.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

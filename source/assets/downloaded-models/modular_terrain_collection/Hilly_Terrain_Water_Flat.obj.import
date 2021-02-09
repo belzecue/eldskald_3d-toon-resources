@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Terrain_Water_Flat.obj-7f52537ac79f7307c139e77f5f1f3590.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Terrain_Water_Flat.obj-7f52537ac79f7307c139e77f5f1f3590.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_terrain_collection/Hilly_Terrain_Water_Flat.obj"
+dest_files=[ "res://.import/Hilly_Terrain_Water_Flat.obj-7f52537ac79f7307c139e77f5f1f3590.mesh", "res://.import/Hilly_Terrain_Water_Flat.obj-7f52537ac79f7307c139e77f5f1f3590.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

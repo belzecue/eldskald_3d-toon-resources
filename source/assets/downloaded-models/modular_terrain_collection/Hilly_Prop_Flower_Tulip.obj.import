@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Flower_Tulip.obj-c539039c8d2decc5137743e42e52daa9.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Flower_Tulip.obj-c539039c8d2decc5137743e42e52daa9.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_terrain_collection/Hilly_Prop_Flower_Tulip.obj"
+dest_files=[ "res://.import/Hilly_Prop_Flower_Tulip.obj-c539039c8d2decc5137743e42e52daa9.mesh", "res://.import/Hilly_Prop_Flower_Tulip.obj-c539039c8d2decc5137743e42e52daa9.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

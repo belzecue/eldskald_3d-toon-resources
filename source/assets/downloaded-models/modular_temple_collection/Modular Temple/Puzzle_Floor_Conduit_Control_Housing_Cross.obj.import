@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Puzzle_Floor_Conduit_Control_Housing_Cross.obj-a35678d37ce1ceb52c7ea58a286cc13c.mesh"
+
+[deps]
+
+files=[ "res://.import/Puzzle_Floor_Conduit_Control_Housing_Cross.obj-a35678d37ce1ceb52c7ea58a286cc13c.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_temple_collection/Modular Temple/Puzzle_Floor_Conduit_Control_Housing_Cross.obj"
+dest_files=[ "res://.import/Puzzle_Floor_Conduit_Control_Housing_Cross.obj-a35678d37ce1ceb52c7ea58a286cc13c.mesh", "res://.import/Puzzle_Floor_Conduit_Control_Housing_Cross.obj-a35678d37ce1ceb52c7ea58a286cc13c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

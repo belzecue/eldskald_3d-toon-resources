@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/palm-stem-2.obj-ed5c4b8beb0977786d6ad84ae5d37978.mesh"
+
+[deps]
+
+files=[ "res://.import/palm-stem-2.obj-ed5c4b8beb0977786d6ad84ae5d37978.mesh" ]
+
+source_file="res://assets/meshes/palm-trees/palm-2/palm-stem-2.obj"
+dest_files=[ "res://.import/palm-stem-2.obj-ed5c4b8beb0977786d6ad84ae5d37978.mesh", "res://.import/palm-stem-2.obj-ed5c4b8beb0977786d6ad84ae5d37978.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

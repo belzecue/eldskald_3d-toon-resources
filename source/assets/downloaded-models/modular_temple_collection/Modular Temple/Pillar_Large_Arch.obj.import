@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Pillar_Large_Arch.obj-cd224d301684a8e8f080671d5cb407ba.mesh"
+
+[deps]
+
+files=[ "res://.import/Pillar_Large_Arch.obj-cd224d301684a8e8f080671d5cb407ba.mesh" ]
+
+source_file="res://assets/downloaded-models/modular_temple_collection/Modular Temple/Pillar_Large_Arch.obj"
+dest_files=[ "res://.import/Pillar_Large_Arch.obj-cd224d301684a8e8f080671d5cb407ba.mesh", "res://.import/Pillar_Large_Arch.obj-cd224d301684a8e8f080671d5cb407ba.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
