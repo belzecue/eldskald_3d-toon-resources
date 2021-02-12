@@ -1,9 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/models/palm-trees/coconut/toon-coconut.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/shader-materials/toon-outline.tres" type="Material" id=2]
 [ext_resource path="res://assets/models/palm-trees/palm-2/palm-stem-2.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://assets/models/palm-trees/palm-leaf-1/palm-leaf.obj" type="ArrayMesh" id=4]
+
 
 
 [sub_resource type="SpatialMaterial" id=1]

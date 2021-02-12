@@ -1,23 +1,39 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/models/campfire/campfire.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/shader-materials/toon-outline.tres" type="Material" id=2]
 
 
 [sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0.631373, 0.623529, 0.611765, 1 )
-metallic = 0.5
-roughness = 0.5
+next_pass = ExtResource( 2 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+metallic_specular = 0.0
+roughness = 0.01
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.219608, 0.180392, 0.117647, 1 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.0784314, 0.0705882, 0.0588235, 1 )
+metallic_specular = 0.0
+roughness = 0.01
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.423529, 0.313726, 0.160784, 1 )
-roughness = 0.7
+next_pass = ExtResource( 2 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.215686, 0.14902, 0.054902, 1 )
+metallic_specular = 0.0
+roughness = 0.01
 
 [sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.635294, 0.537255, 0.4, 1 )
-roughness = 0.7
+next_pass = ExtResource( 2 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.313726, 0.258824, 0.184314, 1 )
+metallic_specular = 0.0
+roughness = 0.01
 
 [node name="Campfire" type="MeshInstance"]
 mesh = ExtResource( 1 )

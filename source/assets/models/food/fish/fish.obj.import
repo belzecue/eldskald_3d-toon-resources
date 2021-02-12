@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/fish.obj-f8b0c6d23dca0601a73695a0fe29d31b.mesh"
+
+[deps]
+
+files=[ "res://.import/fish.obj-f8b0c6d23dca0601a73695a0fe29d31b.mesh" ]
+
+source_file="res://assets/models/food/fish/fish.obj"
+dest_files=[ "res://.import/fish.obj-f8b0c6d23dca0601a73695a0fe29d31b.mesh", "res://.import/fish.obj-f8b0c6d23dca0601a73695a0fe29d31b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -3,7 +3,8 @@
 [ext_resource path="res://assets/shader-materials/toon-outline.tres" type="Material" id=1]
 [ext_resource path="res://assets/models/palm-trees/palm-3/palm-stem-3.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://assets/models/palm-trees/palm-leaf-1/palm-leaf.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://assets/models/palm-trees/coconut/toon-coconut.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=4]
+
 
 
 [sub_resource type="SpatialMaterial" id=1]

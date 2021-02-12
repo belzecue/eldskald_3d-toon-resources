@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/guitar.obj-1b9f54adb902dd44f2bb874a15519b57.mesh"
+
+[deps]
+
+files=[ "res://.import/guitar.obj-1b9f54adb902dd44f2bb874a15519b57.mesh" ]
+
+source_file="res://assets/models/tools/guitar/guitar.obj"
+dest_files=[ "res://.import/guitar.obj-1b9f54adb902dd44f2bb874a15519b57.mesh", "res://.import/guitar.obj-1b9f54adb902dd44f2bb874a15519b57.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

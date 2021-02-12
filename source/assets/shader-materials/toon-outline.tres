@@ -4,7 +4,7 @@
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_alpha_prepass;
+render_mode cull_front, unshaded, depth_draw_always;
 
 uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float outline_width = 1.0;

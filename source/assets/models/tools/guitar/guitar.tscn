@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/models/tools/guitar/guitar.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/shader-materials/toon-outline.tres" type="Material" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+next_pass = ExtResource( 2 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.34902, 0.25098, 0.0862745, 1 )
+metallic_specular = 0.0
+roughness = 0.02
+
+[sub_resource type="SpatialMaterial" id=2]
+next_pass = ExtResource( 2 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.172549, 0.0901961, 0.0313726, 1 )
+metallic_specular = 0.0
+roughness = 0.02
+
+[sub_resource type="SpatialMaterial" id=3]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0, 0, 0, 1 )
+metallic_specular = 0.0
+roughness = 0.02
+
+[sub_resource type="SpatialMaterial" id=4]
+next_pass = ExtResource( 2 )
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.396078, 0.396078, 0.396078, 1 )
+metallic_specular = 0.0
+roughness = 0.02
+
+[sub_resource type="SpatialMaterial" id=5]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+metallic_specular = 0.0
+roughness = 0.02
+
+[node name="Guitar" type="MeshInstance"]
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
+material/1 = SubResource( 2 )
+material/2 = SubResource( 3 )
+material/3 = SubResource( 2 )
+material/4 = SubResource( 3 )
+material/5 = SubResource( 4 )
+material/6 = SubResource( 4 )
+material/7 = SubResource( 5 )
