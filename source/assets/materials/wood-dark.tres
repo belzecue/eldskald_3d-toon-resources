@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/shader-codes/toon-shader/base-toon.shader" type="Shader" id=2]
 
 [resource]
-resource_local_to_scene = true
 next_pass = ExtResource( 1 )
 shader = ExtResource( 2 )
 shader_param/albedo = Color( 0.207843, 0.109804, 0.0470588, 1 )

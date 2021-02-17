@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/materials/wood-light.tres" type="Material" id=1]
+[ext_resource path="res://assets/models/wood/steps/stairs.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/materials/wood-dark.tres" type="Material" id=3]
+
+
+[node name="WoodenStairs" type="MeshInstance"]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 1 )
+material/2 = ExtResource( 1 )
+material/3 = ExtResource( 1 )
+material/4 = ExtResource( 1 )
+material/5 = ExtResource( 1 )
+material/6 = ExtResource( 1 )
+material/7 = ExtResource( 1 )
+material/8 = ExtResource( 1 )
+material/9 = ExtResource( 1 )
+material/10 = ExtResource( 1 )
+material/11 = ExtResource( 1 )
+material/12 = ExtResource( 1 )
+material/13 = ExtResource( 1 )
+material/14 = ExtResource( 1 )

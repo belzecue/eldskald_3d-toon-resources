@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/timber-1.obj-bae15479cfa01c8c386a46340605a563.mesh"
+
+[deps]
+
+files=[ "res://.import/timber-1.obj-bae15479cfa01c8c386a46340605a563.mesh" ]
+
+source_file="res://assets/models/logs/timbers/timber-1.obj"
+dest_files=[ "res://.import/timber-1.obj-bae15479cfa01c8c386a46340605a563.mesh", "res://.import/timber-1.obj-bae15479cfa01c8c386a46340605a563.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -80,15 +80,17 @@ void light() {
 	float shade = clamp(dot(NORMAL, LIGHT), 0.0, 1.0);
 	float dark_shade = smoothstep(0.0, lighting_smoothness, shade);
 	float half_shade = smoothstep(lighting_half_band, lighting_half_band + lighting_smoothness, shade);
-	float litness = dark_shade/2.0 + half_shade/2.0; // We'll use this value on spec and rim to check for shading
-	DIFFUSE_LIGHT += ALBEDO * ATTENUATION * LIGHT_COLOR * mix(lighting, 1.0, litness);
+	vec3 litness = (dark_shade/2.0 + half_shade/2.0) * ATTENUATION;
+	DIFFUSE_LIGHT.r += ALBEDO.r * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);
+	DIFFUSE_LIGHT.g += ALBEDO.g * LIGHT_COLOR.g * mix(lighting, 1.0, litness.g);
+	DIFFUSE_LIGHT.b += ALBEDO.b * LIGHT_COLOR.b * mix(lighting, 1.0, litness.b);
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.
 	vec3 half = normalize(VIEW + LIGHT);
 	float spec_intensity = pow(dot(NORMAL, half), specular_glossiness * specular_glossiness);
 	spec_intensity = smoothstep(0.05, 0.05 + specular_smoothness, spec_intensity);
-	SPECULAR_LIGHT += ATTENUATION * mix(vec3(0.0), LIGHT_COLOR, specular) * spec_intensity * litness;
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, specular) * spec_intensity * litness;
 	
 	// Rim part. We use the view and normal vectors only to find out if we're looking
 	// at a pixel from the edge of the object or not. We add the final value to specular
@@ -96,7 +98,7 @@ void light() {
 	float rim_dot = 1.0 - dot(NORMAL, VIEW);
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
-	SPECULAR_LIGHT += ATTENUATION * mix(vec3(0.0), LIGHT_COLOR, rim) * rim_intensity * litness;
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim) * rim_intensity * litness;
 }
 
 

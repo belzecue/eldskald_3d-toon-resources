@@ -44,7 +44,6 @@ shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
 [resource]
-resource_local_to_scene = true
 next_pass = SubResource( 2 )
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )

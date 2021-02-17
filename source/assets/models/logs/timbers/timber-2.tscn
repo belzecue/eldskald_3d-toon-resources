@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/materials/sapwood.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/bark-dark.tres" type="Material" id=2]
+[ext_resource path="res://assets/models/logs/timbers/timber-2.obj" type="ArrayMesh" id=3]
+
+
+[node name="Timber" type="MeshInstance"]
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 1 )
