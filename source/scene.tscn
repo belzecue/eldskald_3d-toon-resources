@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=2]
@@ -33,6 +33,9 @@
 [ext_resource path="res://assets/shader-codes/toon-shader/base-toon.shader" type="Shader" id=31]
 [ext_resource path="res://assets/models/logs/timber-pile.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/models/palm-trees/palm-tree.tscn" type="PackedScene" id=33]
+[ext_resource path="res://assets/materials/stone.tres" type="Material" id=34]
+[ext_resource path="res://assets/materials/grass.tres" type="Material" id=35]
+[ext_resource path="res://assets/models/grounds/cliff-1.obj" type="ArrayMesh" id=36]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
@@ -69,7 +72,7 @@ glow_blend_mode = 1
 glow_hdr_threshold = 0.44
 glow_bicubic_upscale = true
 
-[sub_resource type="Shader" id=15]
+[sub_resource type="Shader" id=3]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -104,15 +107,15 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=16]
+[sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
-shader = SubResource( 15 )
+shader = SubResource( 3 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=17]
+[sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-next_pass = SubResource( 16 )
+next_pass = SubResource( 4 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
 shader_param/roughness = 1.0
@@ -131,7 +134,7 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="Shader" id=18]
+[sub_resource type="Shader" id=6]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -166,15 +169,15 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=19]
+[sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
-shader = SubResource( 18 )
+shader = SubResource( 6 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
-next_pass = SubResource( 19 )
+next_pass = SubResource( 7 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
 shader_param/roughness = 1.0
@@ -193,7 +196,7 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="Shader" id=21]
+[sub_resource type="Shader" id=9]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -228,9 +231,171 @@ void fragment() {
 
 "
 
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = SubResource( 9 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+next_pass = SubResource( 10 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+next_pass = SubResource( 12 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=14]
+resource_local_to_scene = true
+shader = SubResource( 6 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=15]
+resource_local_to_scene = true
+next_pass = SubResource( 14 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=16]
+resource_local_to_scene = true
+shader = SubResource( 9 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+next_pass = SubResource( 16 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=18]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+next_pass = SubResource( 18 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=20]
+resource_local_to_scene = true
+shader = SubResource( 6 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+next_pass = SubResource( 20 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
 [sub_resource type="ShaderMaterial" id=22]
 resource_local_to_scene = true
-shader = SubResource( 21 )
+shader = SubResource( 9 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
@@ -257,7 +422,7 @@ shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=24]
 resource_local_to_scene = true
-shader = SubResource( 15 )
+shader = SubResource( 3 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
@@ -284,7 +449,7 @@ shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=26]
 resource_local_to_scene = true
-shader = SubResource( 18 )
+shader = SubResource( 6 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
@@ -311,7 +476,7 @@ shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=28]
 resource_local_to_scene = true
-shader = SubResource( 21 )
+shader = SubResource( 9 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
@@ -336,169 +501,7 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=30]
-resource_local_to_scene = true
-shader = SubResource( 15 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=31]
-resource_local_to_scene = true
-next_pass = SubResource( 30 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=32]
-resource_local_to_scene = true
-shader = SubResource( 18 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=33]
-resource_local_to_scene = true
-next_pass = SubResource( 32 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=34]
-resource_local_to_scene = true
-shader = SubResource( 21 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=35]
-resource_local_to_scene = true
-next_pass = SubResource( 34 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=36]
-resource_local_to_scene = true
-shader = SubResource( 15 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=37]
-resource_local_to_scene = true
-next_pass = SubResource( 36 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=38]
-resource_local_to_scene = true
-shader = SubResource( 18 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=39]
-resource_local_to_scene = true
-next_pass = SubResource( 38 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=40]
-resource_local_to_scene = true
-shader = SubResource( 21 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=41]
-resource_local_to_scene = true
-next_pass = SubResource( 40 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="Shader" id=42]
+[sub_resource type="Shader" id=30]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -533,15 +536,15 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=43]
+[sub_resource type="ShaderMaterial" id=31]
 resource_local_to_scene = true
-shader = SubResource( 42 )
+shader = SubResource( 30 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=44]
+[sub_resource type="ShaderMaterial" id=32]
 resource_local_to_scene = true
-next_pass = SubResource( 43 )
+next_pass = SubResource( 31 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
 shader_param/roughness = 1.0
@@ -560,15 +563,15 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=45]
+[sub_resource type="ShaderMaterial" id=33]
 resource_local_to_scene = true
-shader = SubResource( 42 )
+shader = SubResource( 30 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=46]
+[sub_resource type="ShaderMaterial" id=34]
 resource_local_to_scene = true
-next_pass = SubResource( 45 )
+next_pass = SubResource( 33 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
 shader_param/roughness = 1.0
@@ -581,6 +584,239 @@ shader_param/specular_glossiness = 16.0
 shader_param/specular_smoothness = 0.05
 shader_param/rim = 0.1
 shader_param/rim_amount = 0.3
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=35]
+resource_local_to_scene = true
+shader = SubResource( 30 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=36]
+resource_local_to_scene = true
+next_pass = SubResource( 35 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.1
+shader_param/rim_amount = 0.3
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="Shader" id=37]
+code = "// Outline, by GDQuest
+// Source: https://github.com/GDQuest/godot-shaders
+shader_type spatial;
+render_mode cull_front, unshaded, depth_draw_always;
+
+uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float outline_width = 1.0;
+
+
+
+void vertex() {
+	// Converts vertex position and normal to clip coordinates.
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+
+	// Calculates the width based off of view distance to keep
+	// the outline width constant.
+	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+
+	POSITION = clip_position;
+}
+
+
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if(outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}
+
+
+"
+
+[sub_resource type="ShaderMaterial" id=38]
+resource_local_to_scene = true
+shader = SubResource( 37 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=39]
+resource_local_to_scene = true
+next_pass = SubResource( 38 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.1
+shader_param/rim_amount = 0.3
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="Shader" id=40]
+code = "// Outline, by GDQuest
+// Source: https://github.com/GDQuest/godot-shaders
+shader_type spatial;
+render_mode cull_front, unshaded, depth_draw_always;
+
+uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float outline_width = 1.0;
+
+
+
+void vertex() {
+	// Converts vertex position and normal to clip coordinates.
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+
+	// Calculates the width based off of view distance to keep
+	// the outline width constant.
+	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+
+	POSITION = clip_position;
+}
+
+
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if(outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}
+
+
+"
+
+[sub_resource type="ShaderMaterial" id=41]
+resource_local_to_scene = true
+shader = SubResource( 40 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=42]
+resource_local_to_scene = true
+next_pass = SubResource( 41 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.5
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.25
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="Shader" id=43]
+code = "// Outline, by GDQuest
+// Source: https://github.com/GDQuest/godot-shaders
+shader_type spatial;
+render_mode cull_front, unshaded, depth_draw_always;
+
+uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float outline_width = 1.0;
+
+
+
+void vertex() {
+	// Converts vertex position and normal to clip coordinates.
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+
+	// Calculates the width based off of view distance to keep
+	// the outline width constant.
+	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+
+	POSITION = clip_position;
+}
+
+
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if(outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}
+
+
+"
+
+[sub_resource type="ShaderMaterial" id=44]
+resource_local_to_scene = true
+shader = SubResource( 43 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=45]
+resource_local_to_scene = true
+next_pass = SubResource( 44 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.5
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.25
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=46]
+resource_local_to_scene = true
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
@@ -589,7 +825,7 @@ shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=47]
 resource_local_to_scene = true
-shader = SubResource( 42 )
+shader = SubResource( 37 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
@@ -614,174 +850,15 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="Shader" id=49]
-code = "// Outline, by GDQuest
-// Source: https://github.com/GDQuest/godot-shaders
-shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_always;
-
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-void vertex() {
-	// Converts vertex position and normal to clip coordinates.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-
-	// Calculates the width based off of view distance to keep
-	// the outline width constant.
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-
-	POSITION = clip_position;
-}
-
-
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if(outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}
-
-
-"
+[sub_resource type="ShaderMaterial" id=49]
+resource_local_to_scene = true
+shader = SubResource( 40 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=50]
 resource_local_to_scene = true
-shader = SubResource( 49 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=51]
-resource_local_to_scene = true
-next_pass = SubResource( 50 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="Shader" id=52]
-code = "// Outline, by GDQuest
-// Source: https://github.com/GDQuest/godot-shaders
-shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_always;
-
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-void vertex() {
-	// Converts vertex position and normal to clip coordinates.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-
-	// Calculates the width based off of view distance to keep
-	// the outline width constant.
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-
-	POSITION = clip_position;
-}
-
-
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if(outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}
-
-
-"
-
-[sub_resource type="ShaderMaterial" id=53]
-resource_local_to_scene = true
-shader = SubResource( 52 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=54]
-resource_local_to_scene = true
-next_pass = SubResource( 53 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.5
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.25
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="Shader" id=55]
-code = "// Outline, by GDQuest
-// Source: https://github.com/GDQuest/godot-shaders
-shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_always;
-
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-void vertex() {
-	// Converts vertex position and normal to clip coordinates.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-
-	// Calculates the width based off of view distance to keep
-	// the outline width constant.
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-
-	POSITION = clip_position;
-}
-
-
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if(outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}
-
-
-"
-
-[sub_resource type="ShaderMaterial" id=56]
-resource_local_to_scene = true
-shader = SubResource( 55 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=57]
-resource_local_to_scene = true
-next_pass = SubResource( 56 )
+next_pass = SubResource( 49 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
 shader_param/roughness = 1.0
@@ -800,86 +877,12 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=58]
-resource_local_to_scene = true
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=59]
-resource_local_to_scene = true
-shader = SubResource( 49 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=60]
-resource_local_to_scene = true
-next_pass = SubResource( 59 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=61]
-resource_local_to_scene = true
-shader = SubResource( 52 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=62]
-resource_local_to_scene = true
-next_pass = SubResource( 61 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.5
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.25
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=51]
 code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
 
 shader_type spatial;
-render_mode blend_mix;
+render_mode blend_mix, unshaded;
 
 // This texture must be seamless!
 // Experiment with the different noises provided in the res://Demos/StylizedFire/ folder
@@ -958,36 +961,36 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=52]
 resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/emission_intensity = 2.0
+shader = SubResource( 51 )
+shader_param/emission_intensity = 0.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
 shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=53]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=6]
+[sub_resource type="GradientTexture" id=54]
 resource_local_to_scene = true
-gradient = SubResource( 5 )
+gradient = SubResource( 53 )
 width = 128
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=55]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 10.0736, 0, 0, Vector2( 0.251046, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=8]
+[sub_resource type="CurveTexture" id=56]
 resource_local_to_scene = true
 width = 128
-curve = SubResource( 7 )
+curve = SubResource( 55 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=57]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -999,13 +1002,13 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 8 )
-color_ramp = SubResource( 6 )
+scale_curve = SubResource( 56 )
+color_ramp = SubResource( 54 )
 
-[sub_resource type="QuadMesh" id=10]
+[sub_resource type="QuadMesh" id=58]
 size = Vector2( 0.5, 0.5 )
 
-[sub_resource type="Shader" id=11]
+[sub_resource type="Shader" id=59]
 code = "shader_type spatial;
 render_mode unshaded, depth_draw_alpha_prepass;
 
@@ -1063,20 +1066,20 @@ void fragment() {
 
 "
 
-[sub_resource type="ViewportTexture" id=12]
+[sub_resource type="ViewportTexture" id=60]
 viewport_path = NodePath("Campfire/Viewport")
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=61]
 resource_local_to_scene = true
-shader = SubResource( 11 )
+shader = SubResource( 59 )
 shader_param/grow = 0.3
 shader_param/outline_width = 1.5
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 12 )
+shader_param/texture_albedo = SubResource( 60 )
 
-[sub_resource type="QuadMesh" id=14]
+[sub_resource type="QuadMesh" id=62]
 resource_local_to_scene = true
-material = SubResource( 13 )
+material = SubResource( 61 )
 size = Vector2( 1.5, 1.5 )
 
 [node name="Demo" type="Spatial"]
@@ -1103,27 +1106,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="Log" parent="Terrain" instance=ExtResource( 11 )]
 transform = Transform( 0.0974124, 1.3966, -0.00384948, -1.39551, 0.0974883, 0.055147, 0.0552812, 0, 1.39891, 1.409, 0.197178, 0.245 )
-material/0 = SubResource( 17 )
-material/1 = SubResource( 20 )
-material/2 = SubResource( 23 )
+material/0 = SubResource( 5 )
+material/1 = SubResource( 8 )
+material/2 = SubResource( 11 )
 
 [node name="Log2" parent="Terrain" instance=ExtResource( 16 )]
 transform = Transform( 0.362347, 0, 1.3523, 0, 1.4, 0, -1.3523, 0, 0.362347, 0.5, 0.183743, -1.5 )
-material/0 = SubResource( 25 )
-material/1 = SubResource( 27 )
-material/2 = SubResource( 29 )
+material/0 = SubResource( 13 )
+material/1 = SubResource( 15 )
+material/2 = SubResource( 17 )
 
 [node name="Log3" parent="Terrain" instance=ExtResource( 11 )]
 transform = Transform( 1.12801, 0, -0.829212, 0, 1.4, 0, 0.829213, 0, 1.12801, -1.19, 0.2, -0.906 )
-material/0 = SubResource( 31 )
-material/1 = SubResource( 33 )
-material/2 = SubResource( 35 )
+material/0 = SubResource( 19 )
+material/1 = SubResource( 21 )
+material/2 = SubResource( 23 )
 
 [node name="Log4" parent="Terrain" instance=ExtResource( 29 )]
 transform = Transform( 0.917394, 0, -0.79117, 0, 1.5, 0, 1.18676, 0, 0.611596, 0.910227, 0.19413, 1.74845 )
-material/0 = SubResource( 37 )
-material/1 = SubResource( 39 )
-material/2 = SubResource( 41 )
+material/0 = SubResource( 25 )
+material/1 = SubResource( 27 )
+material/2 = SubResource( 29 )
 
 [node name="PalmTree" parent="Terrain" instance=ExtResource( 33 )]
 transform = Transform( 0.5623, 0, -0.826933, 0, 1, 0, 0.826933, 0, 0.5623, 2.696, 0.053, -4.457 )
@@ -1172,15 +1175,15 @@ transform = Transform( 1, -4.65661e-10, 0, 0, 1, -7.96717e-10, 0, 1.39516e-08, 1
 
 [node name="SkeweredFish" parent="Terrain" instance=ExtResource( 10 )]
 transform = Transform( 0.108449, 0.208084, 0.97208, -0.0230675, 0.978111, -0.206802, -0.993834, 3.8594e-06, 0.110875, -0.951, 0.451, 0.343 )
-material/0 = SubResource( 44 )
+material/0 = SubResource( 32 )
 
 [node name="SkeweredFish2" parent="Terrain" instance=ExtResource( 10 )]
 transform = Transform( 0.68764, 0.350756, 0.86847, -0.214995, 1.14757, -0.260893, 0.831221, 0.0066514, -0.785935, -0.836, 0.361, 0.573 )
-material/0 = SubResource( 46 )
+material/0 = SubResource( 34 )
 
 [node name="SkeweredFish3" parent="Terrain" instance=ExtResource( 10 )]
 transform = Transform( 0.322274, 0.184784, 0.941127, -0.186274, 0.876128, -0.168077, -1.14081, -0.0908559, 0.293309, -0.874, 0.414, 0.138 )
-material/0 = SubResource( 48 )
+material/0 = SubResource( 36 )
 
 [node name="Boulder" parent="Terrain" instance=ExtResource( 21 )]
 transform = Transform( -0.757143, 0, 0.653249, -0.277479, 0.905302, -0.32161, -0.591388, -0.424768, -0.685443, 2.90384, -0.28696, -6.03076 )
@@ -1189,7 +1192,7 @@ transform = Transform( -0.757143, 0, 0.653249, -0.277479, 0.905302, -0.32161, -0
 transform = Transform( 0.779546, 0, -0.626345, 0, 1, 0, 0.626345, 0, 0.779546, -3.87214, 0.00882436, -3.18381 )
 
 [node name="Boulder3" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44629, -0.00881804, -2.07715 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44629, -0.00881804, -2.06949 )
 
 [node name="Boulder4" parent="Terrain" instance=ExtResource( 20 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.27151, -1.49042, 9.30804 )
@@ -1230,6 +1233,12 @@ transform = Transform( 0.689513, 0.496985, -0.526856, -0.129026, 0.800079, 0.585
 [node name="Boulder16" parent="Terrain" instance=ExtResource( 21 )]
 transform = Transform( 0.894316, 0.272163, -0.355142, -0.168816, 0.94031, 0.295496, 0.414367, -0.204313, 0.88688, 4.95556, -0.256589, -4.49736 )
 
+[node name="Boulder17" parent="Terrain" instance=ExtResource( 20 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1.3, 1.4371, -1.72375, -9.27939 )
+
+[node name="Boulder18" parent="Terrain" instance=ExtResource( 21 )]
+transform = Transform( 1.95456, 0, 1.247, 0, 3, 0, -1.55874, 0, 1.56365, -3.60083, -1.96257, -9.11996 )
+
 [node name="Props" type="Spatial" parent="."]
 
 [node name="TimberPile" parent="Props" instance=ExtResource( 32 )]
@@ -1237,8 +1246,8 @@ transform = Transform( 0.312169, 0, -0.950027, 0, 1, 0, 0.950027, 0, 0.312169, 1
 
 [node name="Axe" parent="Props" instance=ExtResource( 14 )]
 transform = Transform( -0.499929, 0.742558, 0.445734, -0.0229024, -0.525819, 0.850288, 0.865763, 0.414876, 0.279879, -1.32153, 0.732886, -0.95785 )
-material/0 = SubResource( 51 )
-material/1 = SubResource( 54 )
+material/0 = SubResource( 39 )
+material/1 = SubResource( 42 )
 
 [node name="Bottle" parent="Props" instance=ExtResource( 12 )]
 transform = Transform( 0.942525, 0, -0.334136, 0, 1, 0, 0.334136, 0, 0.942525, 0.682, 0.148531, 0.617 )
@@ -1281,9 +1290,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62143, 0.0134806, 0.895697 
 
 [node name="Guitar" parent="Props" instance=ExtResource( 5 )]
 transform = Transform( -0.708795, 0.370959, -3.11531e-07, 0.370959, 0.708795, -5.76113e-14, 2.76015e-07, -1.44457e-07, -0.8, 1.13829, 0.190973, -0.119158 )
-material/5 = SubResource( 57 )
-material/6 = SubResource( 57 )
-material/7 = SubResource( 58 )
+material/5 = SubResource( 45 )
+material/6 = SubResource( 45 )
+material/7 = SubResource( 46 )
 
 [node name="Rock7" parent="Props" instance=ExtResource( 22 )]
 transform = Transform( -0.10399, 0, -0.994578, 0, 1, 0, 0.994578, 0, -0.10399, -1.37014, 0.014189, 4.57321 )
@@ -1341,8 +1350,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69859, -1.08784, -6.06527 )
 
 [node name="Knife" parent="Props" instance=ExtResource( 3 )]
 transform = Transform( -0.468309, 0.0390754, -0.170763, 0, 0.487401, 0.111531, 0.175177, 0.104462, -0.456509, 1.06778, 0.251299, 1.44971 )
-material/0 = SubResource( 60 )
-material/1 = SubResource( 62 )
+material/0 = SubResource( 48 )
+material/1 = SubResource( 50 )
 
 [node name="Fish" parent="Props" instance=ExtResource( 8 )]
 transform = Transform( -0.983671, 0.032384, 0.177041, 0.0335538, 0.99943, 0.00361726, -0.176822, 0.00949859, -0.984197, 0.860312, 0.209964, 1.7204 )
@@ -1351,7 +1360,7 @@ transform = Transform( -0.983671, 0.032384, 0.177041, 0.0335538, 0.99943, 0.0036
 transform = Transform( -0.9801, 0.0253344, 0.576435, 0.0402645, 0.99943, 0.00361728, -0.691218, 0.022296, -0.817135, 0.70026, 0.22247, 1.90159 )
 
 [node name="Sea" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113535, -0.795744, 0.0942211 )
 mesh = ExtResource( 30 )
 material/0 = ExtResource( 28 )
 
@@ -1375,18 +1384,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="Campfire/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 4 )
+material_override = SubResource( 52 )
 cast_shadow = 0
 amount = 64
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 9 )
-draw_pass_1 = SubResource( 10 )
+process_material = SubResource( 57 )
+draw_pass_1 = SubResource( 58 )
 
 [node name="Flames" type="MeshInstance" parent="Campfire"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
-mesh = SubResource( 14 )
+mesh = SubResource( 62 )
 material/0 = null
 
 [node name="Smoke" parent="Campfire" instance=ExtResource( 4 )]
@@ -1407,10 +1416,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, 1.3, 0 )
 transform = Transform( 1, 0, 4.84288e-08, 0, 1.2, 0, -4.84288e-08, 0, 1, -1.43823, -1.04725, 1.51458 )
 
 [node name="SupportBeam4" parent="WoodenStairs" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 4.84288e-08, 0, 1.2, 0, -4.84288e-08, 0, 1, -5.226, -1.04707, 1.515 )
+transform = Transform( 1, 0, 4.84288e-08, 0, 1.2, 0, -4.84288e-08, 0, 1, -3.24769, -1.04707, 1.515 )
 
 [node name="SupportBeam2" parent="WoodenStairs" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 5.58793e-08, 0, 1.2, 0, -5.58793e-08, 0, 1, -1.438, -1.04707, -1.515 )
 
 [node name="SupportBeam3" parent="WoodenStairs" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 5.58793e-08, 0, 1.2, 0, -5.58793e-08, 0, 1, -5.22642, -1.04707, -1.515 )
+transform = Transform( 1, 0, 5.58793e-08, 0, 1.2, 0, -5.58793e-08, 0, 1, -3.2481, -1.04707, -1.515 )
+
+[node name="CliffIsland" type="MeshInstance" parent="."]
+transform = Transform( 0.759169, 0, -0.650894, 0, 1, 0, 0.650894, 0, 0.759169, 0.483997, -0.533968, -17.1249 )
+mesh = ExtResource( 36 )
+material/0 = ExtResource( 34 )
+material/1 = ExtResource( 35 )
+
+[node name="Boulder" parent="CliffIsland" instance=ExtResource( 21 )]
+transform = Transform( -0.353573, 0, -0.935407, 0, 1, 0, 0.935407, 0, -0.353573, 6.34929, -0.762708, 0.273156 )
+
+[node name="Boulder2" parent="CliffIsland" instance=ExtResource( 20 )]
+transform = Transform( -0.116697, 0, 1.99659, 0, 2, 0, -1.99659, 0, -0.116697, 6.48025, -1.02397, 2.28905 )
+
+[node name="Boulder3" parent="CliffIsland" instance=ExtResource( 20 )]
+transform = Transform( 2, 0, 0, 0, 3, 0, 0, 0, 2, -0.92565, -1.54511, 6.49468 )
+
+[node name="Boulder4" parent="CliffIsland" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 2.24919, -1.09664, 6.15815 )
+
+[node name="Boulder5" parent="CliffIsland" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, -3.7427, -1.07106, 5.42153 )
