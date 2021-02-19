@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://assets/water/sea/edge-noise.png" type="Texture" id=1]
-[ext_resource path="res://assets/water/sea/sea-texture.png" type="Texture" id=2]
+[ext_resource path="res://assets/water/sea/sea-texture-2.png" type="Texture" id=2]
 [ext_resource path="res://assets/water/sea/texture-noise.png" type="Texture" id=3]
 
 [sub_resource type="Shader" id=1]
@@ -88,11 +88,11 @@ void vertex() {
 [resource]
 resource_local_to_scene = true
 shader = SubResource( 1 )
-shader_param/water_color = Color( 0.588235, 0.611765, 0.784314, 1 )
+shader_param/water_color = Color( 0.588235, 0.74902, 0.784314, 1 )
 shader_param/uv1 = Vector2( 20, 20 )
 shader_param/texture_movement = Vector2( 0, 0 )
 shader_param/texture_displacement = 0.08
-shader_param/edge_color = Color( 0.588235, 0.611765, 0.784314, 1 )
+shader_param/edge_color = Color( 0.588235, 0.74902, 0.784314, 1 )
 shader_param/edge_max_threshold = 0.8
 shader_param/edge_displacement = 0.6
 shader_param/near = 0.15
