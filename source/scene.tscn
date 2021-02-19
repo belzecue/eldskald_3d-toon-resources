@@ -1010,10 +1010,11 @@ size = Vector2( 0.5, 0.5 )
 
 [sub_resource type="Shader" id=59]
 code = "shader_type spatial;
-render_mode unshaded, depth_draw_alpha_prepass;
+render_mode depth_draw_alpha_prepass, ambient_light_disabled;
 
 uniform sampler2D texture_albedo : hint_albedo;
 uniform float grow;
+uniform float emission;
 uniform float outline_width;
 uniform vec4 outline_color: hint_color;
 
@@ -1061,6 +1062,7 @@ void fragment() {
 	
 	ALBEDO = color;
 	ALPHA = alpha;
+	EMISSION = color * emission;
 }
 
 
@@ -1073,6 +1075,7 @@ viewport_path = NodePath("Campfire/Viewport")
 resource_local_to_scene = true
 shader = SubResource( 59 )
 shader_param/grow = 0.3
+shader_param/emission = 1.5
 shader_param/outline_width = 1.5
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = SubResource( 60 )
@@ -1372,7 +1375,7 @@ material/0 = ExtResource( 9 )
 [node name="Campfire" parent="." instance=ExtResource( 17 )]
 
 [node name="Viewport" type="Viewport" parent="Campfire"]
-size = Vector2( 1000, 1000 )
+size = Vector2( 1024, 1024 )
 transparent_bg = true
 msaa = 3
 render_target_v_flip = true
