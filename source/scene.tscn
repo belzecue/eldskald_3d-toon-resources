@@ -1430,9 +1430,6 @@ mesh = ExtResource( 36 )
 material/0 = ExtResource( 34 )
 material/1 = ExtResource( 35 )
 
-[node name="Boulder" parent="CliffIsland" instance=ExtResource( 21 )]
-transform = Transform( -0.353573, 0, -0.935407, 0, 1, 0, 0.935407, 0, -0.353573, 6.34929, -0.762708, 0.273156 )
-
 [node name="Boulder2" parent="CliffIsland" instance=ExtResource( 20 )]
 transform = Transform( -0.116697, 0, 1.99659, 0, 2, 0, -1.99659, 0, -0.116697, 6.48025, -1.02397, 2.28905 )
 
@@ -1443,4 +1440,16 @@ transform = Transform( 2, 0, 0, 0, 3, 0, 0, 0, 2, -0.92565, -1.54511, 6.49468 )
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 2.24919, -1.09664, 6.15815 )
 
 [node name="Boulder5" parent="CliffIsland" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, -3.7427, -1.07106, 5.42153 )
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, -3.8591, -1.07106, 5.70603 )
+
+[node name="Boulder6" parent="CliffIsland" instance=ExtResource( 20 )]
+transform = Transform( 1.43414, 0, 1.95448, 0, 2.5, 0, -1.79812, 0, 1.55885, 7.17873, -1.52098, -2.70378 )
+
+[node name="Boulder7" parent="CliffIsland" instance=ExtResource( 21 )]
+transform = Transform( 1.36415, 0, -1.46256, 0, 2.4, 0, 1.46256, 0, 1.36415, 3.03015, -1.36627, -6.95798 )
+
+[node name="Boulder8" parent="CliffIsland" instance=ExtResource( 20 )]
+transform = Transform( 0.967838, 0, -2.83959, 0, 3, 0, 2.83959, 0, 0.967838, -7.74291, -1.53122, 1.60235 )
+
+[node name="Boulder9" parent="CliffIsland" instance=ExtResource( 20 )]
+transform = Transform( 2, 0, 0, 0, 2.7, 0, 0, 0, 2.1, -6.45149, -1.84286, 5.98216 )
