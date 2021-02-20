@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/shader-codes/toon-shader/refraction-toon.shader" type="Shader" id=1]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=61]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -37,14 +37,14 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=62]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 61 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
 [resource]
-next_pass = SubResource( 2 )
+next_pass = SubResource( 62 )
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 0.262745, 0.592157, 0.592157, 0.392157 )
 shader_param/roughness = 1.0
