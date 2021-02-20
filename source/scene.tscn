@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=2]
@@ -36,6 +36,9 @@
 [ext_resource path="res://assets/materials/stone.tres" type="Material" id=34]
 [ext_resource path="res://assets/materials/grass.tres" type="Material" id=35]
 [ext_resource path="res://assets/models/grounds/cliff-1.obj" type="ArrayMesh" id=36]
+[ext_resource path="res://assets/models/food/watermelon/watermelon-1.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/models/food/watermelon/watermelon-2.tscn" type="PackedScene" id=38]
+[ext_resource path="res://assets/models/food/watermelon/watermelon-3.tscn" type="PackedScene" id=39]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
@@ -563,166 +566,50 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=33]
-resource_local_to_scene = true
-shader = SubResource( 30 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
+[sub_resource type="Shader" id=33]
+code = "// Outline, by GDQuest
+// Source: https://github.com/GDQuest/godot-shaders
+shader_type spatial;
+render_mode cull_front, unshaded, depth_draw_always;
+
+uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float outline_width = 1.0;
+
+
+
+void vertex() {
+	// Converts vertex position and normal to clip coordinates.
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+
+	// Calculates the width based off of view distance to keep
+	// the outline width constant.
+	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+
+	POSITION = clip_position;
+}
+
+
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if(outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}
+
+
+"
 
 [sub_resource type="ShaderMaterial" id=34]
 resource_local_to_scene = true
-next_pass = SubResource( 33 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader = SubResource( 33 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=35]
 resource_local_to_scene = true
-shader = SubResource( 30 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=36]
-resource_local_to_scene = true
-next_pass = SubResource( 35 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="Shader" id=37]
-code = "// Outline, by GDQuest
-// Source: https://github.com/GDQuest/godot-shaders
-shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_always;
-
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-void vertex() {
-	// Converts vertex position and normal to clip coordinates.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-
-	// Calculates the width based off of view distance to keep
-	// the outline width constant.
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-
-	POSITION = clip_position;
-}
-
-
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if(outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}
-
-
-"
-
-[sub_resource type="ShaderMaterial" id=38]
-resource_local_to_scene = true
-shader = SubResource( 37 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=39]
-resource_local_to_scene = true
-next_pass = SubResource( 38 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-
-[sub_resource type="Shader" id=40]
-code = "// Outline, by GDQuest
-// Source: https://github.com/GDQuest/godot-shaders
-shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_always;
-
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-void vertex() {
-	// Converts vertex position and normal to clip coordinates.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-
-	// Calculates the width based off of view distance to keep
-	// the outline width constant.
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-
-	POSITION = clip_position;
-}
-
-
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if(outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}
-
-
-"
-
-[sub_resource type="ShaderMaterial" id=41]
-resource_local_to_scene = true
-shader = SubResource( 40 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=42]
-resource_local_to_scene = true
-next_pass = SubResource( 41 )
+next_pass = SubResource( 34 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
 shader_param/roughness = 1.0
@@ -741,7 +628,7 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="Shader" id=43]
+[sub_resource type="Shader" id=36]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -776,15 +663,15 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=44]
+[sub_resource type="ShaderMaterial" id=37]
 resource_local_to_scene = true
-shader = SubResource( 43 )
+shader = SubResource( 36 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=45]
+[sub_resource type="ShaderMaterial" id=38]
 resource_local_to_scene = true
-next_pass = SubResource( 44 )
+next_pass = SubResource( 37 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
 shader_param/roughness = 1.0
@@ -803,7 +690,7 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=46]
+[sub_resource type="ShaderMaterial" id=39]
 resource_local_to_scene = true
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
@@ -823,15 +710,15 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=47]
+[sub_resource type="ShaderMaterial" id=40]
 resource_local_to_scene = true
-shader = SubResource( 37 )
+shader = SubResource( 30 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=48]
+[sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
-next_pass = SubResource( 47 )
+next_pass = SubResource( 40 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
 shader_param/roughness = 1.0
@@ -850,15 +737,15 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=49]
+[sub_resource type="ShaderMaterial" id=42]
 resource_local_to_scene = true
-shader = SubResource( 40 )
+shader = SubResource( 33 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=50]
+[sub_resource type="ShaderMaterial" id=43]
 resource_local_to_scene = true
-next_pass = SubResource( 49 )
+next_pass = SubResource( 42 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
 shader_param/roughness = 1.0
@@ -877,7 +764,7 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="Shader" id=51]
+[sub_resource type="Shader" id=44]
 code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
 
@@ -961,9 +848,9 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=52]
+[sub_resource type="ShaderMaterial" id=45]
 resource_local_to_scene = true
-shader = SubResource( 51 )
+shader = SubResource( 44 )
 shader_param/emission_intensity = 0.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -971,26 +858,26 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=53]
+[sub_resource type="Gradient" id=46]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=54]
+[sub_resource type="GradientTexture" id=47]
 resource_local_to_scene = true
-gradient = SubResource( 53 )
+gradient = SubResource( 46 )
 width = 128
 
-[sub_resource type="Curve" id=55]
+[sub_resource type="Curve" id=48]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 10.0736, 0, 0, Vector2( 0.251046, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=56]
+[sub_resource type="CurveTexture" id=49]
 resource_local_to_scene = true
 width = 128
-curve = SubResource( 55 )
+curve = SubResource( 48 )
 
-[sub_resource type="ParticlesMaterial" id=57]
+[sub_resource type="ParticlesMaterial" id=50]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1002,13 +889,13 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 56 )
-color_ramp = SubResource( 54 )
+scale_curve = SubResource( 49 )
+color_ramp = SubResource( 47 )
 
-[sub_resource type="QuadMesh" id=58]
+[sub_resource type="QuadMesh" id=51]
 size = Vector2( 0.5, 0.5 )
 
-[sub_resource type="Shader" id=59]
+[sub_resource type="Shader" id=52]
 code = "shader_type spatial;
 render_mode depth_draw_alpha_prepass, ambient_light_disabled;
 
@@ -1068,21 +955,21 @@ void fragment() {
 
 "
 
-[sub_resource type="ViewportTexture" id=60]
+[sub_resource type="ViewportTexture" id=53]
 viewport_path = NodePath("Campfire/Viewport")
 
-[sub_resource type="ShaderMaterial" id=61]
+[sub_resource type="ShaderMaterial" id=54]
 resource_local_to_scene = true
-shader = SubResource( 59 )
+shader = SubResource( 52 )
 shader_param/grow = 0.3
 shader_param/emission = 1.5
 shader_param/outline_width = 1.5
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 60 )
+shader_param/texture_albedo = SubResource( 53 )
 
-[sub_resource type="QuadMesh" id=62]
+[sub_resource type="QuadMesh" id=55]
 resource_local_to_scene = true
-material = SubResource( 61 )
+material = SubResource( 54 )
 size = Vector2( 1.5, 1.5 )
 
 [node name="Demo" type="Spatial"]
@@ -1126,7 +1013,7 @@ material/1 = SubResource( 21 )
 material/2 = SubResource( 23 )
 
 [node name="Log4" parent="Terrain" instance=ExtResource( 29 )]
-transform = Transform( 0.917394, 0, -0.79117, 0, 1.5, 0, 1.18676, 0, 0.611596, 0.910227, 0.19413, 1.74845 )
+transform = Transform( 0.917392, 0, -1.18676, 0, 1.5, 0, 1.18676, 0, 0.917392, 0.77209, 0.19413, 1.83575 )
 material/0 = SubResource( 25 )
 material/1 = SubResource( 27 )
 material/2 = SubResource( 29 )
@@ -1178,15 +1065,12 @@ transform = Transform( 1, -4.65661e-10, 0, 0, 1, -7.96717e-10, 0, 1.39516e-08, 1
 
 [node name="SkeweredFish" parent="Terrain" instance=ExtResource( 10 )]
 transform = Transform( 0.108449, 0.208084, 0.97208, -0.0230675, 0.978111, -0.206802, -0.993834, 3.8594e-06, 0.110875, -0.951, 0.451, 0.343 )
-material/0 = SubResource( 32 )
 
 [node name="SkeweredFish2" parent="Terrain" instance=ExtResource( 10 )]
 transform = Transform( 0.68764, 0.350756, 0.86847, -0.214995, 1.14757, -0.260893, 0.831221, 0.0066514, -0.785935, -0.836, 0.361, 0.573 )
-material/0 = SubResource( 34 )
 
 [node name="SkeweredFish3" parent="Terrain" instance=ExtResource( 10 )]
 transform = Transform( 0.322274, 0.184784, 0.941127, -0.186274, 0.876128, -0.168077, -1.14081, -0.0908559, 0.293309, -0.874, 0.414, 0.138 )
-material/0 = SubResource( 36 )
 
 [node name="Boulder" parent="Terrain" instance=ExtResource( 21 )]
 transform = Transform( -0.757143, 0, 0.653249, -0.277479, 0.905302, -0.32161, -0.591388, -0.424768, -0.685443, 2.90384, -0.28696, -6.03076 )
@@ -1249,8 +1133,8 @@ transform = Transform( 0.312169, 0, -0.950027, 0, 1, 0, 0.950027, 0, 0.312169, 1
 
 [node name="Axe" parent="Props" instance=ExtResource( 14 )]
 transform = Transform( -0.499929, 0.742558, 0.445734, -0.0229024, -0.525819, 0.850288, 0.865763, 0.414876, 0.279879, -1.32153, 0.732886, -0.95785 )
-material/0 = SubResource( 39 )
-material/1 = SubResource( 42 )
+material/0 = SubResource( 32 )
+material/1 = SubResource( 35 )
 
 [node name="Bottle" parent="Props" instance=ExtResource( 12 )]
 transform = Transform( 0.942525, 0, -0.334136, 0, 1, 0, 0.334136, 0, 0.942525, 0.682, 0.148531, 0.617 )
@@ -1293,9 +1177,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62143, 0.0134806, 0.895697 
 
 [node name="Guitar" parent="Props" instance=ExtResource( 5 )]
 transform = Transform( -0.708795, 0.370959, -3.11531e-07, 0.370959, 0.708795, -5.76113e-14, 2.76015e-07, -1.44457e-07, -0.8, 1.13829, 0.190973, -0.119158 )
-material/5 = SubResource( 45 )
-material/6 = SubResource( 45 )
-material/7 = SubResource( 46 )
+material/5 = SubResource( 38 )
+material/6 = SubResource( 38 )
+material/7 = SubResource( 39 )
 
 [node name="Rock7" parent="Props" instance=ExtResource( 22 )]
 transform = Transform( -0.10399, 0, -0.994578, 0, 1, 0, 0.994578, 0, -0.10399, -1.37014, 0.014189, 4.57321 )
@@ -1352,15 +1236,27 @@ transform = Transform( 0.948633, -0.273419, -0.159175, 0.315897, 0.8463, 0.42893
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69859, -1.08784, -6.06527 )
 
 [node name="Knife" parent="Props" instance=ExtResource( 3 )]
-transform = Transform( -0.468309, 0.0390754, -0.170763, 0, 0.487401, 0.111531, 0.175177, 0.104462, -0.456509, 1.06778, 0.251299, 1.44971 )
-material/0 = SubResource( 48 )
-material/1 = SubResource( 50 )
+transform = Transform( -0.487829, 0.0244589, -0.106887, 0, 0.487401, 0.111531, 0.10965, 0.108816, -0.475537, 0.660312, 0.251299, 1.75631 )
+material/0 = SubResource( 41 )
+material/1 = SubResource( 43 )
 
 [node name="Fish" parent="Props" instance=ExtResource( 8 )]
-transform = Transform( -0.983671, 0.032384, 0.177041, 0.0335538, 0.99943, 0.00361726, -0.176822, 0.00949859, -0.984197, 0.860312, 0.209964, 1.7204 )
+transform = Transform( -0.983671, 0.032384, 0.177041, 0.0335538, 0.99943, 0.00361726, -0.176822, 0.00949859, -0.984197, 0.496503, 0.209964, 1.99625 )
 
 [node name="Fish2" parent="Props" instance=ExtResource( 8 )]
-transform = Transform( -0.9801, 0.0253344, 0.576435, 0.0402645, 0.99943, 0.00361728, -0.691218, 0.022296, -0.817135, 0.70026, 0.22247, 1.90159 )
+transform = Transform( -0.9801, 0.0253344, 0.576435, 0.0402645, 0.99943, 0.00361728, -0.691218, 0.022296, -0.817135, 0.336451, 0.22247, 2.17744 )
+
+[node name="Watermelon" parent="Props" instance=ExtResource( 39 )]
+transform = Transform( 0.993857, 0, 0.110671, 0, 1, 0, -0.110671, 0, 0.993857, 0.833414, 0.224094, 1.70513 )
+
+[node name="Watermelon2" parent="Props" instance=ExtResource( 39 )]
+transform = Transform( 0.963402, 0, 0.268062, 0, 1, 0, -0.268062, 0, 0.963402, 0.903764, 0.223905, 1.63798 )
+
+[node name="Watermelon3" parent="Props" instance=ExtResource( 37 )]
+transform = Transform( 0.614726, 0, -0.788741, 0, 1, 0, 0.788741, 0, 0.614726, 0.932138, 0.145462, 1.25437 )
+
+[node name="Watermelon4" parent="Props" instance=ExtResource( 38 )]
+transform = Transform( 0.878983, -0.391312, 0.272515, 0.406705, 0.91356, 0, -0.248959, 0.110833, 0.962151, 1.14626, 0.363512, 1.54378 )
 
 [node name="Sea" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113535, -0.795744, 0.0942211 )
@@ -1387,18 +1283,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="Campfire/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 52 )
+material_override = SubResource( 45 )
 cast_shadow = 0
 amount = 64
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 57 )
-draw_pass_1 = SubResource( 58 )
+process_material = SubResource( 50 )
+draw_pass_1 = SubResource( 51 )
 
 [node name="Flames" type="MeshInstance" parent="Campfire"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
-mesh = SubResource( 62 )
+mesh = SubResource( 55 )
 material/0 = null
 
 [node name="Smoke" parent="Campfire" instance=ExtResource( 4 )]
