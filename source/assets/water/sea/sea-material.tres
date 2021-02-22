@@ -3,96 +3,17 @@
 [ext_resource path="res://assets/water/sea/edge-noise.png" type="Texture" id=1]
 [ext_resource path="res://assets/water/sea/sea-texture-2.png" type="Texture" id=2]
 [ext_resource path="res://assets/water/sea/texture-noise.png" type="Texture" id=3]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type spatial;
-render_mode depth_draw_always;
-
-uniform vec4 water_color : hint_color = vec4(1.0);
-uniform vec2 uv1 = vec2(1.0);
-uniform vec2 texture_movement = vec2(0.0, 1.0);
-uniform float texture_displacement = 0.1;
-
-uniform vec4 edge_color : hint_color = vec4(1.0);
-uniform float edge_max_threshold = 0.5;
-uniform float edge_displacement = 0.6;
-uniform float near = 0.15;
-uniform float far = 300.0;
-
-uniform float first_wave_height;
-uniform float first_wave_length;
-uniform vec2 first_wave_velocity = vec2(0.0, 1.0);
-uniform float sec_wave_height;
-uniform float sec_wave_length;
-uniform vec2 sec_wave_velocity = vec2(1.0, 0.0);
-
-uniform sampler2D water_texture : hint_white;
-uniform sampler2D edge_noise : hint_white;
-uniform sampler2D texture_noise : hint_white;
-
-
-
-// This function turns distances from depth texture into linear system.
-float linearize(float c_depth) {
-	c_depth = 2.0 * c_depth - 1.0;
-	return near * far / (far + c_depth * (near - far));
-}
-
-// Fragment function deals with edge foams and water texture.
-void fragment() {
-	
-	// These calculate the distance between the water and whatever's behind it,
-	// exactly at the pixel we are looking at.
-	float zdepth = linearize(texture(DEPTH_TEXTURE, SCREEN_UV).x);
-	float zpos = linearize(FRAGCOORD.z);
-	float diff = zdepth - zpos;
-	
-	// These randomize the difference calculated previously using the displacement
-	// texture and amount.
-	vec2 edge_displ = texture(edge_noise, UV - TIME / 14.0).rg;
-	edge_displ = ((edge_displ * 2.0) - 1.0) * edge_displacement;
-	diff += edge_displ.x;
-	
-	// If the final difference with displacement is smaller than the max threshold,
-	// we paint the pixel with the edge color.
-	vec2 tex_displ = texture(texture_noise, UV + TIME / 60.0).rg;
-	tex_displ = (2.0 * tex_displ - 1.0) * texture_displacement;
-	vec4 main_color = water_color * texture(water_texture, UV * uv1 + TIME * texture_movement + tex_displ);
-	vec4 col = mix(edge_color, main_color, step(edge_max_threshold, diff));
-	ALBEDO = col.rgb;
-	ALPHA = col.a;
-}
-
-
-
-// Vertex function deals with the waves.
-void vertex() {
-	
-	// These project the vertex coordinates into the wave's direction so we
-	// can know its position in the wave.
-	vec2 coords = (WORLD_MATRIX * vec4(VERTEX, 1.0)).xz;
-	float first_wave = dot(normalize(first_wave_velocity), coords);
-	float sec_wave = dot(normalize(sec_wave_velocity), coords);
-	
-	// Add time and wave length.
-	first_wave = (first_wave + TIME * length(first_wave_velocity)) / first_wave_length;
-	sec_wave = (sec_wave + TIME * length(sec_wave_velocity)) / sec_wave_length;
-	
-	// Apply the wave effect.
-	VERTEX += NORMAL * (first_wave_height * sin(first_wave) + sec_wave_height * sin(sec_wave));
-}
-
-
-"
+[ext_resource path="res://assets/shader-codes/water-shaders/sea.shader" type="Shader" id=4]
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = ExtResource( 4 )
 shader_param/water_color = Color( 0.588235, 0.74902, 0.784314, 1 )
 shader_param/uv1 = Vector2( 20, 20 )
 shader_param/texture_movement = Vector2( 0, 0 )
 shader_param/texture_displacement = 0.08
 shader_param/edge_color = Color( 0.588235, 0.74902, 0.784314, 1 )
+shader_param/edge_smoothness = 0.1
 shader_param/edge_max_threshold = 0.8
 shader_param/edge_displacement = 0.6
 shader_param/near = 0.15
