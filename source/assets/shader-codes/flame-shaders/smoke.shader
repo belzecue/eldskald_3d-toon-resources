@@ -34,10 +34,13 @@ void light() {
 	float dark_shade = smoothstep(0.0, lighting_smoothness, shade);
 	float half_shade = smoothstep(lighting_half_band, lighting_half_band + lighting_smoothness, shade);
 	vec3 litness = (dark_shade/2.0 + half_shade/2.0) * ATTENUATION;
-	DIFFUSE_LIGHT.r += ALBEDO.r * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);
-	DIFFUSE_LIGHT.g += ALBEDO.g * LIGHT_COLOR.g * mix(lighting, 1.0, litness.g);
-	DIFFUSE_LIGHT.b += ALBEDO.b * LIGHT_COLOR.b * mix(lighting, 1.0, litness.b);
-	DIFFUSE_LIGHT = mix(ALBEDO, DIFFUSE_LIGHT, alpha); // This last line is to add transparency.
+	
+	vec3 diffuse = vec3(0.0);
+	diffuse.r += ALBEDO.r * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);
+	diffuse.g += ALBEDO.g * LIGHT_COLOR.g * mix(lighting, 1.0, litness.g);
+	diffuse.b += ALBEDO.b * LIGHT_COLOR.b * mix(lighting, 1.0, litness.b);
+	
+	DIFFUSE_LIGHT += mix(ALBEDO, diffuse, alpha); // This last line is to add transparency.
 }
 
 
