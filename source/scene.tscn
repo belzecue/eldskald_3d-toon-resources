@@ -1481,6 +1481,7 @@ transform = Transform( 0.759169, 0, -0.650894, 0, 1, 0, 0.650894, 0, 0.759169, 0
 mesh = ExtResource( 36 )
 material/0 = ExtResource( 34 )
 material/1 = ExtResource( 35 )
+material/2 = ExtResource( 34 )
 
 [node name="Boulder2" parent="CliffIsland" instance=ExtResource( 20 )]
 transform = Transform( -0.116697, 0, 1.99659, 0, 2, 0, -1.99659, 0, -0.116697, 6.48025, -1.02397, 2.28905 )
