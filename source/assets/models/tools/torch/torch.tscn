@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/models/tools/torch/torch.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/materials/rags.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/wood-dark.tres" type="Material" id=4]
+
+[node name="Torch" type="MeshInstance"]
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 4 )
+material/1 = ExtResource( 2 )
