@@ -8,14 +8,12 @@ render_mode depth_draw_always;
 
 
 uniform vec4 water_color : hint_color = vec4(1.0);
-uniform float edge_brightness: hint_range(0,1) = 0.5;
 uniform float edge_smoothness = 0.05;
 uniform float edge_max_threshold = 0.5;
 uniform float edge_displacement = 0.6;
 uniform float near = 0.15;
 uniform float far = 300.0;
-uniform float metallic: hint_range(0,1) = 0.5;
-uniform float roughness: hint_range(0,1) = 0.0;
+uniform float reflectiveness: hint_range(0,1) = 0.5;
 uniform float agitation: hint_range(0,1) = 0.0;
 uniform vec2 uv1_scale = vec2(1,1);
 uniform vec2 uv1_offset = vec2(0,0);
@@ -34,9 +32,10 @@ float linearize(float c_depth) {
 
 
 void fragment() {
-	// These are here just for the looks of reflections.
-	METALLIC = metallic;
-	ROUGHNESS = roughness;
+	// These are here just for the looks of reflections. Low roughness on agitated
+	// waters look less toony, but on still waters it looks good.
+	METALLIC = reflectiveness;
+	ROUGHNESS = clamp(1.0 - reflectiveness + 5.0 * agitation, 0.0, 1.0);
 	
 	// Edge ripples code directly from sea shader, but this time instead of painting
 	// with water and edge colors, we paint it with black and white to help the light
@@ -60,7 +59,7 @@ void fragment() {
 	
 	// Refraction from Godot's base code, a little bit modified to look better.
 	vec3 normal = 2.0 * NORMALMAP - vec3(1.0);
-	vec2 ref_ofs = SCREEN_UV - normal.xy * NORMALMAP_DEPTH * 0.03;
+	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.12;
 	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, 0.0).rgb * (1.0 - water_color.a);
 }
 
@@ -72,14 +71,14 @@ void vertex() {
 
 
 const float lighting = 0.0;
-const float lighting_half_band = 0.25;
+const float lighting_half_band = 0.0;
 const float lighting_smoothness = 0.02;
 
 const float specular_glossiness = 16.0;
-const float specular_smoothness = 0.05;
+const float specular_smoothness = 0.02;
 
 const float rim_amount = 0.2;
-const float rim_smoothness = 0.05;
+const float rim_smoothness = 0.02;
 
 void light() {
 	// Lighting, specular and rim directly from base toon shader. The agitation
@@ -96,7 +95,7 @@ void light() {
 	vec3 half = normalize(VIEW + LIGHT);
 	float spec_intensity = pow(dot(NORMAL, half), specular_glossiness * specular_glossiness);
 	spec_intensity = smoothstep(0.05, 0.05 + specular_smoothness, spec_intensity);
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, agitation * 0.5) * spec_intensity * litness;
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, agitation * reflectiveness) * spec_intensity * litness;
 	
 	// To blend the edge ripples with rim and specular, we detect edge
 	// here by reading the albedo. If it's black, it's not edge, if it's
@@ -106,7 +105,7 @@ void light() {
 	float rim_dot = 1.0 - dot(NORMAL, VIEW) + ALBEDO.r;
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
-	float rim_value = clamp((ALBEDO.r * agitation * edge_brightness + agitation) * 0.5, 0.0, 0.5);
+	float rim_value = clamp(ALBEDO.r + rim_dot, 0.0, 1.0) * agitation * reflectiveness;
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness;
 }
 
