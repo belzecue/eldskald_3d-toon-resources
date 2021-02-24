@@ -766,12 +766,12 @@ shader_param/emission_energy = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 
-[sub_resource type="PlaneMesh" id=75]
+[sub_resource type="PlaneMesh" id=44]
 size = Vector2( 100, 100 )
 subdivide_width = 100
 subdivide_depth = 100
 
-[sub_resource type="Shader" id=44]
+[sub_resource type="Shader" id=45]
 code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
 
@@ -855,9 +855,9 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=45]
+[sub_resource type="ShaderMaterial" id=46]
 resource_local_to_scene = true
-shader = SubResource( 44 )
+shader = SubResource( 45 )
 shader_param/emission_intensity = 0.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -865,26 +865,26 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=46]
+[sub_resource type="Gradient" id=47]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=47]
+[sub_resource type="GradientTexture" id=48]
 resource_local_to_scene = true
-gradient = SubResource( 46 )
+gradient = SubResource( 47 )
 width = 128
 
-[sub_resource type="Curve" id=48]
+[sub_resource type="Curve" id=49]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 10.0736, 0, 0, Vector2( 0.251046, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=49]
+[sub_resource type="CurveTexture" id=50]
 resource_local_to_scene = true
 width = 128
-curve = SubResource( 48 )
+curve = SubResource( 49 )
 
-[sub_resource type="ParticlesMaterial" id=50]
+[sub_resource type="ParticlesMaterial" id=51]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -896,37 +896,37 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 49 )
-color_ramp = SubResource( 47 )
+scale_curve = SubResource( 50 )
+color_ramp = SubResource( 48 )
 
-[sub_resource type="QuadMesh" id=51]
+[sub_resource type="QuadMesh" id=52]
 size = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ViewportTexture" id=52]
+[sub_resource type="ViewportTexture" id=53]
 viewport_path = NodePath("Campfire/Viewport")
 
-[sub_resource type="ShaderMaterial" id=53]
+[sub_resource type="ShaderMaterial" id=54]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.3
 shader_param/emission = 1.5
 shader_param/outline_width = 1.5
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 52 )
+shader_param/texture_albedo = SubResource( 53 )
 
-[sub_resource type="QuadMesh" id=54]
+[sub_resource type="QuadMesh" id=55]
 resource_local_to_scene = true
-material = SubResource( 53 )
+material = SubResource( 54 )
 size = Vector2( 1.5, 1.5 )
 
-[sub_resource type="Curve" id=55]
+[sub_resource type="Curve" id=56]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 4.24199, 0, 0, Vector2( 0.48954, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -4.13853, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=56]
-curve = SubResource( 55 )
+[sub_resource type="CurveTexture" id=57]
+curve = SubResource( 56 )
 
-[sub_resource type="ParticlesMaterial" id=57]
+[sub_resource type="ParticlesMaterial" id=58]
 resource_local_to_scene = true
 emission_shape = 1
 emission_sphere_radius = 0.1
@@ -936,14 +936,14 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 0.75
 scale = 1.5
 scale_random = 1.0
-scale_curve = SubResource( 56 )
+scale_curve = SubResource( 57 )
 color = Color( 0.470588, 0.470588, 0.470588, 0.470588 )
 
-[sub_resource type="PlaneMesh" id=76]
+[sub_resource type="PlaneMesh" id=59]
 subdivide_width = 16
 subdivide_depth = 16
 
-[sub_resource type="Shader" id=59]
+[sub_resource type="Shader" id=60]
 code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
 
@@ -1027,9 +1027,9 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=60]
+[sub_resource type="ShaderMaterial" id=61]
 resource_local_to_scene = true
-shader = SubResource( 59 )
+shader = SubResource( 60 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1037,26 +1037,26 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=61]
+[sub_resource type="Gradient" id=62]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=62]
+[sub_resource type="GradientTexture" id=63]
 resource_local_to_scene = true
-gradient = SubResource( 61 )
+gradient = SubResource( 62 )
 width = 128
 
-[sub_resource type="Curve" id=63]
+[sub_resource type="Curve" id=64]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.276151, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=64]
+[sub_resource type="CurveTexture" id=65]
 resource_local_to_scene = true
 width = 128
-curve = SubResource( 63 )
+curve = SubResource( 64 )
 
-[sub_resource type="ParticlesMaterial" id=65]
+[sub_resource type="ParticlesMaterial" id=66]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1068,31 +1068,31 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 64 )
-color_ramp = SubResource( 62 )
+scale_curve = SubResource( 65 )
+color_ramp = SubResource( 63 )
 
-[sub_resource type="QuadMesh" id=66]
+[sub_resource type="QuadMesh" id=67]
 size = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ViewportTexture" id=67]
+[sub_resource type="ViewportTexture" id=68]
 viewport_path = NodePath("Torch/Viewport")
 
-[sub_resource type="ShaderMaterial" id=68]
+[sub_resource type="ShaderMaterial" id=69]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 67 )
+shader_param/texture_albedo = SubResource( 68 )
 
-[sub_resource type="QuadMesh" id=69]
+[sub_resource type="QuadMesh" id=70]
 resource_local_to_scene = true
-material = SubResource( 68 )
+material = SubResource( 69 )
 
-[sub_resource type="ShaderMaterial" id=70]
+[sub_resource type="ShaderMaterial" id=71]
 resource_local_to_scene = true
-shader = SubResource( 59 )
+shader = SubResource( 60 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1100,7 +1100,7 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=71]
+[sub_resource type="ParticlesMaterial" id=72]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1112,24 +1112,24 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 64 )
-color_ramp = SubResource( 62 )
+scale_curve = SubResource( 65 )
+color_ramp = SubResource( 63 )
 
-[sub_resource type="ViewportTexture" id=72]
+[sub_resource type="ViewportTexture" id=73]
 viewport_path = NodePath("Torch2/Viewport")
 
-[sub_resource type="ShaderMaterial" id=73]
+[sub_resource type="ShaderMaterial" id=74]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 72 )
+shader_param/texture_albedo = SubResource( 73 )
 
-[sub_resource type="QuadMesh" id=74]
+[sub_resource type="QuadMesh" id=75]
 resource_local_to_scene = true
-material = SubResource( 73 )
+material = SubResource( 74 )
 
 [node name="Demo" type="Spatial"]
 
@@ -1419,7 +1419,7 @@ transform = Transform( 0.878983, -0.391312, 0.272515, 0.406705, 0.91356, 0, -0.2
 
 [node name="Sea" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113535, -0.795744, 0.0942211 )
-mesh = SubResource( 75 )
+mesh = SubResource( 44 )
 material/0 = ExtResource( 28 )
 
 [node name="Isle" type="MeshInstance" parent="."]
@@ -1442,23 +1442,23 @@ current = true
 
 [node name="Flames" type="Particles" parent="Campfire/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 45 )
+material_override = SubResource( 46 )
 cast_shadow = 0
 amount = 64
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 50 )
-draw_pass_1 = SubResource( 51 )
+process_material = SubResource( 51 )
+draw_pass_1 = SubResource( 52 )
 
 [node name="Flames" type="MeshInstance" parent="Campfire"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
-mesh = SubResource( 54 )
+mesh = SubResource( 55 )
 material/0 = null
 
 [node name="Smoke" parent="Campfire" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.599, 0 )
-process_material = SubResource( 57 )
+process_material = SubResource( 58 )
 
 [node name="OmniLight" type="OmniLight" parent="Campfire"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
@@ -1518,7 +1518,7 @@ transform = Transform( 2, 0, 0, 0, 2.7, 0, 0, 0, 2.1, -6.45149, -1.84286, 5.9821
 
 [node name="Lake" type="MeshInstance" parent="CliffIsland"]
 transform = Transform( 2.58117, 0, 2.21304, 0, 1, 0, -2.21304, 0, 2.58117, -0.151247, 2.68753, 0.0560665 )
-mesh = SubResource( 76 )
+mesh = SubResource( 59 )
 material/0 = ExtResource( 42 )
 
 [node name="Torch" parent="." instance=ExtResource( 41 )]
@@ -1538,18 +1538,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="Torch/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 60 )
+material_override = SubResource( 61 )
 cast_shadow = 0
 amount = 32
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 65 )
-draw_pass_1 = SubResource( 66 )
+process_material = SubResource( 66 )
+draw_pass_1 = SubResource( 67 )
 
 [node name="Flames" type="MeshInstance" parent="Torch"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.611915, 0 )
-mesh = SubResource( 69 )
+mesh = SubResource( 70 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Torch"]
@@ -1573,18 +1573,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="Torch2/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 70 )
+material_override = SubResource( 71 )
 cast_shadow = 0
 amount = 16
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 71 )
-draw_pass_1 = SubResource( 66 )
+process_material = SubResource( 72 )
+draw_pass_1 = SubResource( 67 )
 
 [node name="Flames" type="MeshInstance" parent="Torch2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.612, 0 )
-mesh = SubResource( 74 )
+mesh = SubResource( 75 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Torch2"]
