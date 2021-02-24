@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.s3tc.stex"
-path.etc="res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.etc.stex"
+path.s3tc="res://.import/ripples-normal-1.jpg-004ed2b6fc829f999d8cfdbefbcbeab8.s3tc.stex"
+path.etc="res://.import/ripples-normal-1.jpg-004ed2b6fc829f999d8cfdbefbcbeab8.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/water/sea/sea-texture-1.png"
-dest_files=[ "res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.s3tc.stex", "res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.etc.stex" ]
+source_file="res://assets/water/ripples-normal-1.jpg"
+dest_files=[ "res://.import/ripples-normal-1.jpg-004ed2b6fc829f999d8cfdbefbcbeab8.s3tc.stex", "res://.import/ripples-normal-1.jpg-004ed2b6fc829f999d8cfdbefbcbeab8.etc.stex" ]
 
 [params]
 

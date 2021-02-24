@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/edge-noise.png-68c3e88974fda85e45ea4685c28770c7.s3tc.stex"
-path.etc="res://.import/edge-noise.png-68c3e88974fda85e45ea4685c28770c7.etc.stex"
+path.s3tc="res://.import/ripples-normal-2.jpg-6344230d9b6fcc0ccec539a527035983.s3tc.stex"
+path.etc="res://.import/ripples-normal-2.jpg-6344230d9b6fcc0ccec539a527035983.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/water/sea/edge-noise.png"
-dest_files=[ "res://.import/edge-noise.png-68c3e88974fda85e45ea4685c28770c7.s3tc.stex", "res://.import/edge-noise.png-68c3e88974fda85e45ea4685c28770c7.etc.stex" ]
+source_file="res://assets/water/ripples-normal-2.jpg"
+dest_files=[ "res://.import/ripples-normal-2.jpg-6344230d9b6fcc0ccec539a527035983.s3tc.stex", "res://.import/ripples-normal-2.jpg-6344230d9b6fcc0ccec539a527035983.etc.stex" ]
 
 [params]
 

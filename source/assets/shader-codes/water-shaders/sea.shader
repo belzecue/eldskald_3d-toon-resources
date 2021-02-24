@@ -41,7 +41,9 @@ float linearize(float c_depth) {
 void fragment() {
 	
 	// These calculate the distance between the water and whatever's behind it,
-	// exactly at the pixel we are looking at.
+	// exactly at the pixel we are looking at with the depth texture. Because we
+	// use it, we are sent to the transparent pipeline, meaning the sea doesn't
+	// appear behind other transparent objects.
 	float zdepth = linearize(texture(DEPTH_TEXTURE, SCREEN_UV).x);
 	float zpos = linearize(FRAGCOORD.z);
 	float diff = zdepth - zpos;

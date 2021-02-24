@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/sea-texture.png-66a167c8bc1ac0945e7d244ccb3a683a.s3tc.stex"
-path.etc="res://.import/sea-texture.png-66a167c8bc1ac0945e7d244ccb3a683a.etc.stex"
+path.s3tc="res://.import/texture-noise.png-51810212215fa59131c231aa28fae3f5.s3tc.stex"
+path.etc="res://.import/texture-noise.png-51810212215fa59131c231aa28fae3f5.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/water/sea/sea-texture.png"
-dest_files=[ "res://.import/sea-texture.png-66a167c8bc1ac0945e7d244ccb3a683a.s3tc.stex", "res://.import/sea-texture.png-66a167c8bc1ac0945e7d244ccb3a683a.etc.stex" ]
+source_file="res://assets/water/texture-noise.png"
+dest_files=[ "res://.import/texture-noise.png-51810212215fa59131c231aa28fae3f5.s3tc.stex", "res://.import/texture-noise.png-51810212215fa59131c231aa28fae3f5.etc.stex" ]
 
 [params]
 
