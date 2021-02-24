@@ -1,22 +1,24 @@
 // A modified sea shader to fix the normal vector in order
 // to produce reflections. Has no textures and less freedom
 // over waves.
-
 shader_type spatial;
 render_mode depth_draw_always;
 
 
 
 uniform vec4 water_color : hint_color = vec4(1.0);
+uniform float reflectiveness: hint_range(0,1) = 0.8;
+uniform float agitation: hint_range(0,1) = 0.0;
+
 uniform float edge_smoothness = 0.05;
 uniform float edge_max_threshold = 0.5;
 uniform float edge_displacement = 0.6;
 uniform float near = 0.15;
 uniform float far = 300.0;
-uniform float reflectiveness: hint_range(0,1) = 0.5;
-uniform float agitation: hint_range(0,1) = 0.0;
+
 uniform vec2 uv1_scale = vec2(1,1);
 uniform vec2 uv1_offset = vec2(0,0);
+
 uniform sampler2D edge_noise : hint_white;
 uniform sampler2D agitation_noise_1 : hint_white;
 uniform sampler2D agitation_noise_2 : hint_white;
@@ -71,7 +73,6 @@ void vertex() {
 
 
 const float lighting = 0.0;
-const float lighting_half_band = 0.0;
 const float lighting_smoothness = 0.02;
 
 const float specular_glossiness = 16.0;
@@ -84,14 +85,15 @@ void light() {
 	// Lighting, specular and rim directly from base toon shader. The agitation
 	// value controls rim and specular values. We use water color instead of albedo
 	// to keep albedo solely for edge detection.
+	
+	// Litness has no half band, and we add 0.5 to it to make better shaded parts.
 	float shade = clamp(dot(NORMAL, LIGHT), 0.0, 1.0);
-	float dark_shade = smoothstep(0.0, lighting_smoothness, shade);
-	float half_shade = smoothstep(lighting_half_band, lighting_half_band + lighting_smoothness, shade);
-	vec3 litness = (dark_shade/2.0 + half_shade/2.0) * ATTENUATION;
+	vec3 litness = (smoothstep(0.0, lighting_smoothness, shade)/2.0 + 0.5) * ATTENUATION;
 	DIFFUSE_LIGHT.r += water_color.r * water_color.a * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);
 	DIFFUSE_LIGHT.g += water_color.g * water_color.a * LIGHT_COLOR.g * mix(lighting, 1.0, litness.g);
 	DIFFUSE_LIGHT.b += water_color.b * water_color.a * LIGHT_COLOR.b * mix(lighting, 1.0, litness.b);
 	
+	// Normal specular, with agitation and reflectiveness controling its amount.
 	vec3 half = normalize(VIEW + LIGHT);
 	float spec_intensity = pow(dot(NORMAL, half), specular_glossiness * specular_glossiness);
 	spec_intensity = smoothstep(0.05, 0.05 + specular_smoothness, spec_intensity);
@@ -102,11 +104,14 @@ void light() {
 	// white, it's edge and everything in between is smoothing.
 	// We add the albedo value to the rim dot product and to the rim value
 	// so that we always read it as rim lighting when we are on edges.
+	// We also multiply the final result by 1 - spec_intensity so that the
+	// edge ripples don't add onto specular light, looks better this way.
+	// You can remove it to see if you like how it looks.
 	float rim_dot = 1.0 - dot(NORMAL, VIEW) + ALBEDO.r;
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
 	float rim_value = clamp(ALBEDO.r + rim_dot, 0.0, 1.0) * agitation * reflectiveness;
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness;
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness * (1.0 - spec_intensity);
 }
 
 
