@@ -75,6 +75,15 @@ void fragment() {
 
 
 void light() {
+	// Let's start by incorporating specular and rim textures. Pay attention to
+	// the channels and what each value does.
+	float spec_value = specular * texture(texture_specular, UV).r;
+	float spec_gloss = specular_glossiness * texture(texture_specular, UV).g;
+	float spec_smooth = specular_smoothness * texture(texture_specular, UV).b;
+	float rim_value = rim * texture(texture_rim, UV).r;
+	float rim_width = rim_amount * texture(texture_rim, UV).g;
+	float rim_smooth = rim_smoothness * texture(texture_rim, UV).b;
+	
 	// Lighting part. We smoothstep the dot product for each band then interpolate the sum
 	// between the lighting value and 1. Mess with the lighting uniforms to see.
 	float shade = clamp(dot(NORMAL, LIGHT), 0.0, 1.0);
@@ -88,17 +97,17 @@ void light() {
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.
 	vec3 half = normalize(VIEW + LIGHT);
-	float spec_intensity = pow(dot(NORMAL, half), specular_glossiness * specular_glossiness);
-	spec_intensity = smoothstep(0.05, 0.05 + specular_smoothness, spec_intensity);
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, specular) * spec_intensity * litness;
+	float spec_intensity = pow(dot(NORMAL, half), spec_gloss * spec_gloss);
+	spec_intensity = smoothstep(0.05, 0.05 + spec_smooth, spec_intensity);
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, spec_value) * spec_intensity * litness;
 	
 	// Rim part. We use the view and normal vectors only to find out if we're looking
 	// at a pixel from the edge of the object or not. We add the final value to specular
 	// light values so that Godot treats it as specular.
 	float rim_dot = 1.0 - dot(NORMAL, VIEW);
-	float rim_threshold = pow((1.0 - rim_amount), shade);
-	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim) * rim_intensity * litness;
+	float rim_threshold = pow((1.0 - rim_width), shade);
+	float rim_intensity = smoothstep(rim_threshold - rim_smooth/2.0, rim_threshold + rim_smooth/2.0, rim_dot);
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness;
 }
 
 

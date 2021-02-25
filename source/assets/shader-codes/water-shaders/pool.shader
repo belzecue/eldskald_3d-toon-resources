@@ -107,10 +107,10 @@ void light() {
 	// We also multiply the final result by 1 - spec_intensity so that the
 	// edge ripples don't add onto specular light, looks better this way.
 	// You can remove it to see if you like how it looks.
-	float rim_dot = 1.0 - dot(NORMAL, VIEW) + ALBEDO.r;
+	float rim_dot = clamp(1.0 - dot(NORMAL, VIEW) + ALBEDO.r, 0.0, 1.0);
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
-	float rim_value = clamp(ALBEDO.r + rim_dot, 0.0, 1.0) * agitation * reflectiveness;
+	float rim_value = agitation * reflectiveness;
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness * (1.0 - spec_intensity);
 }
 
