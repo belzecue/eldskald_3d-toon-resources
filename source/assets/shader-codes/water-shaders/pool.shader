@@ -16,12 +16,18 @@ uniform float edge_displacement = 0.6;
 uniform float near = 0.15;
 uniform float far = 300.0;
 
-uniform vec2 uv1_scale = vec2(1,1);
-uniform vec2 uv1_offset = vec2(0,0);
+uniform vec2 uv_scale = vec2(1,1);
+uniform vec2 uv_offset = vec2(0,0);
 
 uniform sampler2D edge_noise : hint_white;
 uniform sampler2D agitation_noise_1 : hint_white;
 uniform sampler2D agitation_noise_2 : hint_white;
+
+
+
+void vertex() {
+	UV = UV * uv_scale.xy + uv_offset.xy;
+}
 
 
 
@@ -67,9 +73,8 @@ void fragment() {
 
 
 
-void vertex() {
-	UV = UV * uv1_scale.xy + uv1_offset.xy;
-}
+
+
 
 
 const float lighting = 0.0;

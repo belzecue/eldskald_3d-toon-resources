@@ -42,15 +42,19 @@ uniform vec4 emission : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float emission_energy = 1.0;
 uniform sampler2D texture_emission : hint_black_albedo;
 
-// UV1 from base code.
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
+// Ambient occlusion from base code.
+uniform sampler2D ao_map : hint_white;
+uniform float ao_light_affect: hint_range(0,1) = 0.0;
+
+// UV scale and offset from base code.
+uniform vec2 uv_scale;
+uniform vec2 uv_offset;
 
 
 
 // Vertex function to deal with UV1, straight out of base code.
 void vertex() {
-	UV = UV * uv1_scale.xy + uv1_offset.xy;
+	UV = UV * uv_scale.xy + uv_offset.xy;
 }
 
 
@@ -62,6 +66,10 @@ void fragment() {
 	
 	// Emission, straight out of base code with additive mode.
 	EMISSION = (emission.rgb + texture(texture_emission, UV).rgb) * emission_energy;
+	
+	// Ambient occlusion, straight out of base code on the red channel.
+	AO = texture(ao_map, UV).r;
+	AO_LIGHT_AFFECT = ao_light_affect;
 }
 
 

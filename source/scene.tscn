@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=2]
+[gd_scene load_steps=120 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/models/wood/steps/bridge.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/water/sea-material.tres" type="Material" id=28]
 [ext_resource path="res://assets/models/logs/logs/log-3.tscn" type="PackedScene" id=29]
+[ext_resource path="res://assets/water/edge-noise.png" type="Texture" id=30]
 [ext_resource path="res://assets/shader-codes/toon-shader/base-toon.shader" type="Shader" id=31]
 [ext_resource path="res://assets/models/logs/timber-pile.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/models/palm-trees/palm-tree.tscn" type="PackedScene" id=33]
@@ -40,7 +41,8 @@
 [ext_resource path="res://assets/models/food/watermelon/watermelon-3.tscn" type="PackedScene" id=39]
 [ext_resource path="res://assets/shader-codes/flame-shaders/toon-flames.shader" type="Shader" id=40]
 [ext_resource path="res://assets/models/tools/torch/torch.tscn" type="PackedScene" id=41]
-[ext_resource path="res://assets/water/pool-material.tres" type="Material" id=42]
+[ext_resource path="res://assets/shader-codes/water-shaders/pool.shader" type="Shader" id=42]
+[ext_resource path="res://assets/water/Water_001_NORM.jpg" type="Texture" id=43]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
@@ -60,7 +62,9 @@ background_mode = 2
 background_sky = SubResource( 1 )
 background_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
 background_canvas_max_layer = 1
-ambient_light_color = Color( 0.333333, 0.439216, 0.466667, 1 )
+ambient_light_color = Color( 0.2, 0.258824, 0.27451, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
 fog_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
 fog_sun_color = Color( 0.564706, 0.729412, 0.92549, 1 )
 fog_sun_amount = 0.13
@@ -70,6 +74,7 @@ fog_depth_curve = 0.615572
 fog_height_min = 148.2
 fog_height_max = -171.5
 tonemap_mode = 2
+ss_reflections_enabled = true
 glow_enabled = true
 glow_intensity = 1.8
 glow_strength = 0.87
@@ -136,8 +141,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="Shader" id=6]
 code = "// Outline, by GDQuest
@@ -198,8 +204,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="Shader" id=9]
 code = "// Outline, by GDQuest
@@ -260,8 +267,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
@@ -287,8 +295,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=14]
 resource_local_to_scene = true
@@ -314,8 +323,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=16]
 resource_local_to_scene = true
@@ -341,8 +351,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=18]
 resource_local_to_scene = true
@@ -368,8 +379,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=20]
 resource_local_to_scene = true
@@ -395,8 +407,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=22]
 resource_local_to_scene = true
@@ -422,8 +435,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=24]
 resource_local_to_scene = true
@@ -449,8 +463,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=26]
 resource_local_to_scene = true
@@ -476,8 +491,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=28]
 resource_local_to_scene = true
@@ -503,8 +519,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="Shader" id=30]
 code = "// Outline, by GDQuest
@@ -565,8 +582,9 @@ shader_param/rim_amount = 0.3
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="Shader" id=33]
 code = "// Outline, by GDQuest
@@ -627,8 +645,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="Shader" id=36]
 code = "// Outline, by GDQuest
@@ -689,8 +708,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=39]
 resource_local_to_scene = true
@@ -709,8 +729,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=40]
 resource_local_to_scene = true
@@ -736,8 +757,9 @@ shader_param/rim_amount = 0.3
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=42]
 resource_local_to_scene = true
@@ -763,8 +785,9 @@ shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="PlaneMesh" id=44]
 size = Vector2( 100, 100 )
@@ -943,7 +966,24 @@ color = Color( 0.470588, 0.470588, 0.470588, 0.470588 )
 subdivide_width = 16
 subdivide_depth = 16
 
-[sub_resource type="Shader" id=60]
+[sub_resource type="ShaderMaterial" id=60]
+resource_local_to_scene = true
+shader = ExtResource( 42 )
+shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 0.313726 )
+shader_param/reflectiveness = 1.0
+shader_param/agitation = 0.0
+shader_param/edge_smoothness = 0.05
+shader_param/edge_max_threshold = 0.5
+shader_param/edge_displacement = 0.6
+shader_param/near = 0.15
+shader_param/far = 300.0
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/edge_noise = ExtResource( 30 )
+shader_param/agitation_noise_1 = ExtResource( 43 )
+shader_param/agitation_noise_2 = ExtResource( 43 )
+
+[sub_resource type="Shader" id=61]
 code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
 
@@ -1027,9 +1067,9 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=61]
+[sub_resource type="ShaderMaterial" id=62]
 resource_local_to_scene = true
-shader = SubResource( 60 )
+shader = SubResource( 61 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1037,26 +1077,26 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=62]
+[sub_resource type="Gradient" id=63]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=63]
+[sub_resource type="GradientTexture" id=64]
 resource_local_to_scene = true
-gradient = SubResource( 62 )
+gradient = SubResource( 63 )
 width = 128
 
-[sub_resource type="Curve" id=64]
+[sub_resource type="Curve" id=65]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.276151, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=65]
+[sub_resource type="CurveTexture" id=66]
 resource_local_to_scene = true
 width = 128
-curve = SubResource( 64 )
+curve = SubResource( 65 )
 
-[sub_resource type="ParticlesMaterial" id=66]
+[sub_resource type="ParticlesMaterial" id=67]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1068,31 +1108,31 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 65 )
-color_ramp = SubResource( 63 )
+scale_curve = SubResource( 66 )
+color_ramp = SubResource( 64 )
 
-[sub_resource type="QuadMesh" id=67]
+[sub_resource type="QuadMesh" id=68]
 size = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ViewportTexture" id=68]
+[sub_resource type="ViewportTexture" id=69]
 viewport_path = NodePath("Torch/Viewport")
 
-[sub_resource type="ShaderMaterial" id=69]
+[sub_resource type="ShaderMaterial" id=70]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 68 )
+shader_param/texture_albedo = SubResource( 69 )
 
-[sub_resource type="QuadMesh" id=70]
+[sub_resource type="QuadMesh" id=71]
 resource_local_to_scene = true
-material = SubResource( 69 )
+material = SubResource( 70 )
 
-[sub_resource type="ShaderMaterial" id=71]
+[sub_resource type="ShaderMaterial" id=72]
 resource_local_to_scene = true
-shader = SubResource( 60 )
+shader = SubResource( 61 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1100,7 +1140,7 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=72]
+[sub_resource type="ParticlesMaterial" id=73]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1112,24 +1152,24 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 65 )
-color_ramp = SubResource( 63 )
+scale_curve = SubResource( 66 )
+color_ramp = SubResource( 64 )
 
-[sub_resource type="ViewportTexture" id=73]
+[sub_resource type="ViewportTexture" id=74]
 viewport_path = NodePath("Torch2/Viewport")
 
-[sub_resource type="ShaderMaterial" id=74]
+[sub_resource type="ShaderMaterial" id=75]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 73 )
+shader_param/texture_albedo = SubResource( 74 )
 
-[sub_resource type="QuadMesh" id=75]
+[sub_resource type="QuadMesh" id=76]
 resource_local_to_scene = true
-material = SubResource( 74 )
+material = SubResource( 75 )
 
 [node name="Demo" type="Spatial"]
 
@@ -1520,7 +1560,7 @@ transform = Transform( 2, 0, 0, 0, 2.7, 0, 0, 0, 2.1, -6.45149, -1.84286, 5.9821
 transform = Transform( 2.58117, 0, 2.21304, 0, 1, 0, -2.21304, 0, 2.58117, -0.151247, 2.68753, 0.0560665 )
 cast_shadow = 0
 mesh = SubResource( 59 )
-material/0 = ExtResource( 42 )
+material/0 = SubResource( 60 )
 
 [node name="Torch" parent="." instance=ExtResource( 41 )]
 transform = Transform( 1.13875, 0, -0.976341, 0, 1.5, 0, 0.976341, 0, 1.13875, 2.4437, 3.21853, -12 )
@@ -1539,18 +1579,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="Torch/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 61 )
+material_override = SubResource( 62 )
 cast_shadow = 0
 amount = 32
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 66 )
-draw_pass_1 = SubResource( 67 )
+process_material = SubResource( 67 )
+draw_pass_1 = SubResource( 68 )
 
 [node name="Flames" type="MeshInstance" parent="Torch"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.611915, 0 )
-mesh = SubResource( 70 )
+mesh = SubResource( 71 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Torch"]
@@ -1574,18 +1614,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="Torch2/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 71 )
+material_override = SubResource( 72 )
 cast_shadow = 0
 amount = 16
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 72 )
-draw_pass_1 = SubResource( 67 )
+process_material = SubResource( 73 )
+draw_pass_1 = SubResource( 68 )
 
 [node name="Flames" type="MeshInstance" parent="Torch2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.612, 0 )
-mesh = SubResource( 75 )
+mesh = SubResource( 76 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Torch2"]
