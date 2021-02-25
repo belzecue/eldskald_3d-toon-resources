@@ -49,3 +49,6 @@ shader = ExtResource( 1 )
 shader_param/lighting = 0.0
 shader_param/lighting_half_band = 0.0
 shader_param/lighting_smoothness = 0.02
+shader_param/rim = 0.5
+shader_param/rim_amount = 0.6
+shader_param/rim_smoothness = 0.05
