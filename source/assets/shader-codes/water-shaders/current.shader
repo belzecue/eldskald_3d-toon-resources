@@ -1,3 +1,5 @@
+// This is basically the pool shader without the edge ripples and
+// with a single normal map moving in a single direction.
 shader_type spatial;
 render_mode depth_draw_always;
 
@@ -21,11 +23,13 @@ void vertex() {
 
 
 
-// Most of these are taken from the water pool shader.
+// Pool shader without the edge ripples implementation.
 void fragment() {
 	METALLIC = reflectiveness;
 	ROUGHNESS = clamp(1.0 - reflectiveness + 5.0 * agitation, 0.0, 1.0);
 	
+	// We just need one normal map here, and it always moves up on the y direction.
+	// Make your river/falls models with that in mind.
 	NORMALMAP = texture(normal_map, UV + vec2(0.0, flow_speed*TIME)).rgb;
 	NORMALMAP_DEPTH = agitation*4.0;
 	
@@ -46,12 +50,8 @@ const float specular_smoothness = 0.02;
 const float rim_amount = 0.2;
 const float rim_smoothness = 0.02;
 
+// Pool light pass without the albedo to edge ripples trick.
 void light() {
-	// Lighting, specular and rim directly from base toon shader. The agitation
-	// value controls rim and specular values. We use water color instead of albedo
-	// to keep albedo solely for edge detection.
-	
-	// Litness has no half band, and we add 0.5 to it to make better shaded parts.
 	float shade = clamp(dot(NORMAL, LIGHT), 0.0, 1.0);
 	vec3 litness = (smoothstep(0.0, lighting_smoothness, shade)/2.0 + 0.5) * ATTENUATION;
 	DIFFUSE_LIGHT.r += ALBEDO.r * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);
@@ -68,8 +68,6 @@ void light() {
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
 	float rim_value = agitation * reflectiveness;
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness * (1.0 - spec_intensity) * brightness;
-	
-	
 }
 
 

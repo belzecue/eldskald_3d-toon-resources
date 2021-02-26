@@ -10,6 +10,8 @@ uniform vec4 water_color : hint_color = vec4(1.0);
 uniform float reflectiveness: hint_range(0,1) = 0.8;
 uniform float agitation: hint_range(0,1) = 0.0;
 uniform float brightness = 1.0;
+uniform float edge_brightness = 1.0;
+uniform bool fixed_edge_lighting = false;
 
 uniform float edge_smoothness = 0.05;
 uniform float edge_max_threshold = 0.5;
@@ -105,19 +107,21 @@ void light() {
 	spec_intensity = smoothstep(0.05, 0.05 + specular_smoothness, spec_intensity);
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, agitation * reflectiveness) * spec_intensity * litness * brightness;
 	
-	// To blend the edge ripples with rim and specular, we detect edge
-	// here by reading the albedo. If it's black, it's not edge, if it's
-	// white, it's edge and everything in between is smoothing.
-	// We add the albedo value to the rim dot product and to the rim value
-	// so that we always read it as rim lighting when we are on edges.
-	// We also multiply the final result by 1 - spec_intensity so that the
-	// edge ripples don't add onto specular light, looks better this way.
-	// You can remove it to see if you like how it looks.
-	float rim_dot = clamp(1.0 - dot(NORMAL, VIEW) + ALBEDO.r, 0.0, 1.0);
+	// Rim lighting with agitation and reflectiveness controling its amount.
+	// We also blend it with specular by multiplying the final value by
+	// 1 - spec_intensity, try removing it to see how it looks.
+	float rim_dot = 1.0 - dot(NORMAL, VIEW);
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
 	float rim_value = agitation * reflectiveness;
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness * (1.0 - spec_intensity) * brightness;
+	
+	// We detect edge here by reading the albedo. If it's black
+	// it's not edge, if it's white it's edge, and every shade of
+	// gray in between is smoothing.
+	float edge_factor = edge_brightness * (1.0 - rim_intensity) * (1.0 - spec_intensity);
+	float edge_value = fixed_edge_lighting ? 0.5 : agitation * reflectiveness;
+	SPECULAR_LIGHT += ALBEDO.r * mix(vec3(0.0), LIGHT_COLOR, edge_value) * edge_factor * litness;
 }
 
 

@@ -7,7 +7,7 @@
 [resource]
 next_pass = ExtResource( 2 )
 shader = ExtResource( 3 )
-shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 0.313726 )
+shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 0.0784314 )
 shader_param/reflectiveness = 0.8
 shader_param/agitation = 0.2
 shader_param/brightness = 1.0
