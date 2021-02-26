@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=2]
+[gd_scene load_steps=124 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/models/food/skewered-fish/skewered-fish.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/models/logs/logs/log-1.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/models/tools/bottles/bottle-2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/water/ripples-material.tres" type="Material" id=13]
 [ext_resource path="res://assets/models/tools/axe/toon-axe.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/models/logs/logs/log-2.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/models/logs/campfire.tscn" type="PackedScene" id=17]
@@ -977,7 +978,7 @@ spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 0.6
 scale_curve = SubResource( 60 )
-color = Color( 0.643137, 0.72549, 0.72549, 1 )
+color = Color( 0.152941, 0.207843, 0.207843, 1 )
 
 [sub_resource type="PlaneMesh" id=62]
 subdivide_width = 16
@@ -989,12 +990,12 @@ shader = ExtResource( 42 )
 shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 0.0784314 )
 shader_param/reflectiveness = 0.8
 shader_param/agitation = 0.4
-shader_param/brightness = 1.0
-shader_param/edge_brightness = 1.0
+shader_param/brightness = 0.0
+shader_param/edge_brightness = 0.1
 shader_param/fixed_edge_lighting = false
-shader_param/edge_smoothness = 0.05
-shader_param/edge_max_threshold = 0.5
-shader_param/edge_displacement = 0.6
+shader_param/edge_smoothness = 0.1
+shader_param/edge_max_threshold = 0.15
+shader_param/edge_displacement = 0.2
 shader_param/near = 0.15
 shader_param/far = 300.0
 shader_param/uv_scale = Vector2( 1, 1 )
@@ -1002,6 +1003,8 @@ shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/edge_noise = ExtResource( 30 )
 shader_param/agitation_noise_1 = ExtResource( 43 )
 shader_param/agitation_noise_2 = ExtResource( 43 )
+
+[sub_resource type="QuadMesh" id=80]
 
 [sub_resource type="Shader" id=64]
 code = "// This shader is based on Minionsart's stylized fire
@@ -1542,6 +1545,11 @@ transform = Transform( 2.58117, 0, 2.21304, 0, 1, 0, -2.21304, 0, 2.58117, -0.15
 cast_shadow = 0
 mesh = SubResource( 62 )
 material/0 = SubResource( 63 )
+
+[node name="Ripples" type="MeshInstance" parent="CliffIsland"]
+transform = Transform( 5.47692, 1.63344, 1.785e-08, 0, -1.74846e-07, 1, 2.45017, -3.65128, -3.99007e-08, 1.14585, 2.7, -2.39266 )
+mesh = SubResource( 80 )
+material/0 = ExtResource( 13 )
 
 [node name="Torch" parent="CliffIsland" instance=ExtResource( 41 )]
 transform = Transform( 1.03602, 0, -1.08474, 0, 1.5, 0, 1.08474, 0, 1.03602, 2.86498, 3.7525, -0.296042 )
