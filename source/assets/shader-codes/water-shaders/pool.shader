@@ -9,6 +9,7 @@ render_mode depth_draw_always;
 uniform vec4 water_color : hint_color = vec4(1.0);
 uniform float reflectiveness: hint_range(0,1) = 0.8;
 uniform float agitation: hint_range(0,1) = 0.0;
+uniform float brightness = 1.0;
 
 uniform float edge_smoothness = 0.05;
 uniform float edge_max_threshold = 0.5;
@@ -20,8 +21,8 @@ uniform vec2 uv_scale = vec2(1,1);
 uniform vec2 uv_offset = vec2(0,0);
 
 uniform sampler2D edge_noise : hint_white;
-uniform sampler2D agitation_noise_1 : hint_white;
-uniform sampler2D agitation_noise_2 : hint_white;
+uniform sampler2D agitation_noise_1 : hint_normal;
+uniform sampler2D agitation_noise_2 : hint_normal;
 
 
 
@@ -102,7 +103,7 @@ void light() {
 	vec3 half = normalize(VIEW + LIGHT);
 	float spec_intensity = pow(dot(NORMAL, half), specular_glossiness * specular_glossiness);
 	spec_intensity = smoothstep(0.05, 0.05 + specular_smoothness, spec_intensity);
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, agitation * reflectiveness) * spec_intensity * litness;
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, agitation * reflectiveness) * spec_intensity * litness * brightness;
 	
 	// To blend the edge ripples with rim and specular, we detect edge
 	// here by reading the albedo. If it's black, it's not edge, if it's
@@ -116,7 +117,7 @@ void light() {
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
 	float rim_value = agitation * reflectiveness;
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness * (1.0 - spec_intensity);
+	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness * (1.0 - spec_intensity) * brightness;
 }
 
 

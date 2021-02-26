@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/cliff-2.obj-fccbe2d1e285823d51a864f72bb53567.mesh"
+
+[deps]
+
+files=[ "res://.import/cliff-2.obj-fccbe2d1e285823d51a864f72bb53567.mesh" ]
+
+source_file="res://assets/models/grounds/cliff-2.obj"
+dest_files=[ "res://.import/cliff-2.obj-fccbe2d1e285823d51a864f72bb53567.mesh", "res://.import/cliff-2.obj-fccbe2d1e285823d51a864f72bb53567.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

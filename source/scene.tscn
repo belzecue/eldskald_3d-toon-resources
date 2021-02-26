@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=2]
+[gd_scene load_steps=122 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=2]
@@ -12,9 +12,7 @@
 [ext_resource path="res://assets/models/food/skewered-fish/skewered-fish.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/models/logs/logs/log-1.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/models/tools/bottles/bottle-2.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/models/wood/steps/stairs.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/models/tools/axe/toon-axe.tscn" type="PackedScene" id=14]
-[ext_resource path="res://assets/models/wood/steps/beam.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/models/logs/logs/log-2.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/models/logs/campfire.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/models/tools/bottles/bottle-1.tscn" type="PackedScene" id=18]
@@ -26,7 +24,6 @@
 [ext_resource path="res://assets/models/stones/large-rocks/boulder-3.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/models/stones/small-rocks/rock-2.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/models/grounds/little-isle.obj" type="ArrayMesh" id=26]
-[ext_resource path="res://assets/models/wood/steps/bridge.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/water/sea-material.tres" type="Material" id=28]
 [ext_resource path="res://assets/models/logs/logs/log-3.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/water/edge-noise.png" type="Texture" id=30]
@@ -35,7 +32,7 @@
 [ext_resource path="res://assets/models/palm-trees/palm-tree.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/materials/stone.tres" type="Material" id=34]
 [ext_resource path="res://assets/materials/grass.tres" type="Material" id=35]
-[ext_resource path="res://assets/models/grounds/cliff-1.obj" type="ArrayMesh" id=36]
+[ext_resource path="res://assets/water/current-material.tres" type="Material" id=36]
 [ext_resource path="res://assets/models/food/watermelon/watermelon-1.tscn" type="PackedScene" id=37]
 [ext_resource path="res://assets/models/food/watermelon/watermelon-2.tscn" type="PackedScene" id=38]
 [ext_resource path="res://assets/models/food/watermelon/watermelon-3.tscn" type="PackedScene" id=39]
@@ -43,6 +40,8 @@
 [ext_resource path="res://assets/models/tools/torch/torch.tscn" type="PackedScene" id=41]
 [ext_resource path="res://assets/shader-codes/water-shaders/pool.shader" type="Shader" id=42]
 [ext_resource path="res://assets/water/Water_001_NORM.jpg" type="Texture" id=43]
+[ext_resource path="res://assets/models/grounds/cliff-3.obj" type="ArrayMesh" id=44]
+[ext_resource path="res://assets/shader-codes/flame-shaders/foam.tscn" type="PackedScene" id=45]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.0745098, 0.0901961, 0.117647, 1 )
@@ -82,7 +81,12 @@ glow_blend_mode = 1
 glow_hdr_threshold = 0.44
 glow_bicubic_upscale = true
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 100, 100 )
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="Shader" id=4]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -116,16 +120,16 @@ void fragment() {
 
 
 "
-
-[sub_resource type="ShaderMaterial" id=4]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-next_pass = SubResource( 4 )
+shader = SubResource( 4 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+next_pass = SubResource( 5 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
 shader_param/roughness = 1.0
@@ -145,7 +149,7 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=7]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -179,16 +183,16 @@ void fragment() {
 
 
 "
-
-[sub_resource type="ShaderMaterial" id=7]
-resource_local_to_scene = true
-shader = SubResource( 6 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
-next_pass = SubResource( 7 )
+shader = SubResource( 7 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+next_pass = SubResource( 8 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
 shader_param/roughness = 1.0
@@ -208,7 +212,7 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="Shader" id=9]
+[sub_resource type="Shader" id=10]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -242,212 +246,128 @@ void fragment() {
 
 
 "
-
-[sub_resource type="ShaderMaterial" id=10]
-resource_local_to_scene = true
-shader = SubResource( 9 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=11]
 resource_local_to_scene = true
-next_pass = SubResource( 10 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader = SubResource( 10 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
+next_pass = SubResource( 11 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=13]
 resource_local_to_scene = true
-next_pass = SubResource( 12 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader = SubResource( 4 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=14]
 resource_local_to_scene = true
-shader = SubResource( 6 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
+next_pass = SubResource( 13 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=15]
 resource_local_to_scene = true
-next_pass = SubResource( 14 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader = SubResource( 7 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=16]
 resource_local_to_scene = true
-shader = SubResource( 9 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
+next_pass = SubResource( 15 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=17]
 resource_local_to_scene = true
-next_pass = SubResource( 16 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader = SubResource( 10 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=18]
 resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
+next_pass = SubResource( 17 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=19]
 resource_local_to_scene = true
-next_pass = SubResource( 18 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader = SubResource( 4 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
 
 [sub_resource type="ShaderMaterial" id=20]
 resource_local_to_scene = true
-shader = SubResource( 6 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=21]
-resource_local_to_scene = true
-next_pass = SubResource( 20 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
-
-[sub_resource type="ShaderMaterial" id=22]
-resource_local_to_scene = true
-shader = SubResource( 9 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=23]
-resource_local_to_scene = true
-next_pass = SubResource( 22 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
-
-[sub_resource type="ShaderMaterial" id=24]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=25]
-resource_local_to_scene = true
-next_pass = SubResource( 24 )
+next_pass = SubResource( 19 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
 shader_param/roughness = 1.0
@@ -467,15 +387,15 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="ShaderMaterial" id=26]
+[sub_resource type="ShaderMaterial" id=21]
 resource_local_to_scene = true
-shader = SubResource( 6 )
+shader = SubResource( 7 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=27]
+[sub_resource type="ShaderMaterial" id=22]
 resource_local_to_scene = true
-next_pass = SubResource( 26 )
+next_pass = SubResource( 21 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
 shader_param/roughness = 1.0
@@ -495,15 +415,15 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="ShaderMaterial" id=28]
+[sub_resource type="ShaderMaterial" id=23]
 resource_local_to_scene = true
-shader = SubResource( 9 )
+shader = SubResource( 10 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=29]
+[sub_resource type="ShaderMaterial" id=24]
 resource_local_to_scene = true
-next_pass = SubResource( 28 )
+next_pass = SubResource( 23 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
 shader_param/roughness = 1.0
@@ -523,7 +443,91 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="Shader" id=30]
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+next_pass = SubResource( 25 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.313726, 0.258824, 0.184314, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
+
+[sub_resource type="ShaderMaterial" id=27]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=28]
+resource_local_to_scene = true
+next_pass = SubResource( 27 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
+
+[sub_resource type="ShaderMaterial" id=29]
+resource_local_to_scene = true
+shader = SubResource( 10 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=30]
+resource_local_to_scene = true
+next_pass = SubResource( 29 )
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.290196, 0.231373, 0.164706, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
+
+[sub_resource type="Shader" id=31]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -558,15 +562,15 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=31]
+[sub_resource type="ShaderMaterial" id=32]
 resource_local_to_scene = true
-shader = SubResource( 30 )
+shader = SubResource( 31 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=32]
+[sub_resource type="ShaderMaterial" id=33]
 resource_local_to_scene = true
-next_pass = SubResource( 31 )
+next_pass = SubResource( 32 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
 shader_param/roughness = 1.0
@@ -586,7 +590,7 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="Shader" id=33]
+[sub_resource type="Shader" id=34]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -621,15 +625,15 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=34]
+[sub_resource type="ShaderMaterial" id=35]
 resource_local_to_scene = true
-shader = SubResource( 33 )
+shader = SubResource( 34 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=35]
+[sub_resource type="ShaderMaterial" id=36]
 resource_local_to_scene = true
-next_pass = SubResource( 34 )
+next_pass = SubResource( 35 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
 shader_param/roughness = 1.0
@@ -649,7 +653,7 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="Shader" id=36]
+[sub_resource type="Shader" id=37]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders
 shader_type spatial;
@@ -684,15 +688,15 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=37]
+[sub_resource type="ShaderMaterial" id=38]
 resource_local_to_scene = true
-shader = SubResource( 36 )
+shader = SubResource( 37 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=38]
+[sub_resource type="ShaderMaterial" id=39]
 resource_local_to_scene = true
-next_pass = SubResource( 37 )
+next_pass = SubResource( 38 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
 shader_param/roughness = 1.0
@@ -704,27 +708,6 @@ shader_param/specular = 0.5
 shader_param/specular_glossiness = 16.0
 shader_param/specular_smoothness = 0.05
 shader_param/rim = 0.25
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
-
-[sub_resource type="ShaderMaterial" id=39]
-resource_local_to_scene = true
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
 shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
@@ -735,13 +718,34 @@ shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=40]
 resource_local_to_scene = true
-shader = SubResource( 30 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
+shader = ExtResource( 31 )
+shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_glossiness = 16.0
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/uv_scale = null
+shader_param/uv_offset = null
 
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
-next_pass = SubResource( 40 )
+shader = SubResource( 31 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+
+[sub_resource type="ShaderMaterial" id=42]
+resource_local_to_scene = true
+next_pass = SubResource( 41 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
 shader_param/roughness = 1.0
@@ -761,15 +765,15 @@ shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
 
-[sub_resource type="ShaderMaterial" id=42]
+[sub_resource type="ShaderMaterial" id=43]
 resource_local_to_scene = true
-shader = SubResource( 33 )
+shader = SubResource( 34 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 2.0
 
-[sub_resource type="ShaderMaterial" id=43]
+[sub_resource type="ShaderMaterial" id=44]
 resource_local_to_scene = true
-next_pass = SubResource( 42 )
+next_pass = SubResource( 43 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
 shader_param/roughness = 1.0
@@ -788,11 +792,6 @@ shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
 shader_param/uv_scale = null
 shader_param/uv_offset = null
-
-[sub_resource type="PlaneMesh" id=44]
-size = Vector2( 100, 100 )
-subdivide_width = 100
-subdivide_depth = 100
 
 [sub_resource type="Shader" id=45]
 code = "// This shader is based on Minionsart's stylized fire
@@ -926,7 +925,7 @@ color_ramp = SubResource( 48 )
 size = Vector2( 0.5, 0.5 )
 
 [sub_resource type="ViewportTexture" id=53]
-viewport_path = NodePath("Campfire/Viewport")
+viewport_path = NodePath("Isle/Campfire/Viewport")
 
 [sub_resource type="ShaderMaterial" id=54]
 resource_local_to_scene = true
@@ -962,16 +961,35 @@ scale_random = 1.0
 scale_curve = SubResource( 57 )
 color = Color( 0.470588, 0.470588, 0.470588, 0.470588 )
 
-[sub_resource type="PlaneMesh" id=59]
+[sub_resource type="Curve" id=78]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.48954, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -1.95902, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=79]
+width = 1024
+curve = SubResource( 78 )
+
+[sub_resource type="ParticlesMaterial" id=80]
+resource_local_to_scene = true
+emission_shape = 2
+emission_box_extents = Vector3( 0.02, 0.02, 0.6 )
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.6
+scale_curve = SubResource( 79 )
+color = Color( 0.643137, 0.72549, 0.72549, 1 )
+
+[sub_resource type="PlaneMesh" id=60]
 subdivide_width = 16
 subdivide_depth = 16
 
-[sub_resource type="ShaderMaterial" id=60]
+[sub_resource type="ShaderMaterial" id=61]
 resource_local_to_scene = true
 shader = ExtResource( 42 )
 shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 0.313726 )
-shader_param/reflectiveness = 1.0
-shader_param/agitation = 0.0
+shader_param/reflectiveness = 0.8
+shader_param/agitation = 0.4
+shader_param/brightness = 1.0
 shader_param/edge_smoothness = 0.05
 shader_param/edge_max_threshold = 0.5
 shader_param/edge_displacement = 0.6
@@ -983,7 +1001,7 @@ shader_param/edge_noise = ExtResource( 30 )
 shader_param/agitation_noise_1 = ExtResource( 43 )
 shader_param/agitation_noise_2 = ExtResource( 43 )
 
-[sub_resource type="Shader" id=61]
+[sub_resource type="Shader" id=62]
 code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
 
@@ -1067,9 +1085,9 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=62]
+[sub_resource type="ShaderMaterial" id=63]
 resource_local_to_scene = true
-shader = SubResource( 61 )
+shader = SubResource( 62 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1077,26 +1095,26 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=63]
+[sub_resource type="Gradient" id=64]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=64]
+[sub_resource type="GradientTexture" id=65]
 resource_local_to_scene = true
-gradient = SubResource( 63 )
+gradient = SubResource( 64 )
 width = 128
 
-[sub_resource type="Curve" id=65]
+[sub_resource type="Curve" id=66]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.276151, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=66]
+[sub_resource type="CurveTexture" id=67]
 resource_local_to_scene = true
 width = 128
-curve = SubResource( 65 )
+curve = SubResource( 66 )
 
-[sub_resource type="ParticlesMaterial" id=67]
+[sub_resource type="ParticlesMaterial" id=68]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1108,31 +1126,31 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 66 )
-color_ramp = SubResource( 64 )
+scale_curve = SubResource( 67 )
+color_ramp = SubResource( 65 )
 
-[sub_resource type="QuadMesh" id=68]
+[sub_resource type="QuadMesh" id=69]
 size = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ViewportTexture" id=69]
-viewport_path = NodePath("Torch/Viewport")
+[sub_resource type="ViewportTexture" id=70]
+viewport_path = NodePath("CliffIsland/Torch/Viewport")
 
-[sub_resource type="ShaderMaterial" id=70]
+[sub_resource type="ShaderMaterial" id=71]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 69 )
+shader_param/texture_albedo = SubResource( 70 )
 
-[sub_resource type="QuadMesh" id=71]
+[sub_resource type="QuadMesh" id=72]
 resource_local_to_scene = true
-material = SubResource( 70 )
+material = SubResource( 71 )
 
-[sub_resource type="ShaderMaterial" id=72]
+[sub_resource type="ShaderMaterial" id=73]
 resource_local_to_scene = true
-shader = SubResource( 61 )
+shader = SubResource( 62 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1140,7 +1158,7 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=73]
+[sub_resource type="ParticlesMaterial" id=74]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1152,24 +1170,24 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 66 )
-color_ramp = SubResource( 64 )
+scale_curve = SubResource( 67 )
+color_ramp = SubResource( 65 )
 
-[sub_resource type="ViewportTexture" id=74]
-viewport_path = NodePath("Torch2/Viewport")
+[sub_resource type="ViewportTexture" id=75]
+viewport_path = NodePath("CliffIsland/Torch2/Viewport")
 
-[sub_resource type="ShaderMaterial" id=75]
+[sub_resource type="ShaderMaterial" id=76]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 74 )
+shader_param/texture_albedo = SubResource( 75 )
 
-[sub_resource type="QuadMesh" id=76]
+[sub_resource type="QuadMesh" id=77]
 resource_local_to_scene = true
-material = SubResource( 75 )
+material = SubResource( 76 )
 
 [node name="Demo" type="Spatial"]
 
@@ -1191,275 +1209,9 @@ mouse_sensitivity = 1.0
 [node name="Camera" type="Camera" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
-[node name="Terrain" type="Spatial" parent="."]
-
-[node name="Log" parent="Terrain" instance=ExtResource( 11 )]
-transform = Transform( 0.0974124, 1.3966, -0.00384948, -1.39551, 0.0974883, 0.055147, 0.0552812, 0, 1.39891, 1.409, 0.197178, 0.245 )
-material/0 = SubResource( 5 )
-material/1 = SubResource( 8 )
-material/2 = SubResource( 11 )
-
-[node name="Log2" parent="Terrain" instance=ExtResource( 16 )]
-transform = Transform( 0.362347, 0, 1.3523, 0, 1.4, 0, -1.3523, 0, 0.362347, 0.5, 0.183743, -1.5 )
-material/0 = SubResource( 13 )
-material/1 = SubResource( 15 )
-material/2 = SubResource( 17 )
-
-[node name="Log3" parent="Terrain" instance=ExtResource( 11 )]
-transform = Transform( 1.12801, 0, -0.829212, 0, 1.4, 0, 0.829213, 0, 1.12801, -1.19, 0.2, -0.906 )
-material/0 = SubResource( 19 )
-material/1 = SubResource( 21 )
-material/2 = SubResource( 23 )
-
-[node name="Log4" parent="Terrain" instance=ExtResource( 29 )]
-transform = Transform( 0.917392, 0, -1.18676, 0, 1.5, 0, 1.18676, 0, 0.917392, 0.77209, 0.19413, 1.83575 )
-material/0 = SubResource( 25 )
-material/1 = SubResource( 27 )
-material/2 = SubResource( 29 )
-
-[node name="PalmTree" parent="Terrain" instance=ExtResource( 33 )]
-transform = Transform( 0.5623, 0, -0.826933, 0, 1, 0, 0.826933, 0, 0.5623, 2.696, 0.053, -4.457 )
-
-[node name="Coconut" parent="Terrain/PalmTree" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.0331893, 2.49412, 0.326506 )
-
-[node name="Coconut2" parent="Terrain/PalmTree" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.120694, 2.37443, 0.212061 )
-
-[node name="PalmTree2" parent="Terrain" instance=ExtResource( 33 )]
-transform = Transform( 0.297964, -0.142779, -1.04921, 0.0390055, 1.09069, -0.137348, 1.05816, 0, 0.300506, 2.80271, 0.053, 2.71121 )
-
-[node name="Coconut" parent="Terrain/PalmTree2" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.98023e-08, 2.58964e-10, 1, -7.1449e-10, 0, 0, 1, 0.0370154, 2.49319, 0.299925 )
-
-[node name="Coconut2" parent="Terrain/PalmTree2" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.98023e-08, 2.58964e-10, 1, -7.1449e-10, 0, 0, 1, -0.163191, 2.44884, 0.22859 )
-
-[node name="PalmTree3" parent="Terrain" instance=ExtResource( 33 )]
-transform = Transform( 0.761063, 0, 0.480399, 0, 0.9, 0, -0.480399, 0, 0.761063, -1.487, 0.114, -4.432 )
-
-[node name="Coconut" parent="Terrain/PalmTree3" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.0780733, 2.51124, 0.257934 )
-
-[node name="Coconut2" parent="Terrain/PalmTree3" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.98023e-08, 0, 0.999999, 0, -2.98023e-08, 0, 1, -0.141033, 2.53084, 0.214247 )
-
-[node name="Coconut3" parent="Terrain/PalmTree3" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.98023e-08, 0, 0.999999, 0, -2.98023e-08, 0, 1, -0.0509673, 2.37056, 0.267093 )
-
-[node name="PalmTree4" parent="Terrain" instance=ExtResource( 33 )]
-transform = Transform( 0.58287, 0, 1.04893, 0, 1.2, 0, -1.04893, 0, 0.58287, 0.0506754, -0.0858902, 5.94876 )
-
-[node name="PalmTree5" parent="Terrain" instance=ExtResource( 33 )]
-transform = Transform( -0.611527, 0, 0.791223, 0, 1, 0, -0.791223, 0, -0.611527, -4.42972, -0.16676, 4.84087 )
-
-[node name="PalmTree6" parent="Terrain" instance=ExtResource( 33 )]
-transform = Transform( 0.0281833, 0.0682494, 0.99727, 0, 0.997666, -0.0682765, -0.999603, 0.00192425, 0.0281175, -3.507, -0.085, 0.867 )
-
-[node name="Coconut" parent="Terrain/PalmTree6" instance=ExtResource( 2 )]
-transform = Transform( 1, -1.16415e-10, 0, 0, 1, -7.96717e-10, 0, 6.49379e-09, 1, 0.118244, 2.47837, 0.282142 )
-
-[node name="Coconut2" parent="Terrain/PalmTree6" instance=ExtResource( 2 )]
-transform = Transform( 1, -4.65661e-10, 0, 0, 1, -7.96717e-10, 0, 1.39516e-08, 1, -0.0352406, 2.3284, 0.24252 )
-
-[node name="SkeweredFish" parent="Terrain" instance=ExtResource( 10 )]
-transform = Transform( 0.108449, 0.208084, 0.97208, -0.0230675, 0.978111, -0.206802, -0.993834, 3.8594e-06, 0.110875, -0.951, 0.451, 0.343 )
-
-[node name="SkeweredFish2" parent="Terrain" instance=ExtResource( 10 )]
-transform = Transform( 0.68764, 0.350756, 0.86847, -0.214995, 1.14757, -0.260893, 0.831221, 0.0066514, -0.785935, -0.836, 0.361, 0.573 )
-
-[node name="SkeweredFish3" parent="Terrain" instance=ExtResource( 10 )]
-transform = Transform( 0.322274, 0.184784, 0.941127, -0.186274, 0.876128, -0.168077, -1.14081, -0.0908559, 0.293309, -0.874, 0.414, 0.138 )
-
-[node name="Boulder" parent="Terrain" instance=ExtResource( 21 )]
-transform = Transform( -0.757143, 0, 0.653249, -0.277479, 0.905302, -0.32161, -0.591388, -0.424768, -0.685443, 2.90384, -0.28696, -6.03076 )
-
-[node name="Boulder2" parent="Terrain" instance=ExtResource( 24 )]
-transform = Transform( 0.779546, 0, -0.626345, 0, 1, 0, 0.626345, 0, 0.779546, -3.87214, 0.00882436, -3.18381 )
-
-[node name="Boulder3" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44629, -0.00881804, -2.06949 )
-
-[node name="Boulder4" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.27151, -1.49042, 9.30804 )
-
-[node name="Boulder5" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 0.477972, 0, 0.878375, 0, 1, 0, -0.878375, 0, 0.477972, 2.26566, -0.00881797, 4.23511 )
-
-[node name="Boulder6" parent="Terrain" instance=ExtResource( 21 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.02784, -1.61506, 8.4477 )
-
-[node name="Boulder7" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 2.05753, 0, 2.18325, 0, 3, 0, -2.18325, 0, 2.05753, -6.29745, -1.89643, 9.40329 )
-
-[node name="Boulder8" parent="Terrain" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 0.909838, -0.414963, 0, 0.414963, 0.909838, -0.906513, -0.560971, 7.38737 )
-
-[node name="Boulder9" parent="Terrain" instance=ExtResource( 24 )]
-transform = Transform( 0.769341, -0.529016, 0.358129, 0.4796, 0.848612, 0.223254, -0.422017, 0, 0.906588, -7.37442, -0.991176, 3.43855 )
-
-[node name="Boulder10" parent="Terrain" instance=ExtResource( 21 )]
-transform = Transform( 0.799318, -0.39353, -0.454119, 0.432882, 0.901249, -0.019065, 0.416777, -0.181341, 0.890737, -6.82022, -0.4962, -2.94558 )
-
-[node name="Boulder11" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 1.72483, 0, 1.0124, 0, 3, 0, -1.0124, 0, 1.72483, -9.93181, -1.87416, -0.541326 )
-
-[node name="Boulder12" parent="Terrain" instance=ExtResource( 21 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -9.04558, -1.42193, -3.74756 )
-
-[node name="Boulder13" parent="Terrain" instance=ExtResource( 24 )]
-transform = Transform( 1.49261, 0.148693, 0, -0.148693, 1.49261, 0, 0, 0, 1.5, 5.47233, -0.00629514, -0.173174 )
-
-[node name="Boulder14" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 2.27618, 0, 1.95423, 0, 3, 0, -1.95423, 0, 2.27618, 10.5737, -1.92819, -4.3635 )
-
-[node name="Boulder15" parent="Terrain" instance=ExtResource( 24 )]
-transform = Transform( 0.689513, 0.496985, -0.526856, -0.129026, 0.800079, 0.585855, 0.712688, -0.335976, 0.615789, 5.39821, -0.748925, -5.55474 )
-
-[node name="Boulder16" parent="Terrain" instance=ExtResource( 21 )]
-transform = Transform( 0.894316, 0.272163, -0.355142, -0.168816, 0.94031, 0.295496, 0.414367, -0.204313, 0.88688, 4.95556, -0.256589, -4.49736 )
-
-[node name="Boulder17" parent="Terrain" instance=ExtResource( 20 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1.3, 1.4371, -1.72375, -9.27939 )
-
-[node name="Boulder18" parent="Terrain" instance=ExtResource( 21 )]
-transform = Transform( 1.95456, 0, 1.247, 0, 3, 0, -1.55874, 0, 1.56365, -3.60083, -1.96257, -9.11996 )
-
-[node name="Props" type="Spatial" parent="."]
-
-[node name="TimberPile" parent="Props" instance=ExtResource( 32 )]
-transform = Transform( 0.312169, 0, -0.950027, 0, 1, 0, 0.950027, 0, 0.312169, 1.69017, 0.0788577, -1.01866 )
-
-[node name="Axe" parent="Props" instance=ExtResource( 14 )]
-transform = Transform( -0.499929, 0.742558, 0.445734, -0.0229024, -0.525819, 0.850288, 0.865763, 0.414876, 0.279879, -1.32153, 0.732886, -0.95785 )
-material/0 = SubResource( 32 )
-material/1 = SubResource( 35 )
-
-[node name="Bottle" parent="Props" instance=ExtResource( 12 )]
-transform = Transform( 0.942525, 0, -0.334136, 0, 1, 0, 0.334136, 0, 0.942525, 0.682, 0.148531, 0.617 )
-
-[node name="Bottle2" parent="Props" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.149054, 0.423 )
-
-[node name="Bottle3" parent="Props" instance=ExtResource( 12 )]
-transform = Transform( 0.91548, -0.402363, 6.55533e-08, 0, -1.62921e-07, -1, 0.402363, 0.91548, -1.49151e-07, 0.813, 0.089198, 0.843 )
-
-[node name="Bottle4" parent="Props" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.687809, 0.146008, -0.929303 )
-
-[node name="Bottle5" parent="Props" instance=ExtResource( 19 )]
-transform = Transform( -1.36646e-07, -0.838728, 0.544551, 1, -1.62921e-07, 0, 8.87187e-08, 0.544551, 0.838728, 1.058, 0.081767, -0.905 )
-
-[node name="Bottle6" parent="Props" instance=ExtResource( 19 )]
-transform = Transform( 0.299241, 0, 0.954178, 0, 1, 0, -0.954178, 0, 0.299241, -0.377, 0.149357, -1.062 )
-
-[node name="Bottle7" parent="Props" instance=ExtResource( 18 )]
-transform = Transform( 0.935857, -0.352381, 5.74101e-08, 0, -1.62921e-07, -1, 0.352381, 0.935857, -1.5247e-07, -1.104, 0.0944319, -0.177 )
-
-[node name="Rock" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04151, 0.0141891, 1.17747 )
-
-[node name="Rock2" parent="Props" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76958, 0.0100959, -2.59588 )
-
-[node name="Rock3" parent="Props" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25999, 0.0134809, -2.46566 )
-
-[node name="Rock4" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293078, 0.0141889, -2.22462 )
-
-[node name="Rock5" parent="Props" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.03227, 0.010096, 0.0315416 )
-
-[node name="Rock6" parent="Props" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62143, 0.0134806, 0.895697 )
-
-[node name="Guitar" parent="Props" instance=ExtResource( 5 )]
-transform = Transform( -0.708795, 0.370959, -3.11531e-07, 0.370959, 0.708795, -5.76113e-14, 2.76015e-07, -1.44457e-07, -0.8, 1.13829, 0.190973, -0.119158 )
-material/5 = SubResource( 38 )
-material/6 = SubResource( 38 )
-material/7 = SubResource( 39 )
-
-[node name="Rock7" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( -0.10399, 0, -0.994578, 0, 1, 0, 0.994578, 0, -0.10399, -1.37014, 0.014189, 4.57321 )
-
-[node name="Rock8" parent="Props" instance=ExtResource( 23 )]
-transform = Transform( 0.740282, 0.367608, -0.562891, -0.44476, 0.89565, 0, 0.504154, 0.250352, 0.826531, 4.48097, -0.171797, 4.55208 )
-
-[node name="Coconut4" parent="Props" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7028, 0.106335, 3.45156 )
-
-[node name="Coconut5" parent="Props" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6364, 0.112124, 2.11224 )
-
-[node name="Coconut6" parent="Props" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36626, 0.112407, -1.19666 )
-
-[node name="Rock9" parent="Props" instance=ExtResource( 25 )]
-transform = Transform( 0.613085, -0.569819, 0.547205, 0.622384, 0.774987, 0.1097, -0.486586, 0.273316, 0.829779, -6.14176, -0.308222, 2.89145 )
-
-[node name="Rock10" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( 0.898127, -0.439735, 0, 0.439735, 0.898127, 0, 0, 0, 1, -7.3444, -0.526897, 0.667332 )
-
-[node name="Rock11" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( 0.923659, 0.383215, 0, -0.383215, 0.923659, 0, 0, 0, 1, 6.78971, -0.365661, 1.8146 )
-
-[node name="Rock12" parent="Props" instance=ExtResource( 23 )]
-transform = Transform( 0.907602, 0.419832, 0, -0.419832, 0.907602, 0, 0, 0, 1, 7.12569, -0.431704, 0.301969 )
-
-[node name="Coconut7" parent="Props" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.83031, 0.100368, -0.518915 )
-
-[node name="Coconut8" parent="Props" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93723, 0.106632, -3.98787 )
-
-[node name="Rock13" parent="Props" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 0.990095, 0.1404, 0, -0.1404, 0.990095, 2.02628, -0.109589, -5.83938 )
-
-[node name="Rock14" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.652169, 0.0141895, -5.19801 )
-
-[node name="Rock15" parent="Props" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 0.862814, 0.505522, 0, -0.505522, 0.862814, -0.610112, -0.993482, -8.19104 )
-
-[node name="Rock16" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 0.868856, 0.495064, 0, -0.495064, 0.868856, -2.84355, -1.06545, -7.79951 )
-
-[node name="Rock17" parent="Props" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 0.823404, 0.567456, 0, -0.567456, 0.823404, 1.33636, -1.08688, -8.25694 )
-
-[node name="Rock18" parent="Props" instance=ExtResource( 22 )]
-transform = Transform( 0.948633, -0.273419, -0.159175, 0.315897, 0.8463, 0.428935, 0.0174313, -0.457185, 0.889201, -2.8487, -0.279379, -6.06656 )
-
-[node name="Rock19" parent="Props" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69859, -1.08784, -6.06527 )
-
-[node name="Knife" parent="Props" instance=ExtResource( 3 )]
-transform = Transform( -0.487829, 0.0244589, -0.106887, 0, 0.487401, 0.111531, 0.10965, 0.108816, -0.475537, 0.660312, 0.251299, 1.75631 )
-material/0 = SubResource( 41 )
-material/1 = SubResource( 43 )
-
-[node name="Fish" parent="Props" instance=ExtResource( 8 )]
-transform = Transform( -0.983671, 0.032384, 0.177041, 0.0335538, 0.99943, 0.00361726, -0.176822, 0.00949859, -0.984197, 0.496503, 0.209964, 1.99625 )
-
-[node name="Fish2" parent="Props" instance=ExtResource( 8 )]
-transform = Transform( -0.9801, 0.0253344, 0.576435, 0.0402645, 0.99943, 0.00361728, -0.691218, 0.022296, -0.817135, 0.336451, 0.22247, 2.17744 )
-
-[node name="Watermelon" parent="Props" instance=ExtResource( 39 )]
-transform = Transform( 0.993857, 0, 0.110671, 0, 1, 0, -0.110671, 0, 0.993857, 0.833414, 0.224094, 1.70513 )
-
-[node name="Watermelon2" parent="Props" instance=ExtResource( 39 )]
-transform = Transform( 0.963402, 0, 0.268062, 0, 1, 0, -0.268062, 0, 0.963402, 0.903764, 0.223905, 1.63798 )
-
-[node name="Watermelon3" parent="Props" instance=ExtResource( 37 )]
-transform = Transform( 0.614726, 0, -0.788741, 0, 1, 0, 0.788741, 0, 0.614726, 0.932138, 0.145462, 1.25437 )
-
-[node name="Watermelon4" parent="Props" instance=ExtResource( 38 )]
-transform = Transform( 0.878983, -0.391312, 0.272515, 0.406705, 0.91356, 0, -0.248959, 0.110833, 0.962151, 1.14626, 0.363512, 1.54378 )
-
 [node name="Sea" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113535, -0.795744, 0.0942211 )
-mesh = SubResource( 44 )
+mesh = SubResource( 3 )
 material/0 = ExtResource( 28 )
 
 [node name="Isle" type="MeshInstance" parent="."]
@@ -1467,20 +1219,283 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000703752, 0.000505418, 0.00
 mesh = ExtResource( 26 )
 material/0 = ExtResource( 9 )
 
-[node name="Campfire" parent="." instance=ExtResource( 17 )]
+[node name="Terrain" type="Spatial" parent="Isle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000703752, -0.000505418, -0.000254154 )
 
-[node name="Viewport" type="Viewport" parent="Campfire"]
+[node name="Log" parent="Isle/Terrain" instance=ExtResource( 11 )]
+transform = Transform( 0.0974124, 1.3966, -0.00384948, -1.39551, 0.0974883, 0.055147, 0.0552812, 0, 1.39891, 1.409, 0.197178, 0.245 )
+material/0 = SubResource( 6 )
+material/1 = SubResource( 9 )
+material/2 = SubResource( 12 )
+
+[node name="Log2" parent="Isle/Terrain" instance=ExtResource( 16 )]
+transform = Transform( 0.362347, 0, 1.3523, 0, 1.4, 0, -1.3523, 0, 0.362347, 0.5, 0.183743, -1.5 )
+material/0 = SubResource( 14 )
+material/1 = SubResource( 16 )
+material/2 = SubResource( 18 )
+
+[node name="Log3" parent="Isle/Terrain" instance=ExtResource( 11 )]
+transform = Transform( 1.12801, 0, -0.829212, 0, 1.4, 0, 0.829213, 0, 1.12801, -1.19, 0.2, -0.906 )
+material/0 = SubResource( 20 )
+material/1 = SubResource( 22 )
+material/2 = SubResource( 24 )
+
+[node name="Log4" parent="Isle/Terrain" instance=ExtResource( 29 )]
+transform = Transform( 0.917392, 0, -1.18676, 0, 1.5, 0, 1.18676, 0, 0.917392, 0.77209, 0.19413, 1.83575 )
+material/0 = SubResource( 26 )
+material/1 = SubResource( 28 )
+material/2 = SubResource( 30 )
+
+[node name="PalmTree" parent="Isle/Terrain" instance=ExtResource( 33 )]
+transform = Transform( 0.5623, 0, -0.826933, 0, 1, 0, 0.826933, 0, 0.5623, 2.696, 0.053, -4.457 )
+
+[node name="Coconut" parent="Isle/Terrain/PalmTree" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.0331893, 2.49412, 0.326506 )
+
+[node name="Coconut2" parent="Isle/Terrain/PalmTree" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.120694, 2.37443, 0.212061 )
+
+[node name="PalmTree2" parent="Isle/Terrain" instance=ExtResource( 33 )]
+transform = Transform( 0.297964, -0.142779, -1.04921, 0.0390055, 1.09069, -0.137348, 1.05816, 0, 0.300506, 2.80271, 0.053, 2.71121 )
+
+[node name="Coconut" parent="Isle/Terrain/PalmTree2" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 2.58964e-10, 1, -7.1449e-10, 0, 0, 1, 0.0370154, 2.49319, 0.299925 )
+
+[node name="Coconut2" parent="Isle/Terrain/PalmTree2" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 2.58964e-10, 1, -7.1449e-10, 0, 0, 1, -0.163191, 2.44884, 0.22859 )
+
+[node name="PalmTree3" parent="Isle/Terrain" instance=ExtResource( 33 )]
+transform = Transform( 0.761063, 0, 0.480399, 0, 0.9, 0, -0.480399, 0, 0.761063, -1.487, 0.114, -4.432 )
+
+[node name="Coconut" parent="Isle/Terrain/PalmTree3" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.0780733, 2.51124, 0.257934 )
+
+[node name="Coconut2" parent="Isle/Terrain/PalmTree3" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 0, 0.999999, 0, -2.98023e-08, 0, 1, -0.141033, 2.53084, 0.214247 )
+
+[node name="Coconut3" parent="Isle/Terrain/PalmTree3" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 0, 0.999999, 0, -2.98023e-08, 0, 1, -0.0509673, 2.37056, 0.267093 )
+
+[node name="PalmTree4" parent="Isle/Terrain" instance=ExtResource( 33 )]
+transform = Transform( 0.58287, 0, 1.04893, 0, 1.2, 0, -1.04893, 0, 0.58287, 0.0506754, -0.0858902, 5.94876 )
+
+[node name="PalmTree5" parent="Isle/Terrain" instance=ExtResource( 33 )]
+transform = Transform( -0.611527, 0, 0.791223, 0, 1, 0, -0.791223, 0, -0.611527, -4.42972, -0.16676, 4.84087 )
+
+[node name="PalmTree6" parent="Isle/Terrain" instance=ExtResource( 33 )]
+transform = Transform( 0.0281833, 0.0682494, 0.99727, 0, 0.997666, -0.0682765, -0.999603, 0.00192425, 0.0281175, -3.507, -0.085, 0.867 )
+
+[node name="Coconut" parent="Isle/Terrain/PalmTree6" instance=ExtResource( 2 )]
+transform = Transform( 1, -1.16415e-10, 0, 0, 1, -7.96717e-10, 0, 6.49379e-09, 1, 0.118244, 2.47837, 0.282142 )
+
+[node name="Coconut2" parent="Isle/Terrain/PalmTree6" instance=ExtResource( 2 )]
+transform = Transform( 1, -4.65661e-10, 0, 0, 1, -7.96717e-10, 0, 1.39516e-08, 1, -0.0352406, 2.3284, 0.24252 )
+
+[node name="SkeweredFish" parent="Isle/Terrain" instance=ExtResource( 10 )]
+transform = Transform( 0.108449, 0.208084, 0.97208, -0.0230675, 0.978111, -0.206802, -0.993834, 3.8594e-06, 0.110875, -0.951, 0.451, 0.343 )
+
+[node name="SkeweredFish2" parent="Isle/Terrain" instance=ExtResource( 10 )]
+transform = Transform( 0.68764, 0.350756, 0.86847, -0.214995, 1.14757, -0.260893, 0.831221, 0.0066514, -0.785935, -0.836, 0.361, 0.573 )
+
+[node name="SkeweredFish3" parent="Isle/Terrain" instance=ExtResource( 10 )]
+transform = Transform( 0.322274, 0.184784, 0.941127, -0.186274, 0.876128, -0.168077, -1.14081, -0.0908559, 0.293309, -0.874, 0.414, 0.138 )
+
+[node name="Boulder2" parent="Isle/Terrain" instance=ExtResource( 24 )]
+transform = Transform( 0.779546, 0, -0.626345, 0, 1, 0, 0.626345, 0, 0.779546, -3.87214, 0.00882436, -3.18381 )
+
+[node name="Boulder3" parent="Isle/Terrain" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44629, -0.00881804, -2.06949 )
+
+[node name="Boulder4" parent="Isle/Terrain" instance=ExtResource( 20 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.27151, -1.49042, 9.30804 )
+
+[node name="Boulder5" parent="Isle/Terrain" instance=ExtResource( 20 )]
+transform = Transform( 0.477972, 0, 0.878375, 0, 1, 0, -0.878375, 0, 0.477972, 2.26566, -0.00881797, 4.23511 )
+
+[node name="Boulder6" parent="Isle/Terrain" instance=ExtResource( 21 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.02784, -1.61506, 8.4477 )
+
+[node name="Boulder7" parent="Isle/Terrain" instance=ExtResource( 20 )]
+transform = Transform( 2.05753, 0, 2.18325, 0, 3, 0, -2.18325, 0, 2.05753, -6.29745, -1.89643, 9.40329 )
+
+[node name="Boulder8" parent="Isle/Terrain" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 0.909838, -0.414963, 0, 0.414963, 0.909838, -0.906513, -0.560971, 7.38737 )
+
+[node name="Boulder9" parent="Isle/Terrain" instance=ExtResource( 24 )]
+transform = Transform( 0.769341, -0.529016, 0.358129, 0.4796, 0.848612, 0.223254, -0.422017, 0, 0.906588, -7.37442, -0.991176, 3.43855 )
+
+[node name="Boulder10" parent="Isle/Terrain" instance=ExtResource( 21 )]
+transform = Transform( 0.799318, -0.39353, -0.454119, 0.432882, 0.901249, -0.019065, 0.416777, -0.181341, 0.890737, -6.82022, -0.4962, -2.94558 )
+
+[node name="Boulder11" parent="Isle/Terrain" instance=ExtResource( 20 )]
+transform = Transform( 1.72483, 0, 1.0124, 0, 3, 0, -1.0124, 0, 1.72483, -9.93181, -1.87416, -0.541326 )
+
+[node name="Boulder12" parent="Isle/Terrain" instance=ExtResource( 21 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -9.04558, -1.42193, -3.74756 )
+
+[node name="Boulder13" parent="Isle/Terrain" instance=ExtResource( 24 )]
+transform = Transform( 1.49261, 0.148693, 0, -0.148693, 1.49261, 0, 0, 0, 1.5, 5.47233, -0.00629514, -0.173174 )
+
+[node name="Boulder14" parent="Isle/Terrain" instance=ExtResource( 20 )]
+transform = Transform( 2.27618, 0, 1.95423, 0, 3, 0, -1.95423, 0, 2.27618, 10.5737, -1.92819, -4.3635 )
+
+[node name="Boulder15" parent="Isle/Terrain" instance=ExtResource( 24 )]
+transform = Transform( 0.689513, 0.496985, -0.526856, -0.129026, 0.800079, 0.585855, 0.712688, -0.335976, 0.615789, 5.39821, -0.748925, -5.55474 )
+
+[node name="Boulder16" parent="Isle/Terrain" instance=ExtResource( 21 )]
+transform = Transform( 0.894316, 0.272163, -0.355142, -0.168816, 0.94031, 0.295496, 0.414367, -0.204313, 0.88688, 4.95556, -0.256589, -4.49736 )
+
+[node name="Boulder18" parent="Isle/Terrain" instance=ExtResource( 21 )]
+transform = Transform( 1.95456, 0, 1.247, 0, 3, 0, -1.55874, 0, 1.56365, -6.08193, -1.96257, -10.0776 )
+
+[node name="Props" type="Spatial" parent="Isle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000703752, -0.000505418, -0.000254154 )
+
+[node name="TimberPile" parent="Isle/Props" instance=ExtResource( 32 )]
+transform = Transform( 0.312169, 0, -0.950027, 0, 1, 0, 0.950027, 0, 0.312169, 1.69017, 0.0788577, -1.01866 )
+
+[node name="Axe" parent="Isle/Props" instance=ExtResource( 14 )]
+transform = Transform( -0.499929, 0.742558, 0.445734, -0.0229024, -0.525819, 0.850288, 0.865763, 0.414876, 0.279879, -1.32153, 0.732886, -0.95785 )
+material/0 = SubResource( 33 )
+material/1 = SubResource( 36 )
+
+[node name="Bottle" parent="Isle/Props" instance=ExtResource( 12 )]
+transform = Transform( 0.942525, 0, -0.334136, 0, 1, 0, 0.334136, 0, 0.942525, 0.682, 0.148531, 0.617 )
+
+[node name="Bottle2" parent="Isle/Props" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.866, 0.149054, 0.423 )
+
+[node name="Bottle3" parent="Isle/Props" instance=ExtResource( 12 )]
+transform = Transform( 0.91548, -0.402363, 6.55533e-08, 0, -1.62921e-07, -1, 0.402363, 0.91548, -1.49151e-07, 0.813, 0.089198, 0.843 )
+
+[node name="Bottle4" parent="Isle/Props" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.687809, 0.146008, -0.929303 )
+
+[node name="Bottle5" parent="Isle/Props" instance=ExtResource( 19 )]
+transform = Transform( -1.36646e-07, -0.838728, 0.544551, 1, -1.62921e-07, 0, 8.87187e-08, 0.544551, 0.838728, 1.058, 0.081767, -0.905 )
+
+[node name="Bottle6" parent="Isle/Props" instance=ExtResource( 19 )]
+transform = Transform( 0.299241, 0, 0.954178, 0, 1, 0, -0.954178, 0, 0.299241, -0.377, 0.149357, -1.062 )
+
+[node name="Bottle7" parent="Isle/Props" instance=ExtResource( 18 )]
+transform = Transform( 0.935857, -0.352381, 5.74101e-08, 0, -1.62921e-07, -1, 0.352381, 0.935857, -1.5247e-07, -1.104, 0.0944319, -0.177 )
+
+[node name="Rock" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04151, 0.0141891, 1.17747 )
+
+[node name="Rock2" parent="Isle/Props" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76958, 0.0100959, -2.59588 )
+
+[node name="Rock3" parent="Isle/Props" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25999, 0.0134809, -2.46566 )
+
+[node name="Rock4" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293078, 0.0141889, -2.22462 )
+
+[node name="Rock5" parent="Isle/Props" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.03227, 0.010096, 0.0315416 )
+
+[node name="Rock6" parent="Isle/Props" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62143, 0.0134806, 0.895697 )
+
+[node name="Guitar" parent="Isle/Props" instance=ExtResource( 5 )]
+transform = Transform( -0.708795, 0.370959, -3.11531e-07, 0.370959, 0.708795, -5.76113e-14, 2.76015e-07, -1.44457e-07, -0.8, 1.13829, 0.190973, -0.119158 )
+material/5 = SubResource( 39 )
+material/6 = SubResource( 39 )
+material/7 = SubResource( 40 )
+
+[node name="Rock7" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( -0.10399, 0, -0.994578, 0, 1, 0, 0.994578, 0, -0.10399, -1.37014, 0.014189, 4.57321 )
+
+[node name="Rock8" parent="Isle/Props" instance=ExtResource( 23 )]
+transform = Transform( 0.740282, 0.367608, -0.562891, -0.44476, 0.89565, 0, 0.504154, 0.250352, 0.826531, 4.48097, -0.171797, 4.55208 )
+
+[node name="Coconut4" parent="Isle/Props" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7028, 0.106335, 3.45156 )
+
+[node name="Coconut5" parent="Isle/Props" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6364, 0.112124, 2.11224 )
+
+[node name="Coconut6" parent="Isle/Props" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36626, 0.112407, -1.19666 )
+
+[node name="Rock9" parent="Isle/Props" instance=ExtResource( 25 )]
+transform = Transform( 0.613085, -0.569819, 0.547205, 0.622384, 0.774987, 0.1097, -0.486586, 0.273316, 0.829779, -6.14176, -0.308222, 2.89145 )
+
+[node name="Rock10" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( 0.898127, -0.439735, 0, 0.439735, 0.898127, 0, 0, 0, 1, -7.3444, -0.526897, 0.667332 )
+
+[node name="Rock11" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( 0.923659, 0.383215, 0, -0.383215, 0.923659, 0, 0, 0, 1, 6.78971, -0.365661, 1.8146 )
+
+[node name="Rock12" parent="Isle/Props" instance=ExtResource( 23 )]
+transform = Transform( 0.907602, 0.419832, 0, -0.419832, 0.907602, 0, 0, 0, 1, 7.12569, -0.431704, 0.301969 )
+
+[node name="Coconut7" parent="Isle/Props" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.83031, 0.100368, -0.518915 )
+
+[node name="Coconut8" parent="Isle/Props" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93723, 0.106632, -3.98787 )
+
+[node name="Rock13" parent="Isle/Props" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 0.990095, 0.1404, 0, -0.1404, 0.990095, 2.02628, -0.109589, -5.83938 )
+
+[node name="Rock14" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.652169, 0.0141895, -5.19801 )
+
+[node name="Rock15" parent="Isle/Props" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 0.862814, 0.505522, 0, -0.505522, 0.862814, -0.610112, -0.993482, -8.19104 )
+
+[node name="Rock16" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 0.868856, 0.495064, 0, -0.495064, 0.868856, -2.84355, -1.06545, -7.79951 )
+
+[node name="Rock17" parent="Isle/Props" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 0.823404, 0.567456, 0, -0.567456, 0.823404, 1.33636, -1.08688, -8.25694 )
+
+[node name="Rock18" parent="Isle/Props" instance=ExtResource( 22 )]
+transform = Transform( 0.948633, -0.273419, -0.159175, 0.315897, 0.8463, 0.428935, 0.0174313, -0.457185, 0.889201, -2.8487, -0.279379, -6.06656 )
+
+[node name="Rock19" parent="Isle/Props" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69859, -1.08784, -6.06527 )
+
+[node name="Knife" parent="Isle/Props" instance=ExtResource( 3 )]
+transform = Transform( -0.487829, 0.0244589, -0.106887, 0, 0.487401, 0.111531, 0.10965, 0.108816, -0.475537, 0.660312, 0.251299, 1.75631 )
+material/0 = SubResource( 42 )
+material/1 = SubResource( 44 )
+
+[node name="Fish" parent="Isle/Props" instance=ExtResource( 8 )]
+transform = Transform( -0.983671, 0.032384, 0.177041, 0.0335538, 0.99943, 0.00361726, -0.176822, 0.00949859, -0.984197, 0.496503, 0.209964, 1.99625 )
+
+[node name="Fish2" parent="Isle/Props" instance=ExtResource( 8 )]
+transform = Transform( -0.9801, 0.0253344, 0.576435, 0.0402645, 0.99943, 0.00361728, -0.691218, 0.022296, -0.817135, 0.336451, 0.22247, 2.17744 )
+
+[node name="Watermelon" parent="Isle/Props" instance=ExtResource( 39 )]
+transform = Transform( 0.993857, 0, 0.110671, 0, 1, 0, -0.110671, 0, 0.993857, 0.833414, 0.224094, 1.70513 )
+
+[node name="Watermelon2" parent="Isle/Props" instance=ExtResource( 39 )]
+transform = Transform( 0.963402, 0, 0.268062, 0, 1, 0, -0.268062, 0, 0.963402, 0.903764, 0.223905, 1.63798 )
+
+[node name="Watermelon3" parent="Isle/Props" instance=ExtResource( 37 )]
+transform = Transform( 0.614726, 0, -0.788741, 0, 1, 0, 0.788741, 0, 0.614726, 0.932138, 0.145462, 1.25437 )
+
+[node name="Watermelon4" parent="Isle/Props" instance=ExtResource( 38 )]
+transform = Transform( 0.878983, -0.391312, 0.272515, 0.406705, 0.91356, 0, -0.248959, 0.110833, 0.962151, 1.14626, 0.363512, 1.54378 )
+
+[node name="Campfire" parent="Isle" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000703752, -0.000505418, -0.000254154 )
+
+[node name="Viewport" type="Viewport" parent="Isle/Campfire"]
 size = Vector2( 1024, 1024 )
 transparent_bg = true
 msaa = 3
 render_target_v_flip = true
 render_target_update_mode = 3
 
-[node name="Camera" type="Camera" parent="Campfire/Viewport"]
+[node name="Camera" type="Camera" parent="Isle/Campfire/Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0 )
 current = true
 
-[node name="Flames" type="Particles" parent="Campfire/Viewport/Camera"]
+[node name="Flames" type="Particles" parent="Isle/Campfire/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
 material_override = SubResource( 46 )
 cast_shadow = 0
@@ -1491,144 +1506,111 @@ draw_order = 1
 process_material = SubResource( 51 )
 draw_pass_1 = SubResource( 52 )
 
-[node name="Flames" type="MeshInstance" parent="Campfire"]
+[node name="Flames" type="MeshInstance" parent="Isle/Campfire"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
 mesh = SubResource( 55 )
 material/0 = null
 
-[node name="Smoke" parent="Campfire" instance=ExtResource( 4 )]
+[node name="Smoke" parent="Isle/Campfire" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.599, 0 )
 process_material = SubResource( 58 )
 
-[node name="OmniLight" type="OmniLight" parent="Campfire"]
+[node name="OmniLight" type="OmniLight" parent="Isle/Campfire"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
 light_color = Color( 0.984314, 0.792157, 0.137255, 1 )
 light_energy = 3.0
 light_cull_mask = 4294967293
 shadow_enabled = true
 
-[node name="WoodenStairs" parent="." instance=ExtResource( 13 )]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0.375508, 1.30739, -6.8237 )
-
-[node name="WoodenSteps" parent="WoodenStairs" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, 1.3, 0 )
-
-[node name="SupportBeam" parent="WoodenStairs" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 4.84288e-08, 0, 1.2, 0, -4.84288e-08, 0, 1, -1.43823, -1.04725, 1.51458 )
-
-[node name="SupportBeam4" parent="WoodenStairs" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 4.84288e-08, 0, 1.2, 0, -4.84288e-08, 0, 1, -3.24769, -1.04707, 1.515 )
-
-[node name="SupportBeam2" parent="WoodenStairs" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 5.58793e-08, 0, 1.2, 0, -5.58793e-08, 0, 1, -1.438, -1.04707, -1.515 )
-
-[node name="SupportBeam3" parent="WoodenStairs" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 5.58793e-08, 0, 1.2, 0, -5.58793e-08, 0, 1, -3.2481, -1.04707, -1.515 )
-
 [node name="CliffIsland" type="MeshInstance" parent="."]
-transform = Transform( 0.759169, 0, -0.650894, 0, 1, 0, 0.650894, 0, 0.759169, 0.483997, -0.533968, -17.1249 )
-mesh = ExtResource( 36 )
+transform = Transform( 0.995044, 0, 0.099441, 0, 1, 0, -0.099441, 0, 0.995044, 1.69919, -2.09499, -11.3725 )
+mesh = ExtResource( 44 )
 material/0 = ExtResource( 34 )
 material/1 = ExtResource( 35 )
 material/2 = ExtResource( 34 )
+material/3 = ExtResource( 34 )
+material/4 = ExtResource( 36 )
 
-[node name="Boulder2" parent="CliffIsland" instance=ExtResource( 20 )]
-transform = Transform( -0.116697, 0, 1.99659, 0, 2, 0, -1.99659, 0, -0.116697, 6.48025, -1.02397, 2.28905 )
-
-[node name="Boulder3" parent="CliffIsland" instance=ExtResource( 20 )]
-transform = Transform( 2, 0, 0, 0, 3, 0, 0, 0, 2, -0.92565, -1.54511, 6.49468 )
-
-[node name="Boulder4" parent="CliffIsland" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 2.24919, -1.09664, 6.15815 )
-
-[node name="Boulder5" parent="CliffIsland" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, -3.8591, -1.07106, 5.70603 )
-
-[node name="Boulder6" parent="CliffIsland" instance=ExtResource( 20 )]
-transform = Transform( 1.43414, 0, 1.95448, 0, 2.5, 0, -1.79812, 0, 1.55885, 7.17873, -1.52098, -2.70378 )
-
-[node name="Boulder7" parent="CliffIsland" instance=ExtResource( 21 )]
-transform = Transform( 1.36415, 0, -1.46256, 0, 2.4, 0, 1.46256, 0, 1.36415, 3.03015, -1.36627, -6.95798 )
-
-[node name="Boulder8" parent="CliffIsland" instance=ExtResource( 20 )]
-transform = Transform( 0.967838, 0, -2.83959, 0, 3, 0, 2.83959, 0, 0.967838, -7.74291, -1.53122, 1.60235 )
-
-[node name="Boulder9" parent="CliffIsland" instance=ExtResource( 20 )]
-transform = Transform( 2, 0, 0, 0, 2.7, 0, 0, 0, 2.1, -6.45149, -1.84286, 5.98216 )
+[node name="WaterfallFoam" parent="CliffIsland" instance=ExtResource( 45 )]
+transform = Transform( 0.41409, 0, 0.910236, 0, 1, 0, -0.910236, 0, 0.41409, 1.08799, 2.72369, -2.24648 )
+process_material = SubResource( 80 )
 
 [node name="Lake" type="MeshInstance" parent="CliffIsland"]
 transform = Transform( 2.58117, 0, 2.21304, 0, 1, 0, -2.21304, 0, 2.58117, -0.151247, 2.68753, 0.0560665 )
 cast_shadow = 0
-mesh = SubResource( 59 )
-material/0 = SubResource( 60 )
+mesh = SubResource( 60 )
+material/0 = SubResource( 61 )
 
-[node name="Torch" parent="." instance=ExtResource( 41 )]
-transform = Transform( 1.13875, 0, -0.976341, 0, 1.5, 0, 0.976341, 0, 1.13875, 2.4437, 3.21853, -12 )
+[node name="Torch" parent="CliffIsland" instance=ExtResource( 41 )]
+transform = Transform( 1.03602, 0, -1.08474, 0, 1.5, 0, 1.08474, 0, 1.03602, 2.86498, 3.7525, -0.296042 )
 layers = 4
 
-[node name="Viewport" type="Viewport" parent="Torch"]
+[node name="Viewport" type="Viewport" parent="CliffIsland/Torch"]
 size = Vector2( 512, 512 )
 transparent_bg = true
 msaa = 3
 render_target_v_flip = true
 render_target_update_mode = 3
 
-[node name="Camera" type="Camera" parent="Torch/Viewport"]
+[node name="Camera" type="Camera" parent="CliffIsland/Torch/Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
 current = true
 
-[node name="Flames" type="Particles" parent="Torch/Viewport/Camera"]
+[node name="Flames" type="Particles" parent="CliffIsland/Torch/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 62 )
+material_override = SubResource( 63 )
 cast_shadow = 0
 amount = 32
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 67 )
-draw_pass_1 = SubResource( 68 )
+process_material = SubResource( 68 )
+draw_pass_1 = SubResource( 69 )
 
-[node name="Flames" type="MeshInstance" parent="Torch"]
+[node name="Flames" type="MeshInstance" parent="CliffIsland/Torch"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.611915, 0 )
-mesh = SubResource( 71 )
+mesh = SubResource( 72 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Torch"]
+[node name="OmniLight" type="OmniLight" parent="CliffIsland/Torch"]
 transform = Transform( 0.666666, 0, -1.19209e-07, 0, 0.666667, 0, 1.19209e-07, 0, 0.666666, 0, 0.401872, 0 )
 light_color = Color( 0.984314, 0.792157, 0.137255, 1 )
 shadow_enabled = true
 
-[node name="Torch2" parent="." instance=ExtResource( 41 )]
-transform = Transform( 1.13875, 0, -0.976341, 0, 1.5, 0, 0.976341, 0, 1.13875, -1.72618, 3.21853, -12 )
+[node name="Torch2" parent="CliffIsland" instance=ExtResource( 41 )]
+transform = Transform( 1.03602, 0, -1.08474, 0, 1.5, 0, 1.08474, 0, 1.03602, -2.70885, 3.7525, 4.87971 )
 
-[node name="Viewport" type="Viewport" parent="Torch2"]
+[node name="Viewport" type="Viewport" parent="CliffIsland/Torch2"]
 size = Vector2( 512, 512 )
 transparent_bg = true
 msaa = 3
 render_target_v_flip = true
 render_target_update_mode = 3
 
-[node name="Camera" type="Camera" parent="Torch2/Viewport"]
+[node name="Camera" type="Camera" parent="CliffIsland/Torch2/Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
 current = true
 
-[node name="Flames" type="Particles" parent="Torch2/Viewport/Camera"]
+[node name="Flames" type="Particles" parent="CliffIsland/Torch2/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 72 )
+material_override = SubResource( 73 )
 cast_shadow = 0
 amount = 16
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 73 )
-draw_pass_1 = SubResource( 68 )
+process_material = SubResource( 74 )
+draw_pass_1 = SubResource( 69 )
 
-[node name="Flames" type="MeshInstance" parent="Torch2"]
+[node name="Flames" type="MeshInstance" parent="CliffIsland/Torch2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.612, 0 )
-mesh = SubResource( 76 )
+mesh = SubResource( 77 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Torch2"]
+[node name="OmniLight" type="OmniLight" parent="CliffIsland/Torch2"]
 transform = Transform( 0.666668, 0, -8.9407e-08, 0, 0.666667, 0, 8.9407e-08, 0, 0.666668, 0, 0.402, 0 )
 light_color = Color( 0.984314, 0.792157, 0.137255, 1 )
 shadow_enabled = true
+
+[node name="Boulder" parent="CliffIsland" instance=ExtResource( 20 )]
+transform = Transform( 1.2, 0, 0, 0, 1.5, 0, 0, 0, 1.2, -1.38962, 1.71544, -1.01836 )

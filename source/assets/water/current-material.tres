@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://assets/water/Water_002_NORM.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/shader-codes/toon-shader/outline.tres" type="Material" id=2]
+[ext_resource path="res://assets/shader-codes/water-shaders/current.shader" type="Shader" id=3]
+
+[resource]
+next_pass = ExtResource( 2 )
+shader = ExtResource( 3 )
+shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 0.313726 )
+shader_param/reflectiveness = 0.8
+shader_param/agitation = 0.2
+shader_param/brightness = 1.0
+shader_param/flow_speed = 2.0
+shader_param/uv_scale = Vector2( 1, 2 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/normal_map = ExtResource( 1 )
