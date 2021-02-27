@@ -1,6 +1,10 @@
 // Opaque water pool for when you want screen-space reflections.
-// Has no refraction and no edge ripples. You can use ripple nodes
-// on top of those, they still look good.
+// Has no refraction and no edge ripples. You can use ripple nodes,
+// they still look good. Be aware that screen-space reflections can't
+// also reflect specular light, soif you want them to show up on the
+// waters, you have to turn them into diffuse on the light pass,
+// which is heavily influenced by the material's metallic. Mess
+// around the code for the results you like best.
 shader_type spatial;
 render_mode depth_draw_always;
 

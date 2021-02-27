@@ -1,6 +1,10 @@
 // Opaque current shader to accompany opaque pool shaders. Screen-space
 // reflections can only reflect opaque materials, so only opaque waterfalls
-// are reflected on still waters.
+// are reflected on still waters. Be aware that screen-spacereflections can't
+// also reflect specular light, soif you want them to show up on the
+// waters, you have to turn them into diffuse on the light pass, which is
+// heavily influenced by the material's metallic. Mess around the code for
+// the results you like best.
 shader_type spatial;
 render_mode depth_draw_always;
 
