@@ -5,6 +5,7 @@
 [ext_resource path="res://assets/shader-codes/water-shaders/current.shader" type="Shader" id=3]
 
 [resource]
+resource_local_to_scene = true
 next_pass = ExtResource( 2 )
 shader = ExtResource( 3 )
 shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 0.0784314 )
