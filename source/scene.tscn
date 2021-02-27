@@ -147,8 +147,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="Shader" id=7]
 code = "// Outline, by GDQuest
@@ -210,8 +210,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="Shader" id=10]
 code = "// Outline, by GDQuest
@@ -273,8 +273,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=13]
 resource_local_to_scene = true
@@ -301,8 +301,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=15]
 resource_local_to_scene = true
@@ -329,8 +329,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=17]
 resource_local_to_scene = true
@@ -357,8 +357,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=19]
 resource_local_to_scene = true
@@ -385,8 +385,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=21]
 resource_local_to_scene = true
@@ -413,8 +413,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=23]
 resource_local_to_scene = true
@@ -441,8 +441,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=25]
 resource_local_to_scene = true
@@ -469,8 +469,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=27]
 resource_local_to_scene = true
@@ -497,8 +497,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=29]
 resource_local_to_scene = true
@@ -525,8 +525,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="Shader" id=31]
 code = "// Outline, by GDQuest
@@ -588,8 +588,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="Shader" id=34]
 code = "// Outline, by GDQuest
@@ -651,8 +651,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="Shader" id=37]
 code = "// Outline, by GDQuest
@@ -714,8 +714,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=40]
 resource_local_to_scene = true
@@ -735,8 +735,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
@@ -763,8 +763,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=43]
 resource_local_to_scene = true
@@ -791,8 +791,8 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="Shader" id=45]
 code = "// This shader is based on Minionsart's stylized fire
@@ -1004,9 +1004,9 @@ shader_param/edge_noise = ExtResource( 30 )
 shader_param/agitation_noise_1 = ExtResource( 43 )
 shader_param/agitation_noise_2 = ExtResource( 43 )
 
-[sub_resource type="QuadMesh" id=80]
+[sub_resource type="QuadMesh" id=64]
 
-[sub_resource type="Shader" id=64]
+[sub_resource type="Shader" id=65]
 code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
 
@@ -1090,9 +1090,9 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=65]
+[sub_resource type="ShaderMaterial" id=66]
 resource_local_to_scene = true
-shader = SubResource( 64 )
+shader = SubResource( 65 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1100,26 +1100,26 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="Gradient" id=66]
+[sub_resource type="Gradient" id=67]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=67]
+[sub_resource type="GradientTexture" id=68]
 resource_local_to_scene = true
-gradient = SubResource( 66 )
+gradient = SubResource( 67 )
 width = 128
 
-[sub_resource type="Curve" id=68]
+[sub_resource type="Curve" id=69]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.276151, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=69]
+[sub_resource type="CurveTexture" id=70]
 resource_local_to_scene = true
 width = 128
-curve = SubResource( 68 )
+curve = SubResource( 69 )
 
-[sub_resource type="ParticlesMaterial" id=70]
+[sub_resource type="ParticlesMaterial" id=71]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1131,31 +1131,31 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 69 )
-color_ramp = SubResource( 67 )
+scale_curve = SubResource( 70 )
+color_ramp = SubResource( 68 )
 
-[sub_resource type="QuadMesh" id=71]
+[sub_resource type="QuadMesh" id=72]
 size = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ViewportTexture" id=72]
+[sub_resource type="ViewportTexture" id=73]
 viewport_path = NodePath("CliffIsland/Torch/Viewport")
 
-[sub_resource type="ShaderMaterial" id=73]
+[sub_resource type="ShaderMaterial" id=74]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 72 )
+shader_param/texture_albedo = SubResource( 73 )
 
-[sub_resource type="QuadMesh" id=74]
+[sub_resource type="QuadMesh" id=75]
 resource_local_to_scene = true
-material = SubResource( 73 )
+material = SubResource( 74 )
 
-[sub_resource type="ShaderMaterial" id=75]
+[sub_resource type="ShaderMaterial" id=76]
 resource_local_to_scene = true
-shader = SubResource( 64 )
+shader = SubResource( 65 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
 shader_param/texture_scale = Vector2( 1, 1 )
@@ -1163,7 +1163,7 @@ shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=76]
+[sub_resource type="ParticlesMaterial" id=77]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -1175,24 +1175,24 @@ initial_velocity = 0.5
 linear_accel = 4.0
 scale = 2.0
 scale_random = 1.0
-scale_curve = SubResource( 69 )
-color_ramp = SubResource( 67 )
+scale_curve = SubResource( 70 )
+color_ramp = SubResource( 68 )
 
-[sub_resource type="ViewportTexture" id=77]
+[sub_resource type="ViewportTexture" id=78]
 viewport_path = NodePath("CliffIsland/Torch2/Viewport")
 
-[sub_resource type="ShaderMaterial" id=78]
+[sub_resource type="ShaderMaterial" id=79]
 resource_local_to_scene = true
 shader = ExtResource( 40 )
 shader_param/grow = 0.05
 shader_param/emission = 0.75
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/texture_albedo = SubResource( 77 )
+shader_param/texture_albedo = SubResource( 78 )
 
-[sub_resource type="QuadMesh" id=79]
+[sub_resource type="QuadMesh" id=80]
 resource_local_to_scene = true
-material = SubResource( 78 )
+material = SubResource( 79 )
 
 [node name="Demo" type="Spatial"]
 
@@ -1548,7 +1548,7 @@ material/0 = SubResource( 63 )
 
 [node name="Ripples" type="MeshInstance" parent="CliffIsland"]
 transform = Transform( 5.47692, 1.63344, 1.785e-08, 0, -1.74846e-07, 1, 2.45017, -3.65128, -3.99007e-08, 1.14585, 2.7, -2.39266 )
-mesh = SubResource( 80 )
+mesh = SubResource( 64 )
 material/0 = ExtResource( 13 )
 
 [node name="Torch" parent="CliffIsland" instance=ExtResource( 41 )]
@@ -1568,18 +1568,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="CliffIsland/Torch/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 65 )
+material_override = SubResource( 66 )
 cast_shadow = 0
 amount = 32
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 70 )
-draw_pass_1 = SubResource( 71 )
+process_material = SubResource( 71 )
+draw_pass_1 = SubResource( 72 )
 
 [node name="Flames" type="MeshInstance" parent="CliffIsland/Torch"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.611915, 0 )
-mesh = SubResource( 74 )
+mesh = SubResource( 75 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="CliffIsland/Torch"]
@@ -1603,18 +1603,18 @@ current = true
 
 [node name="Flames" type="Particles" parent="CliffIsland/Torch2/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 75 )
+material_override = SubResource( 76 )
 cast_shadow = 0
 amount = 16
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 76 )
-draw_pass_1 = SubResource( 71 )
+process_material = SubResource( 77 )
+draw_pass_1 = SubResource( 72 )
 
 [node name="Flames" type="MeshInstance" parent="CliffIsland/Torch2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.612, 0 )
-mesh = SubResource( 79 )
+mesh = SubResource( 80 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="CliffIsland/Torch2"]

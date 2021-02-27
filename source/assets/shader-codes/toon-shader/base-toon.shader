@@ -43,12 +43,12 @@ uniform float emission_energy = 1.0;
 uniform sampler2D texture_emission : hint_black_albedo;
 
 // Ambient occlusion from base code.
-uniform sampler2D ao_map : hint_white;
 uniform float ao_light_affect: hint_range(0,1) = 0.0;
+uniform sampler2D ao_map : hint_white;
 
 // UV scale and offset from base code.
-uniform vec2 uv_scale;
-uniform vec2 uv_offset;
+uniform vec2 uv_scale = vec2(1,1);
+uniform vec2 uv_offset = vec2(0,0);
 
 
 

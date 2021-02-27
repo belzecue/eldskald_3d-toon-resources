@@ -1,8 +1,7 @@
-// Toon shader.
-// Made adapting Roystan's tutorial (https://roystan.net/articles/toon-shader.html) to
-// Godot's shading pipeline and base code. When you make a spatial material, you can convert
-// it into shader material by right clicking on it and see the base code. I used this base
-// code and added an adapted version of Roystan's methods for multiple light sources and more.
+// Toon shader with normal maps and depth maps. It has to be
+// separated because assigning values to the normal map may
+// cause geometry to break. If all your models are well made,
+// you can use this one in place of the base toon shader.
 shader_type spatial;
 render_mode depth_draw_always;
 
@@ -37,22 +36,30 @@ uniform float rim_amount : hint_range(0,1) = 0.2;
 uniform float rim_smoothness : hint_range(0,1) = 0.05;
 uniform sampler2D texture_rim : hint_white;
 
-// Normal map from base code.
-uniform sampler2D texture_normal : hint_normal;
-uniform float normal_scale : hint_range(-16,16) = 1.0;
-
 // Emission from base code.
 uniform vec4 emission : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float emission_energy = 1.0;
 uniform sampler2D texture_emission : hint_black_albedo;
 
+// Normal map from base code.
+uniform float normal_scale : hint_range(-16,16) = 1.0;
+uniform sampler2D texture_normal : hint_normal;
+
+// Depth map from base code.
+uniform float depth_scale = 0.0;
+uniform int depth_min_layers = 8;
+uniform int depth_max_layers = 32;
+uniform bool flip_tangent = false;
+uniform bool flip_binormal = false;
+uniform sampler2D texture_depth : hint_black;
+
 // Ambient occlusion from base code.
-uniform sampler2D ao_map : hint_white;
 uniform float ao_light_affect: hint_range(0,1) = 0.0;
+uniform sampler2D ao_map : hint_white;
 
 // UV scale and offset from base code.
-uniform vec2 uv_scale;
-uniform vec2 uv_offset;
+uniform vec2 uv_scale = vec2(1,1);
+uniform vec2 uv_offset = vec2(0,0);
 
 
 
@@ -64,19 +71,48 @@ void vertex() {
 
 
 void fragment() {
-	ALBEDO = albedo.rgb * texture(texture_albedo, UV).rgb;
-	ROUGHNESS = roughness * texture(texture_surface, UV).r;
-	METALLIC = metallic * texture(texture_surface, UV).g;
+	vec2 base_uv = UV;
+	
+	// Depth from base code, with deep parallax enabled. Slightly modified so that
+	// black are deeps and white are peaks, as well as turning depth flip into bools.
+	// It is very intense on the GPU, so keep depth scale at zero to turn this off.
+	if (depth_scale != 0.0) {
+		vec2 depth_flip = vec2(flip_tangent ? -1.0 : 1.0, flip_binormal ? -1.0 : 1.0);
+		vec3 view_dir = normalize(normalize(-VERTEX)*mat3(TANGENT*depth_flip.x,-BINORMAL*depth_flip.y,NORMAL));
+		float num_layers = mix(float(depth_max_layers),float(depth_min_layers), abs(dot(vec3(0.0, 0.0, 1.0), view_dir)));
+		float layer_depth = 1.0 / num_layers;
+		float current_layer_depth = 0.0;
+		vec2 P = view_dir.xy * depth_scale;
+		vec2 delta = P / num_layers;
+		vec2  ofs = base_uv;
+		float depth = 1.0 - textureLod(texture_depth, ofs,0.0).r;
+		float current_depth = 0.0;
+		while(current_depth < depth) {
+			ofs -= delta;
+			depth = 1.0 - textureLod(texture_depth, ofs,0.0).r;
+			current_depth += layer_depth;
+		}
+		vec2 prev_ofs = ofs + delta;
+		float after_depth  = depth - current_depth;
+		float before_depth = 1.0 - textureLod(texture_depth, prev_ofs, 0.0).r - current_depth + layer_depth;
+		float weight = after_depth / (after_depth - before_depth);
+		ofs = mix(ofs,prev_ofs,weight);
+		base_uv=ofs;
+	}
+	
+	ALBEDO = albedo.rgb * texture(texture_albedo, base_uv).rgb;
+	ROUGHNESS = roughness * texture(texture_surface, base_uv).r;
+	METALLIC = metallic * texture(texture_surface, base_uv).g;
 	
 	// Normal map, straight out of base code.
-	NORMALMAP = texture(texture_normal, UV).rgb;
+	NORMALMAP = texture(texture_normal, base_uv).rgb;
 	NORMALMAP_DEPTH = normal_scale;
 	
 	// Emission, straight out of base code with additive mode.
-	EMISSION = (emission.rgb + texture(texture_emission, UV).rgb) * emission_energy;
+	EMISSION = (emission.rgb + texture(texture_emission, base_uv).rgb) * emission_energy;
 	
 	// Ambient occlusion, straight out of base code on the red channel.
-	AO = texture(ao_map, UV).r;
+	AO = texture(ao_map, base_uv).r;
 	AO_LIGHT_AFFECT = ao_light_affect;
 }
 
