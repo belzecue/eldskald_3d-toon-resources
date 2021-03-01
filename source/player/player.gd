@@ -3,11 +3,13 @@ extends RigidBody
 export (float) var speed
 export (float) var acceleration
 export (float, 0, 1) var brake_friction 
-onready var input_dir = Vector2.ZERO
+export (float) var jump_force
+onready var input_dir: Vector2 = Vector2.ZERO
+onready var is_jumping: bool = false
 
 export (float, 0.1, 5) var mouse_sensitivity
 export (bool) var invert_y_axis
-onready var camera = $Camera
+onready var camera: Camera = $Camera
 
 
 
@@ -34,23 +36,38 @@ func _physics_process(_delta):
 		
 		# In this case, we are taking a tangent vector pointing towards
 		# the move_input vector so we can accelerate without increasing
-		# linear speed above our limit.
+		# linear speed above our limit. We double it for better feel.
 		elif linear_velocity.angle_to(move_input) != 0:
-			var dir = move_input - move_input.project(linear_velocity)
-			add_central_force(dir.normalized() * acceleration)
+			var proj_vel = Vector3(linear_velocity.x, 0, linear_velocity.z)
+			var dir = move_input - move_input.project(proj_vel)
+			add_central_force(dir.normalized() * acceleration * 2)
 	
 	# Braking the player.
 	else:
 		physics_material_override.friction = brake_friction
+		if linear_velocity.length_squared() > 0.25:
+			add_central_force(-linear_velocity.normalized() * acceleration)
 	
 	# Jumping.
-	if Input.is_action_pressed("jump") and is_on_floor():
-		pass
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not is_jumping:
+		is_jumping = true
+		apply_central_impulse(jump_force * Vector3.UP)
+	if is_jumping:
+		
+		# If the player lets go of the jump button, let's cut
+		# vertical velocity in half.
+		if not Input.is_action_pressed("jump"):
+			apply_central_impulse(-linear_velocity.project(Vector3.UP) / 2)
+			is_jumping = false
+		elif linear_velocity.y <= 0:
+			is_jumping = false
 
 
 
+# GroundMonitor can't detect the player due to its layer, so if
+# it detects anything at all, it means the player is standing on it.
 func is_on_floor() -> bool:
-	return get_colliding_bodies().size() > 0
+	return $GroundMonitor.get_overlapping_bodies().size() > 0
 
 
 

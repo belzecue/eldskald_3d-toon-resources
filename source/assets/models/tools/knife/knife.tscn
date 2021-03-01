@@ -2,7 +2,8 @@
 
 [ext_resource path="res://assets/materials/wood-dark.tres" type="Material" id=1]
 [ext_resource path="res://assets/models/tools/knife/knife.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://assets/shader-codes/toon-shader/base-toon.shader" type="Shader" id=3]
+[ext_resource path="res://shader-codes/toon-shader/base-toon.shader" type="Shader" id=3]
+
 
 
 [sub_resource type="Shader" id=23]

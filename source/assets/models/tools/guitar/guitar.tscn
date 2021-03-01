@@ -1,9 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/models/tools/guitar/guitar.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://assets/shader-codes/toon-shader/outline.tres" type="Material" id=2]
-[ext_resource path="res://assets/shader-codes/toon-shader/base-toon.shader" type="Shader" id=3]
+[ext_resource path="res://shader-codes/toon-shader/outline.tres" type="Material" id=2]
+[ext_resource path="res://shader-codes/toon-shader/base-toon.shader" type="Shader" id=3]
 [ext_resource path="res://assets/materials/iron-light.tres" type="Material" id=4]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 next_pass = ExtResource( 2 )
