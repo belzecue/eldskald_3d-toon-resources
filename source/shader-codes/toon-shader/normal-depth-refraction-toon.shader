@@ -18,10 +18,10 @@ uniform float lighting_half_band : hint_range(0,1) = 0.25;
 uniform float lighting_smoothness : hint_range(0,1) = 0.02;
 
 // Specular reflection uniforms. Set specular to zero to turn off the effect.
-// The texture map uses the red channel for the specular value, green for glossiness
+// The texture map uses the red channel for the specular value, green for amount
 // and blue for smoothness.
 uniform float specular : hint_range(0,1) = 0.5;
-uniform float specular_glossiness : hint_range(4,64) = 16;
+uniform float specular_amount : hint_range(0,1) = 0.5;
 uniform float specular_smoothness : hint_range(0,1) = 0.05;
 uniform sampler2D texture_specular : hint_white;
 
@@ -132,7 +132,7 @@ void light() {
 	// Let's start by incorporating specular and rim textures. Pay attention to
 	// the channels and what each value does.
 	float spec_value = specular * texture(texture_specular, UV).r;
-	float spec_gloss = specular_glossiness * texture(texture_specular, UV).g;
+	float spec_gloss = pow(2.0, 8.0 * (1.0 - specular_amount * texture(texture_specular, UV).g));
 	float spec_smooth = specular_smoothness * texture(texture_specular, UV).b;
 	float rim_value = rim * texture(texture_rim, UV).r;
 	float rim_width = rim_amount * texture(texture_rim, UV).g;

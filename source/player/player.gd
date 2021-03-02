@@ -4,7 +4,7 @@ export (float) var speed
 export (float) var acceleration
 export (float, 0, 1) var brake_friction 
 export (float) var jump_force
-onready var input_dir: Vector2 = Vector2.ZERO
+onready var input: Vector3 = Vector3.ZERO
 onready var is_jumping: bool = false
 
 export (float, 0.1, 5) var mouse_sensitivity
@@ -23,13 +23,13 @@ func _ready():
 func _physics_process(_delta):
 	
 	# Get the directional inputs.
-	input_dir.y = Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
-	input_dir.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var move_input = Vector3(input_dir.x, 0, input_dir.y).normalized()
+	input.z = Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
+	input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var move_input = Vector3(input.x, 0, input.y).normalized()
 	move_input = -self.transform.basis.z * move_input.z + self.transform.basis.x * move_input.x
 	
 	# Accelerating the player.
-	if move_input != Vector3.ZERO:
+	if input != Vector2.ZERO:
 		physics_material_override.friction = 0
 		if linear_velocity.length_squared() < speed * speed:
 			add_central_force(move_input * acceleration)
