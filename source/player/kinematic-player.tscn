@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://player/kinematic-player.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.3
+height = 0.5
+
+[node name="Player" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52612, 4 )
+collision_layer = 2
+script = ExtResource( 1 )
+_speed = 3.0
+_acceleration = 9.0
+_jump_force = 5.0
+_gravity = 12.0
+_mouse_sensitivity = 1.0
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )

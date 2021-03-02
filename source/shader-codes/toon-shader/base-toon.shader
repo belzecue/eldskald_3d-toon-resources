@@ -46,6 +46,10 @@ uniform sampler2D texture_emission : hint_black_albedo;
 uniform float ao_light_affect: hint_range(0,1) = 0.0;
 uniform sampler2D ao_map : hint_white;
 
+// Anisotropy from base code.
+uniform float anisotropy_ratio: hint_range(0,1) = 0.0;
+uniform sampler2D anisotropy_flowmap : hint_aniso;
+
 // UV scale and offset from base code.
 uniform vec2 uv_scale = vec2(1,1);
 uniform vec2 uv_offset = vec2(0,0);
@@ -70,6 +74,10 @@ void fragment() {
 	// Ambient occlusion, straight out of base code on the red channel.
 	AO = texture(ao_map, UV).r;
 	AO_LIGHT_AFFECT = ao_light_affect;
+	
+	// Anisotropy, straight out of base code.
+	ANISOTROPY = anisotropy_ratio * texture(anisotropy_flowmap, UV).a;
+	ANISOTROPY_FLOW = texture(anisotropy_flowmap, UV).rg * 2.0 - 1.0;
 }
 
 

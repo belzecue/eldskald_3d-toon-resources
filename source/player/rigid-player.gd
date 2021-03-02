@@ -29,7 +29,7 @@ func _physics_process(_delta):
 	move_input = -self.transform.basis.z * move_input.z + self.transform.basis.x * move_input.x
 	
 	# Accelerating the player.
-	if input != Vector2.ZERO:
+	if input != Vector3.ZERO:
 		physics_material_override.friction = 0
 		if linear_velocity.length_squared() < speed * speed:
 			add_central_force(move_input * acceleration)
