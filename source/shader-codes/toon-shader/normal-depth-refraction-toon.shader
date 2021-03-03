@@ -54,6 +54,10 @@ uniform sampler2D texture_depth : hint_black;
 uniform float ao_light_affect: hint_range(0,1) = 0.0;
 uniform sampler2D ao_map : hint_white;
 
+// Anisotropy from base code.
+uniform float anisotropy_ratio: hint_range(-1,1) = 0.0;
+uniform sampler2D anisotropy_flowmap : hint_aniso;
+
 // Refraction from base code.
 uniform float refraction : hint_range(-16,16) = 0.00;
 const vec4 refraction_texture_channel = vec4(1.0, 0.0, 0.0, 0.0); // Refraction channel is set to red.
@@ -65,7 +69,7 @@ uniform vec2 uv_offset = vec2(0,0);
 
 
 
-// Vertex function to deal with UV1, straight out of base code.
+// Vertex function to deal with UV scale and offset, straight out of base code.
 void vertex() {
 	UV = UV * uv_scale.xy + uv_offset.xy;
 }
@@ -128,6 +132,8 @@ void fragment() {
 
 
 
+const float PI = 3.14159265358979323846;
+
 void light() {
 	// Let's start by incorporating specular and rim textures. Pay attention to
 	// the channels and what each value does.
@@ -140,7 +146,7 @@ void light() {
 	
 	// Lighting part. We smoothstep the dot product for each band then interpolate the sum
 	// between the lighting value and 1. Mess with the lighting uniforms to see.
-	float shade = clamp(dot(NORMAL, LIGHT), 0.0, 1.0);
+	float shade = dot(NORMAL, LIGHT);
 	float dark_shade = smoothstep(0.0, lighting_smoothness, shade);
 	float half_shade = smoothstep(lighting_half_band, lighting_half_band + lighting_smoothness, shade);
 	vec3 litness = (dark_shade/2.0 + half_shade/2.0) * ATTENUATION;
@@ -150,8 +156,12 @@ void light() {
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.
+	// It also deals with anisotropy.
+	vec3 aniso_dir = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
 	vec3 half = normalize(VIEW + LIGHT);
-	float spec_intensity = pow(dot(NORMAL, half), spec_gloss * spec_gloss);
+	float aniso = max(0, sin(dot(normalize(NORMAL + aniso_dir), half) * PI));
+	float spec = mix(dot(NORMAL, half), aniso, anisotropy_ratio * texture(anisotropy_flowmap, UV).a);
+	float spec_intensity = pow(spec, spec_gloss * spec_gloss);
 	spec_intensity = smoothstep(0.05, 0.05 + spec_smooth, spec_intensity);
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, spec_value) * spec_intensity * litness;
 	
