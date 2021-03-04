@@ -1,8 +1,12 @@
-// This shader is based on Minionsart's stylized fire
+// This shader is from GDQuest's Godot Shaders, who took it from Minionsart's stylized fire 
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
+// I only added the noise growth variable for the noise affecting the flames based on lifetime.
+// You can comment my line on the fragment shader to disable the effect and see how it originally
+// looked. It looked well on point emission shapes, but not so much on box emission shapes for
+// greater flames, and this modification makes it better.
 
 shader_type spatial;
-render_mode blend_mix;
+render_mode blend_mix, ambient_light_disabled;
 
 // This texture must be seamless!
 // Experiment with the different noises provided in the res://Demos/StylizedFire/ folder
@@ -11,11 +15,13 @@ uniform sampler2D noise_texture;
 uniform sampler2D texture_mask;
 uniform float emission_intensity = 2.0;
 uniform float time_scale = 3.0;
+uniform float noise_growth = 5.0;
 uniform vec2 texture_scale = vec2(1.0);
 uniform float edge_softness = 0.1;
 
 varying vec3 world_coord;
 varying float world_x_dot;
+varying float phase;
 
 
 void vertex() {
@@ -32,6 +38,9 @@ void vertex() {
 	world_coord = (mat_world * vec4(VERTEX, 1.0)).rgb;
 	vec4 world_normal = (mat_world * vec4(NORMAL, 0.0));
 	world_x_dot =  abs(dot(normalize(world_normal.rgb), vec3(1.0,0.0,0.0)));
+	
+	// We also map the lifetime phase of the particle.
+	phase = INSTANCE_CUSTOM.y;
 }
 
 
@@ -39,7 +48,7 @@ void fragment() {
 	
 	// We sample the mask texture based on regular UV
 	// We don't want the particles to show their square shape
-	// so we use a round, black and white, mask texture
+	// so we use a round, black and white, mask texture.
 	float mask = texture(texture_mask, UV).r;
 	
 	// We sample the noise both from the xy plane and from the zy plane, adding a time-based
@@ -47,15 +56,19 @@ void fragment() {
 	// same space in global coordinates. Set the time_scale to zero to see how it would look like.
 	// To add more variation, we could sample from another noise that has a different scale and panning speed.
 	// The additional offset on the zy noise is to avoid mirroring effects when
-	// the view vector is between same-sign x and z axes
+	// the view vector is between same-sign x and z axes.
 	vec2 time_based_pan = vec2(0.2, 1.0) * (- TIME * time_scale);
 	float noise_xy = texture(noise_texture, world_coord.xy * texture_scale + time_based_pan).r;
 	float noise_zy = texture(noise_texture, world_coord.zy * texture_scale + time_based_pan + vec2(0.7, 0.3)).r;
 	
 	// We blend the noise based on world_x_dot, which is the dot product between
 	// the normal of the billboard plane, and the global x axis. If we face the global
-	// x axis, then we sample from the xy plane, otherwise, we sample from the zy plane
+	// x axis, then we sample from the xy plane, otherwise, we sample from the zy plane.
 	float noise = mix(noise_xy, noise_zy, clamp(world_x_dot, 0.0, 1.0));
+	
+	// To prevent the base of the flames from having empty spots, we diminish the noise's
+	// effects based on the lifetime of each particle.
+	noise = 1.0 - (1.0 - noise) * clamp(phase * noise_growth, 0.0, 1.0);
 	
 	// The particle color is assigned to the vertex color, which is called COLOR
 	ALBEDO = COLOR.rgb;
@@ -74,7 +87,7 @@ void fragment() {
 	// In order to give this fire a stylized vibe, we use smoothstep to remap the alpha value
 	// We could use step(0.1, alpha), but then there would be an abrupt cut between transparent and
 	// non transparent (exactly as if we discarded the fragment with discard)
-	// smoothstep gives a nice blend on the edges instead
+	// smoothstep gives a nice blend on the edges instead.
 	ALPHA = smoothstep(0.0, edge_softness, alpha);
 }
 

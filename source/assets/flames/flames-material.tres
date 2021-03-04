@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://assets/flames/FireMask.png" type="Texture" id=1]
+[ext_resource path="res://shader-codes/flame-shaders/flames.shader" type="Shader" id=2]
+[ext_resource path="res://assets/flames/HoleNoise.png" type="Texture" id=3]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/emission_intensity = 1.0
+shader_param/time_scale = 3.0
+shader_param/noise_growth = 2.0
+shader_param/texture_scale = Vector2( 1, 1 )
+shader_param/edge_softness = 0.0
+shader_param/noise_texture = ExtResource( 3 )
+shader_param/texture_mask = ExtResource( 1 )

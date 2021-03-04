@@ -21,5 +21,6 @@ shader_param/rim_smoothness = 0.05
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
 shader_param/ao_light_affect = 0.0
+shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )

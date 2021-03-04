@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://player/kinematic-player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/palm-trees/coconut/coconut.tscn" type="PackedScene" id=2]
@@ -26,8 +26,10 @@
 [ext_resource path="res://assets/models/stones/large-rocks/boulder-3.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/models/stones/small-rocks/rock-2.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/models/grounds/little-isle.obj" type="ArrayMesh" id=26]
+[ext_resource path="res://assets/flames/flames-material.tres" type="Material" id=27]
 [ext_resource path="res://assets/water/sea-material.tres" type="Material" id=28]
 [ext_resource path="res://assets/models/logs/logs/log-3.tscn" type="PackedScene" id=29]
+[ext_resource path="res://shader-codes/flame-shaders/flames.shader" type="Shader" id=30]
 [ext_resource path="res://shader-codes/toon-shader/base-toon.shader" type="Shader" id=31]
 [ext_resource path="res://assets/models/logs/timber-pile.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/models/palm-trees/palm-tree.tscn" type="PackedScene" id=33]
@@ -84,134 +86,6 @@ glow_bicubic_upscale = true
 size = Vector2( 100, 100 )
 subdivide_width = 100
 subdivide_depth = 100
-
-[sub_resource type="Shader" id=4]
-code = "// Outline, by GDQuest
-// Source: https://github.com/GDQuest/godot-shaders
-shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_always;
-
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-void vertex() {
-	// Converts vertex position and normal to clip coordinates.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-
-	// Calculates the width based off of view distance to keep
-	// the outline width constant.
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-
-	POSITION = clip_position;
-}
-
-
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if(outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}
-
-
-"
-
-[sub_resource type="ShaderMaterial" id=5]
-resource_local_to_scene = true
-shader = SubResource( 4 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=6]
-resource_local_to_scene = true
-next_pass = SubResource( 5 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_amount = 0.5
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/anisotropy_ratio = 0.0
-shader_param/uv_scale = Vector2( 1, 1 )
-shader_param/uv_offset = Vector2( 0, 0 )
-
-[sub_resource type="Shader" id=7]
-code = "// Outline, by GDQuest
-// Source: https://github.com/GDQuest/godot-shaders
-shader_type spatial;
-render_mode cull_front, unshaded, depth_draw_always;
-
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-void vertex() {
-	// Converts vertex position and normal to clip coordinates.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-
-	// Calculates the width based off of view distance to keep
-	// the outline width constant.
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-
-	POSITION = clip_position;
-}
-
-
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if(outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}
-
-
-"
-
-[sub_resource type="ShaderMaterial" id=8]
-resource_local_to_scene = true
-shader = SubResource( 7 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=9]
-resource_local_to_scene = true
-next_pass = SubResource( 8 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.5
-shader_param/specular_amount = 0.5
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.25
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/anisotropy_ratio = 0.0
-shader_param/uv_scale = Vector2( 1, 1 )
-shader_param/uv_offset = Vector2( 0, 0 )
 
 [sub_resource type="Shader" id=10]
 code = "// Outline, by GDQuest
@@ -299,158 +173,6 @@ shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=14]
-resource_local_to_scene = true
-shader = SubResource( 4 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=15]
-resource_local_to_scene = true
-next_pass = SubResource( 14 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.231373, 0.145098, 0.0901961, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_amount = 0.5
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/anisotropy_ratio = 0.0
-shader_param/uv_scale = Vector2( 1, 1 )
-shader_param/uv_offset = Vector2( 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=16]
-resource_local_to_scene = true
-shader = SubResource( 7 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
-
-[sub_resource type="ShaderMaterial" id=17]
-resource_local_to_scene = true
-next_pass = SubResource( 16 )
-shader = ExtResource( 31 )
-shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.5
-shader_param/specular_amount = 0.5
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.25
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/anisotropy_ratio = 0.0
-shader_param/uv_scale = Vector2( 1, 1 )
-shader_param/uv_offset = Vector2( 0, 0 )
-
-[sub_resource type="Shader" id=18]
-code = "// This shader is based on Minionsart's stylized fire
-// https://twitter.com/minionsart/status/1132593681452683264?s=20
-
-shader_type spatial;
-render_mode blend_mix, unshaded;
-
-// This texture must be seamless!
-// Experiment with the different noises provided in the res://Demos/StylizedFire/ folder
-uniform sampler2D noise_texture;
-
-uniform sampler2D texture_mask;
-uniform float emission_intensity = 2.0;
-uniform float time_scale = 3.0;
-uniform vec2 texture_scale = vec2(1.0);
-uniform float edge_softness = 0.1;
-
-varying vec3 world_coord;
-varying float world_x_dot;
-
-
-void vertex() {
-	// Billboard code, taken directly from a spatial material
-	// create a spatial material, enable billboard with billboard keep scale, and then convert
-	// to shader material, and it will create a shader with this code.
-	mat4 mat_world = mat4(normalize(CAMERA_MATRIX[0])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[1])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[2])*length(WORLD_MATRIX[2]),WORLD_MATRIX[3]);
-	mat_world = mat_world * mat4( vec4(cos(INSTANCE_CUSTOM.x),-sin(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(sin(INSTANCE_CUSTOM.x), cos(INSTANCE_CUSTOM.x), 0.0, 0.0),vec4(0.0, 0.0, 1.0, 0.0),vec4(0.0, 0.0, 0.0, 1.0));
-	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat_world;
-	
-	// We map the coordinates on the vertical planes xy and zy
-	// we also calculate how to blend between the two based on where the world space normal
-	// is pointing.
-	world_coord = (mat_world * vec4(VERTEX, 1.0)).rgb;
-	vec4 world_normal = (mat_world * vec4(NORMAL, 0.0));
-	world_x_dot =  abs(dot(normalize(world_normal.rgb), vec3(1.0,0.0,0.0)));
-}
-
-
-void fragment() {
-	
-	// We sample the mask texture based on regular UV
-	// We don't want the particles to show their square shape
-	// so we use a round, black and white, mask texture
-	float mask = texture(texture_mask, UV).r;
-	
-	// We sample the noise both from the xy plane and from the zy plane, adding a time-based
-	// panning. If we didn't do this, we would see the holes of the noise will always be in the
-	// same space in global coordinates. Set the time_scale to zero to see how it would look like.
-	// To add more variation, we could sample from another noise that has a different scale and panning speed.
-	// The additional offset on the zy noise is to avoid mirroring effects when
-	// the view vector is between same-sign x and z axes
-	vec2 time_based_pan = vec2(0.2, 1.0) * (- TIME * time_scale);
-	float noise_xy = texture(noise_texture, world_coord.xy * texture_scale + time_based_pan).r;
-	float noise_zy = texture(noise_texture, world_coord.zy * texture_scale + time_based_pan + vec2(0.7, 0.3)).r;
-	
-	// We blend the noise based on world_x_dot, which is the dot product between
-	// the normal of the billboard plane, and the global x axis. If we face the global
-	// x axis, then we sample from the xy plane, otherwise, we sample from the zy plane
-	float noise = mix(noise_xy, noise_zy, clamp(world_x_dot, 0.0, 1.0));
-	
-	// The particle color is assigned to the vertex color, which is called COLOR
-	ALBEDO = COLOR.rgb;
-	// Assign the same color for emission, multiplied by the emission intensity
-	EMISSION = ALBEDO * emission_intensity;
-	
-	// Instead of blending out the particle, we apply a technique called alpha erosion, where we
-	// subtract an erosion amount from the alpha.
-	float erosion_amount = (1.0 - COLOR.a);
-	float alpha = (noise * mask) - erosion_amount;
-	
-	// Because we perform a subtraction, we ensure that the alpha is always between 0 and 1.
-	// If the alpha goes negative or above 1, a number of visual artifacts appear.
-	alpha = clamp(alpha, 0.0, 1.0);
-	
-	// In order to give this fire a stylized vibe, we use smoothstep to remap the alpha value
-	// We could use step(0.1, alpha), but then there would be an abrupt cut between transparent and
-	// non transparent (exactly as if we discarded the fragment with discard)
-	// smoothstep gives a nice blend on the edges instead.
-	ALPHA = smoothstep(0.0, edge_softness, alpha);
-}
-
-
-"
-
-[sub_resource type="ShaderMaterial" id=19]
-resource_local_to_scene = true
-shader = SubResource( 18 )
-shader_param/emission_intensity = 0.0
-shader_param/time_scale = 3.0
-shader_param/texture_scale = Vector2( 1, 1 )
-shader_param/edge_softness = 0.0
-shader_param/noise_texture = ExtResource( 7 )
-shader_param/texture_mask = ExtResource( 6 )
-
 [sub_resource type="Gradient" id=20]
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.342857, 1 )
@@ -463,7 +185,7 @@ width = 128
 
 [sub_resource type="Curve" id=22]
 resource_local_to_scene = true
-_data = [ Vector2( 0, 0 ), 0.0, 10.0736, 0, 0, Vector2( 0.251046, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 3.93807, 0, 0, Vector2( 0.502092, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=23]
 resource_local_to_scene = true
@@ -549,95 +271,12 @@ subdivide_depth = 16
 
 [sub_resource type="QuadMesh" id=36]
 
-[sub_resource type="Shader" id=37]
-code = "// This shader is based on Minionsart's stylized fire
-// https://twitter.com/minionsart/status/1132593681452683264?s=20
-
-shader_type spatial;
-render_mode blend_mix, ambient_light_disabled;
-
-// This texture must be seamless!
-// Experiment with the different noises provided in the res://Demos/StylizedFire/ folder
-uniform sampler2D noise_texture;
-
-uniform sampler2D texture_mask;
-uniform float emission_intensity = 2.0;
-uniform float time_scale = 3.0;
-uniform vec2 texture_scale = vec2(1.0);
-uniform float edge_softness = 0.1;
-
-varying vec3 world_coord;
-varying float world_x_dot;
-
-
-void vertex() {
-	// Billboard code, taken directly from a spatial material
-	// create a spatial material, enable billboard with billboard keep scale, and then convert
-	// to shader material, and it will create a shader with this code.
-	mat4 mat_world = mat4(normalize(CAMERA_MATRIX[0])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[1])*length(WORLD_MATRIX[0]),normalize(CAMERA_MATRIX[2])*length(WORLD_MATRIX[2]),WORLD_MATRIX[3]);
-	mat_world = mat_world * mat4( vec4(cos(INSTANCE_CUSTOM.x),-sin(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(sin(INSTANCE_CUSTOM.x), cos(INSTANCE_CUSTOM.x), 0.0, 0.0),vec4(0.0, 0.0, 1.0, 0.0),vec4(0.0, 0.0, 0.0, 1.0));
-	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat_world;
-	
-	// We map the coordinates on the vertical planes xy and zy
-	// we also calculate how to blend between the two based on where the world space normal
-	// is pointing.
-	world_coord = (mat_world * vec4(VERTEX, 1.0)).rgb;
-	vec4 world_normal = (mat_world * vec4(NORMAL, 0.0));
-	world_x_dot =  abs(dot(normalize(world_normal.rgb), vec3(1.0,0.0,0.0)));
-}
-
-
-void fragment() {
-	
-	// We sample the mask texture based on regular UV
-	// We don't want the particles to show their square shape
-	// so we use a round, black and white, mask texture
-	float mask = texture(texture_mask, UV).r;
-	
-	// We sample the noise both from the xy plane and from the zy plane, adding a time-based
-	// panning. If we didn't do this, we would see the holes of the noise will always be in the
-	// same space in global coordinates. Set the time_scale to zero to see how it would look like.
-	// To add more variation, we could sample from another noise that has a different scale and panning speed.
-	// The additional offset on the zy noise is to avoid mirroring effects when
-	// the view vector is between same-sign x and z axes
-	vec2 time_based_pan = vec2(0.2, 1.0) * (- TIME * time_scale);
-	float noise_xy = texture(noise_texture, world_coord.xy * texture_scale + time_based_pan).r;
-	float noise_zy = texture(noise_texture, world_coord.zy * texture_scale + time_based_pan + vec2(0.7, 0.3)).r;
-	
-	// We blend the noise based on world_x_dot, which is the dot product between
-	// the normal of the billboard plane, and the global x axis. If we face the global
-	// x axis, then we sample from the xy plane, otherwise, we sample from the zy plane
-	float noise = mix(noise_xy, noise_zy, clamp(world_x_dot, 0.0, 1.0));
-	
-	// The particle color is assigned to the vertex color, which is called COLOR
-	ALBEDO = COLOR.rgb;
-	// Assign the same color for emission, multiplied by the emission intensity
-	EMISSION = ALBEDO * emission_intensity;
-	
-	// Instead of blending out the particle, we apply a technique called alpha erosion, where we
-	// subtract an erosion amount from the alpha.
-	float erosion_amount = (1.0 - COLOR.a);
-	float alpha = (noise * mask) - erosion_amount;
-	
-	// Because we perform a subtraction, we ensure that the alpha is always between 0 and 1.
-	// If the alpha goes negative or above 1, a number of visual artifacts appear.
-	alpha = clamp(alpha, 0.0, 1.0);
-	
-	// In order to give this fire a stylized vibe, we use smoothstep to remap the alpha value
-	// We could use step(0.1, alpha), but then there would be an abrupt cut between transparent and
-	// non transparent (exactly as if we discarded the fragment with discard)
-	// smoothstep gives a nice blend on the edges instead.
-	ALPHA = smoothstep(0.0, edge_softness, alpha);
-}
-
-
-"
-
 [sub_resource type="ShaderMaterial" id=38]
 resource_local_to_scene = true
-shader = SubResource( 37 )
+shader = ExtResource( 30 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
+shader_param/noise_growth = 5.0
 shader_param/texture_scale = Vector2( 1, 1 )
 shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
@@ -645,7 +284,7 @@ shader_param/texture_mask = ExtResource( 6 )
 
 [sub_resource type="Gradient" id=39]
 resource_local_to_scene = true
-offsets = PoolRealArray( 0, 0.342857, 1 )
+offsets = PoolRealArray( 0, 0.462963, 1 )
 colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
 
 [sub_resource type="GradientTexture" id=40]
@@ -655,14 +294,14 @@ width = 128
 
 [sub_resource type="Curve" id=41]
 resource_local_to_scene = true
-_data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.276151, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.552301, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=42]
 resource_local_to_scene = true
 width = 128
 curve = SubResource( 41 )
 
-[sub_resource type="ParticlesMaterial" id=43]
+[sub_resource type="ParticlesMaterial" id=55]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -698,15 +337,16 @@ material = SubResource( 46 )
 
 [sub_resource type="ShaderMaterial" id=48]
 resource_local_to_scene = true
-shader = SubResource( 37 )
+shader = ExtResource( 30 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
+shader_param/noise_growth = 5.0
 shader_param/texture_scale = Vector2( 1, 1 )
 shader_param/edge_softness = 0.0
 shader_param/noise_texture = ExtResource( 7 )
 shader_param/texture_mask = ExtResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=49]
+[sub_resource type="ParticlesMaterial" id=56]
 resource_local_to_scene = true
 lifetime_randomness = 0.81
 emission_shape = 2
@@ -761,7 +401,6 @@ mesh = SubResource( 3 )
 material/0 = ExtResource( 28 )
 
 [node name="Isle" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000703752, 0.000505418, 0.000254154 )
 mesh = ExtResource( 26 )
 material/0 = ExtResource( 9 )
 
@@ -890,8 +529,6 @@ transform = Transform( 0.312169, 0, -0.950027, 0, 1, 0, 0.950027, 0, 0.312169, 1
 
 [node name="Axe" parent="Isle/Props" instance=ExtResource( 14 )]
 transform = Transform( -0.499929, 0.742558, 0.445734, -0.0229024, -0.525819, 0.850288, 0.865763, 0.414876, 0.279879, -1.32153, 0.732886, -0.95785 )
-material/0 = SubResource( 6 )
-material/1 = SubResource( 9 )
 
 [node name="Bottle" parent="Isle/Props" instance=ExtResource( 12 )]
 transform = Transform( 0.942525, 0, -0.334136, 0, 1, 0, 0.334136, 0, 0.942525, 0.682, 0.148531, 0.617 )
@@ -994,8 +631,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69859, -1.08784, -6.06527 )
 
 [node name="Knife" parent="Isle/Props" instance=ExtResource( 3 )]
 transform = Transform( -0.487829, 0.0244589, -0.106887, 0, 0.487401, 0.111531, 0.10965, 0.108816, -0.475537, 0.660312, 0.251299, 1.75631 )
-material/0 = SubResource( 15 )
-material/1 = SubResource( 17 )
 
 [node name="Fish" parent="Isle/Props" instance=ExtResource( 8 )]
 transform = Transform( -0.983671, 0.032384, 0.177041, 0.0335538, 0.99943, 0.00361726, -0.176822, 0.00949859, -0.984197, 0.496503, 0.209964, 1.99625 )
@@ -1031,7 +666,7 @@ current = true
 
 [node name="Flames" type="Particles" parent="Isle/Campfire/Viewport/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
-material_override = SubResource( 19 )
+material_override = ExtResource( 27 )
 cast_shadow = 0
 amount = 64
 randomness = 0.74
@@ -1103,7 +738,7 @@ amount = 32
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 43 )
+process_material = SubResource( 55 )
 draw_pass_1 = SubResource( 44 )
 
 [node name="Flames" type="MeshInstance" parent="CliffIsland/Torch"]
@@ -1127,7 +762,7 @@ render_target_v_flip = true
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="CliffIsland/Torch2/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1100, 0 )
 current = true
 
 [node name="Flames" type="Particles" parent="CliffIsland/Torch2/Viewport/Camera"]
@@ -1138,7 +773,7 @@ amount = 16
 randomness = 0.74
 local_coords = false
 draw_order = 1
-process_material = SubResource( 49 )
+process_material = SubResource( 56 )
 draw_pass_1 = SubResource( 44 )
 
 [node name="Flames" type="MeshInstance" parent="CliffIsland/Torch2"]
@@ -1156,6 +791,7 @@ transform = Transform( 1.2, 0, 0, 0, 1.5, 0, 0, 0, 1.2, -1.38962, 1.71544, -1.01
 
 [node name="Island" type="StaticBody" parent="CliffIsland"]
 transform = Transform( 1, 0, -2.23517e-08, 0, 1, 0, 2.23517e-08, 0, 1, 0, 6.45752, 0 )
+visible = false
 physics_material_override = SubResource( 53 )
 
 [node name="CollisionPolygon" type="CollisionPolygon" parent="CliffIsland/Island"]
@@ -1165,6 +801,7 @@ polygon = PoolVector2Array( -0.0420163, -6.0416, -2.09707, -5.93538, -3.18848, -
 
 [node name="Mound" type="StaticBody" parent="CliffIsland"]
 transform = Transform( 1, 0, -1.49012e-08, 0, 1, 0, 1.49012e-08, 0, 1, 0, 5, 0 )
+visible = false
 physics_material_override = SubResource( 53 )
 
 [node name="CollisionPolygon" type="CollisionPolygon" parent="CliffIsland/Mound"]
@@ -1173,6 +810,7 @@ depth = 5.0
 polygon = PoolVector2Array( 2.32844, -2.41404, 0.806856, -3.41876, 0.137651, -3.33535, -2.40505, -2.32108, -2.75358, -1.84006, -2.9746, 0.247694, -2.43143, 0.887478, -1.56756, 1.42911, -0.780546, 1.36698, 0.0997076, 1.57647, 0.642944, 1.22473, 0.786952, 0.846775, 1.56743, 0.553949, 2.07467, 0.17275, 2.37742, -0.601146, 2.52963, -1.39305 )
 
 [node name="Plane" type="StaticBody" parent="."]
+visible = false
 physics_material_override = SubResource( 53 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Plane"]

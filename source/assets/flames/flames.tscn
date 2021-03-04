@@ -4,12 +4,12 @@
 [ext_resource path="res://assets/flames/WispyNoise.png" type="Texture" id=2]
 [ext_resource path="res://shader-codes/flame-shaders/flames.shader" type="Shader" id=3]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/emission_intensity = 2.0
 shader_param/time_scale = 3.0
+shader_param/noise_growth = 5.0
 shader_param/texture_scale = Vector2( 1, 1 )
 shader_param/edge_softness = 0.1
 shader_param/noise_texture = ExtResource( 2 )
