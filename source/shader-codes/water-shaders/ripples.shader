@@ -1,39 +1,38 @@
+// Ripples shader. It's just a geometry modifying shader with base toon lighting.
+// It's made to work with ripple-mesh.obj, but you can make variations with more
+// segments if you want, just make sure to keep it in a bidimensional ring shape
+// with the outer side with a radius of 1 unit.
 shader_type spatial;
-render_mode depth_draw_alpha_prepass;
+render_mode depth_draw_always;
+
+
+uniform vec4 color: hint_color;
+uniform sampler2D fade_curve;
+uniform float speed;
+uniform float ripple_width;
+uniform float phase;
+uniform float size;
 
 
 
-// For the best results, use the same color as the water.
-uniform vec4 color: hint_color = vec4(1.0);
-uniform float speed = 0.2;
-uniform float ripple_width = 0.01;
-uniform float ripple_space = 0.15;
-uniform float ripple_smoothing = 0.005;
-uniform float fade = 3.0;
-uniform float brightness: hint_range(0,1) = 0.1;
+void vertex() {
+	float time = mod(phase + TIME * speed, 1.0);
+	if (length(VERTEX.xz) < 0.99) {
+		VERTEX.xz = normalize(VERTEX.xz) * time * (size - ripple_width * texture(fade_curve, vec2(time, 0.0)).r);
+	}
+	else {
+		VERTEX.xz = VERTEX.xz * time * size;
+	}
+}
 
 
 
 void fragment() {
-	// We calculate the distance we are from the center and use that value with
-	// a smoothstep to decide what is or is not a ripple.
-	float dist = length(UV - vec2(0.5));
-	float pos = mod(dist - TIME * speed, ripple_space + ripple_width);
-	float is_wave = smoothstep(ripple_width, ripple_width + ripple_smoothing, pos);
-	is_wave -= smoothstep(ripple_space + ripple_width - ripple_smoothing, ripple_space + ripple_width, pos);
-	is_wave = clamp(1.0 - is_wave - fade * dist, 0.0, 1.0);
-	
-	// Then, we use the alpha channel to show the ripples.
 	ALBEDO = color.rgb;
-	ALPHA = color.a * is_wave;
+	ALPHA = color.a;
 }
-
-
 
 void light() {
-	DIFFUSE_LIGHT += ALBEDO.rgb * LIGHT_COLOR * ATTENUATION;
-	
-	// We always put specular in it. Set brightness to zero for no specular.
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, brightness) * ATTENUATION;
+	vec3 litness = smoothstep(0.0, 0.05, dot(NORMAL, LIGHT)) * ATTENUATION;
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
 }
-
