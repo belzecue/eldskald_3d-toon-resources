@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Water_001_NORM.jpg-3e9e83a030515d8c9d6ff0d6c5af81d0.s3tc.stex"
-path.etc="res://.import/Water_001_NORM.jpg-3e9e83a030515d8c9d6ff0d6c5af81d0.etc.stex"
+path.s3tc="res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.s3tc.stex"
+path.etc="res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/water/Water_001_NORM.jpg"
-dest_files=[ "res://.import/Water_001_NORM.jpg-3e9e83a030515d8c9d6ff0d6c5af81d0.s3tc.stex", "res://.import/Water_001_NORM.jpg-3e9e83a030515d8c9d6ff0d6c5af81d0.etc.stex" ]
+source_file="res://assets/water/sea/sea-texture-1.png"
+dest_files=[ "res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.s3tc.stex", "res://.import/sea-texture-1.png-9f2892647969581469e9d6e9737f3b27.etc.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=1
+compress/normal_map=0
 flags/repeat=true
 flags/filter=true
 flags/mipmaps=true

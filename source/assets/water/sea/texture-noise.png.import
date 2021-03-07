@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/anisotropy-direction-texture-1.jpg-098ee50a24c350554dd13abcc97abb9a.s3tc.stex"
-path.etc="res://.import/anisotropy-direction-texture-1.jpg-098ee50a24c350554dd13abcc97abb9a.etc.stex"
+path.s3tc="res://.import/texture-noise.png-c6ffa451675680ea0f83e72c9e34834d.s3tc.stex"
+path.etc="res://.import/texture-noise.png-c6ffa451675680ea0f83e72c9e34834d.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/anisotropy-direction-texture-1.jpg"
-dest_files=[ "res://.import/anisotropy-direction-texture-1.jpg-098ee50a24c350554dd13abcc97abb9a.s3tc.stex", "res://.import/anisotropy-direction-texture-1.jpg-098ee50a24c350554dd13abcc97abb9a.etc.stex" ]
+source_file="res://assets/water/sea/texture-noise.png"
+dest_files=[ "res://.import/texture-noise.png-c6ffa451675680ea0f83e72c9e34834d.s3tc.stex", "res://.import/texture-noise.png-c6ffa451675680ea0f83e72c9e34834d.etc.stex" ]
 
 [params]
 

@@ -2,7 +2,8 @@
 
 [ext_resource path="res://shader-codes/toon-shader/outline.tres" type="Material" id=1]
 [ext_resource path="res://shader-codes/water-shaders/opaque-current.shader" type="Shader" id=2]
-[ext_resource path="res://assets/water/Water_002_NORM.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/water/current/Water_002_NORM.jpg" type="Texture" id=3]
+
 
 
 [resource]

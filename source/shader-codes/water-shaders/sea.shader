@@ -90,3 +90,10 @@ void vertex() {
 }
 
 
+
+void light() {
+	vec3 litness = smoothstep(0.0, 0.05, dot(NORMAL, LIGHT)) * ATTENUATION;
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
+}
+
+
