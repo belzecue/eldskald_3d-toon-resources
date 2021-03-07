@@ -2,11 +2,11 @@
 
 [ext_resource path="res://shader-codes/water-shaders/ripples.shader" type="Shader" id=1]
 
-[sub_resource type="Curve" id=49]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.501992, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=50]
-curve = SubResource( 49 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
 [resource]
 resource_local_to_scene = true
@@ -16,4 +16,4 @@ shader_param/speed = 0.6
 shader_param/ripple_width = 0.1
 shader_param/phase = 0.0
 shader_param/size = 2.0
-shader_param/fade_curve = SubResource( 50 )
+shader_param/fade_curve = SubResource( 2 )

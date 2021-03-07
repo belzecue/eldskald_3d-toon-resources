@@ -3,7 +3,6 @@
 [ext_resource path="res://assets/water/current/Water_002_NORM.jpg" type="Texture" id=1]
 [ext_resource path="res://shader-codes/water-shaders/current.shader" type="Shader" id=2]
 
-
 [sub_resource type="Shader" id=1]
 code = "// Outline, by GDQuest
 // Source: https://github.com/GDQuest/godot-shaders

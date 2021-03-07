@@ -68,7 +68,15 @@ void fragment() {
 	NORMALMAP = mix(agi_1, agi_2, 0.5);
 	NORMALMAP_DEPTH = agitation*4.0;
 	
-	// Refraction from Godot's base code, a little bit modified to look better.
+	// Refraction from Godot's base code, a little bit modified to look better. This code
+	// has a problem: SCREEN_TEXTURE doesn't differentiate what's underwater from what's
+	// in front of it, so it refracts things that aren't underwater. There's a way to trick
+	// the screen buffer: making objects transparent. If you put any value to something's
+	// ALPHA value, even 1, it is sent to the transparent pipeline, which is not read by
+	// SCREEN_TEXTURE. It allows things to not look bad on top of the water but it also turns
+	// them invisible when under it. If it's not a good solution to you, just turn
+	// refraction off by replacing these last three lines by ALPHA = water_color.a.
+	// Maybe Godot 4 has a proposition to fix our problems? We're waiting for Godot.
 	vec3 normal = 2.0 * NORMALMAP - vec3(1.0);
 	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.12;
 	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, 0.0).rgb * (1.0 - water_color.a);

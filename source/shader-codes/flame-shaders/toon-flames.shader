@@ -1,3 +1,10 @@
+// Too flames shader. You put normal flames on a separate Viewport with
+// transparent background outside the scene and put its output on texture_albedo.
+// It reads the flames and applies an outline to them. This whole thing has
+// to go on a flat plane mesh. Using Viewports make this shader a little
+// costlier. You can have one Viewport being printed onto more than one
+// of these shaders to save processing. And of course, the higher the
+// Viewport's size, the costlier it will be.
 shader_type spatial;
 render_mode depth_draw_alpha_prepass, ambient_light_disabled;
 
