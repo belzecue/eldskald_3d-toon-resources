@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/edge-noise.png-3318d13cb8be91f90b5aeddb17281ef2.s3tc.stex"
+path.etc="res://.import/edge-noise.png-3318d13cb8be91f90b5aeddb17281ef2.etc.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://assets/water/pool/edge-noise.png"
+dest_files=[ "res://.import/edge-noise.png-3318d13cb8be91f90b5aeddb17281ef2.s3tc.stex", "res://.import/edge-noise.png-3318d13cb8be91f90b5aeddb17281ef2.etc.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

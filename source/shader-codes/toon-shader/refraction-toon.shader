@@ -4,6 +4,8 @@
 shader_type spatial;
 render_mode depth_draw_always;
 
+
+
 uniform vec4 albedo : hint_color = vec4(1.0);
 uniform sampler2D texture_albedo : hint_albedo;
 

@@ -3,7 +3,8 @@
 // cause geometry to break. If all your models are well made,
 // you can use this one in place of the base toon shader.
 shader_type spatial;
-render_mode depth_draw_always;
+
+
 
 uniform vec4 albedo : hint_color = vec4(1.0);
 uniform sampler2D texture_albedo : hint_albedo;

@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=2]
 
 [ext_resource path="res://shader-codes/water-shaders/pool.shader" type="Shader" id=1]
-[ext_resource path="res://assets/water/edge-noise.png" type="Texture" id=2]
+[ext_resource path="res://assets/water/pool/edge-noise.png" type="Texture" id=2]
 [ext_resource path="res://assets/water/pool/Water_001_NORM.jpg" type="Texture" id=3]
 
 [sub_resource type="Shader" id=1]
