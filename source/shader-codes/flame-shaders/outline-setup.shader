@@ -1,10 +1,15 @@
-// Too flames shader. You put normal flames on a separate Viewport with
-// transparent background outside the scene and put its output on texture_albedo.
+// You put Minionsart's flames on a separate Viewport with transparent
+// background outside the scene and put its output on texture_albedo.
 // It reads the flames and applies an outline to them. This whole thing has
-// to go on a flat plane mesh. Using Viewports make this shader a little
-// costlier. You can have one Viewport being printed onto more than one
-// of these shaders to save processing. And of course, the higher the
-// Viewport's size, the costlier it will be.
+// to go on a QuadMesh.
+//
+// This one is easier to shape than Febucci's flames, and they work with
+// any 3D flames, but they cost much more GPU processing due to the need
+// for Viewports. You should probably use Febucci's flames if you're going
+// for the outline, this one is here just so you know it is an option. You
+// can also borrow the technique to apply an outline to pretty much anything,
+// you don't need to put flames in particular in front of the camera node.
+// Since it's flat, it has the problems of Febucci's flames due to flatness.
 shader_type spatial;
 render_mode depth_draw_alpha_prepass, ambient_light_disabled;
 

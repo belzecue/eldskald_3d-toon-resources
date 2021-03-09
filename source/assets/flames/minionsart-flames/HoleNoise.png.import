@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/FireMask.png-68d91bc366275eda23b3ac84148bcb56.s3tc.stex"
-path.etc="res://.import/FireMask.png-68d91bc366275eda23b3ac84148bcb56.etc.stex"
+path.s3tc="res://.import/HoleNoise.png-b4b6161f0b09a2732e0161f76ac36a1d.s3tc.stex"
+path.etc="res://.import/HoleNoise.png-b4b6161f0b09a2732e0161f76ac36a1d.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/flames/FireMask.png"
-dest_files=[ "res://.import/FireMask.png-68d91bc366275eda23b3ac84148bcb56.s3tc.stex", "res://.import/FireMask.png-68d91bc366275eda23b3ac84148bcb56.etc.stex" ]
+source_file="res://assets/flames/minionsart-flames/HoleNoise.png"
+dest_files=[ "res://.import/HoleNoise.png-b4b6161f0b09a2732e0161f76ac36a1d.s3tc.stex", "res://.import/HoleNoise.png-b4b6161f0b09a2732e0161f76ac36a1d.etc.stex" ]
 
 [params]
 

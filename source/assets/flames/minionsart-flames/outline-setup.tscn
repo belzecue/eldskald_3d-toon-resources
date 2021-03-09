@@ -1,12 +1,15 @@
-// This shader is from GDQuest's Godot Shaders, who took it from Minionsart's stylized fire 
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/flames/minionsart-flames/FireMask.png" type="Texture" id=1]
+[ext_resource path="res://shader-codes/flame-shaders/outline-setup.shader" type="Shader" id=2]
+[ext_resource path="res://assets/flames/minionsart-flames/HoleNoise.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "// This shader is based on Minionsart's stylized fire
 // https://twitter.com/minionsart/status/1132593681452683264?s=20
-// I only added the noise growth variable for the noise affecting the flames based on lifetime.
-// You can comment my line on the fragment shader to disable the effect and see how it originally
-// looked. It looked well on point emission shapes, but not so much on box emission shapes for
-// greater flames, and this modification makes it better.
 
 shader_type spatial;
-render_mode blend_mix, ambient_light_disabled;
+render_mode blend_mix;
 
 // This texture must be seamless!
 // Experiment with the different noises provided in the res://Demos/StylizedFire/ folder
@@ -15,13 +18,11 @@ uniform sampler2D noise_texture;
 uniform sampler2D texture_mask;
 uniform float emission_intensity = 2.0;
 uniform float time_scale = 3.0;
-uniform float noise_growth = 5.0;
 uniform vec2 texture_scale = vec2(1.0);
 uniform float edge_softness = 0.1;
 
 varying vec3 world_coord;
 varying float world_x_dot;
-varying float phase;
 
 
 void vertex() {
@@ -38,9 +39,6 @@ void vertex() {
 	world_coord = (mat_world * vec4(VERTEX, 1.0)).rgb;
 	vec4 world_normal = (mat_world * vec4(NORMAL, 0.0));
 	world_x_dot =  abs(dot(normalize(world_normal.rgb), vec3(1.0,0.0,0.0)));
-	
-	// We also map the lifetime phase of the particle.
-	phase = INSTANCE_CUSTOM.y;
 }
 
 
@@ -48,7 +46,7 @@ void fragment() {
 	
 	// We sample the mask texture based on regular UV
 	// We don't want the particles to show their square shape
-	// so we use a round, black and white, mask texture.
+	// so we use a round, black and white, mask texture
 	float mask = texture(texture_mask, UV).r;
 	
 	// We sample the noise both from the xy plane and from the zy plane, adding a time-based
@@ -56,19 +54,15 @@ void fragment() {
 	// same space in global coordinates. Set the time_scale to zero to see how it would look like.
 	// To add more variation, we could sample from another noise that has a different scale and panning speed.
 	// The additional offset on the zy noise is to avoid mirroring effects when
-	// the view vector is between same-sign x and z axes.
+	// the view vector is between same-sign x and z axes
 	vec2 time_based_pan = vec2(0.2, 1.0) * (- TIME * time_scale);
 	float noise_xy = texture(noise_texture, world_coord.xy * texture_scale + time_based_pan).r;
 	float noise_zy = texture(noise_texture, world_coord.zy * texture_scale + time_based_pan + vec2(0.7, 0.3)).r;
 	
 	// We blend the noise based on world_x_dot, which is the dot product between
 	// the normal of the billboard plane, and the global x axis. If we face the global
-	// x axis, then we sample from the xy plane, otherwise, we sample from the zy plane.
+	// x axis, then we sample from the xy plane, otherwise, we sample from the zy plane
 	float noise = mix(noise_xy, noise_zy, clamp(world_x_dot, 0.0, 1.0));
-	
-	// To prevent the base of the flames from having empty spots, we diminish the noise's
-	// effects based on the lifetime of each particle.
-	noise = 1.0 - (1.0 - noise) * clamp(phase * noise_growth, 0.0, 1.0);
 	
 	// The particle color is assigned to the vertex color, which is called COLOR
 	ALBEDO = COLOR.rgb;
@@ -92,3 +86,92 @@ void fragment() {
 }
 
 
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/emission_intensity = 2.0
+shader_param/time_scale = 3.0
+shader_param/texture_scale = Vector2( 1, 1 )
+shader_param/edge_softness = 0.0
+shader_param/noise_texture = ExtResource( 3 )
+shader_param/texture_mask = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=3]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.342857, 1 )
+colors = PoolColorArray( 1, 0.984375, 0, 1, 0.854902, 0.160784, 0, 0.8, 1, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+resource_local_to_scene = true
+gradient = SubResource( 3 )
+width = 128
+
+[sub_resource type="Curve" id=5]
+resource_local_to_scene = true
+_data = [ Vector2( 0, 0 ), 0.0, 3.38807, 0, 0, Vector2( 0.597015, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+resource_local_to_scene = true
+width = 128
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+resource_local_to_scene = true
+lifetime_randomness = 0.81
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.5
+linear_accel = 4.0
+scale = 2.0
+scale_random = 1.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
+[sub_resource type="QuadMesh" id=8]
+size = Vector2( 0.5, 0.5 )
+
+[sub_resource type="QuadMesh" id=9]
+
+[sub_resource type="ViewportTexture" id=10]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/grow = 0.2
+shader_param/emission = 2.0
+shader_param/outline_width = 2.0
+shader_param/outline_color = null
+shader_param/texture_albedo = SubResource( 10 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 512, 512 )
+transparent_bg = true
+msaa = 3
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
+current = true
+
+[node name="Flames" type="Particles" parent="Viewport/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
+material_override = SubResource( 2 )
+cast_shadow = 0
+amount = 16
+randomness = 0.74
+local_coords = false
+draw_order = 1
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="Flames" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = SubResource( 9 )
+material/0 = SubResource( 11 )

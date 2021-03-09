@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/HoleNoise.png-7690a11798e42ef800dd10cfd32d8c88.s3tc.stex"
-path.etc="res://.import/HoleNoise.png-7690a11798e42ef800dd10cfd32d8c88.etc.stex"
+path.s3tc="res://.import/flame-shape.png-f9891548c1b8c368c8a24247f325540b.s3tc.stex"
+path.etc="res://.import/flame-shape.png-f9891548c1b8c368c8a24247f325540b.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/flames/HoleNoise.png"
-dest_files=[ "res://.import/HoleNoise.png-7690a11798e42ef800dd10cfd32d8c88.s3tc.stex", "res://.import/HoleNoise.png-7690a11798e42ef800dd10cfd32d8c88.etc.stex" ]
+source_file="res://assets/flames/febucci-flames/flame-shape.png"
+dest_files=[ "res://.import/flame-shape.png-f9891548c1b8c368c8a24247f325540b.s3tc.stex", "res://.import/flame-shape.png-f9891548c1b8c368c8a24247f325540b.etc.stex" ]
 
 [params]
 
