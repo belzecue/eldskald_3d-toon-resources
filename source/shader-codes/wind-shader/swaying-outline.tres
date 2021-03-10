@@ -2,13 +2,13 @@
 
 [ext_resource path="res://shader-codes/wind-shader/swaying-outline.shader" type="Shader" id=1]
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=1]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.247104, 0.481818 ), 0.0, 0.0, 0, 0, Vector2( 0.749035, 0.481818 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
+[sub_resource type="CurveTexture" id=2]
 resource_local_to_scene = true
-curve = SubResource( 5 )
+curve = SubResource( 1 )
 
 [resource]
 resource_local_to_scene = true
@@ -22,4 +22,4 @@ shader_param/height_offset = 0.0
 shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
 shader_param/var_frequency = 0.5
-shader_param/wind_var_curve = SubResource( 6 )
+shader_param/wind_var_curve = SubResource( 2 )

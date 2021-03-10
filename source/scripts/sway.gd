@@ -1,6 +1,7 @@
 tool
 extends MeshInstance
 
+export (Vector2) var wind setget set_wind
 export (float) var resistance setget set_resistance
 export (float) var interval setget set_interval
 export (float) var height_offset setget set_height_offset
@@ -16,6 +17,7 @@ func set_property_in_all_materials(property: String, value):
 		self.get_surface_material(i).next_pass.set_shader_param(property, value)
 
 func set_everything():
+	set_property_in_all_materials("wind", wind)
 	set_property_in_all_materials("resistance", resistance)
 	set_property_in_all_materials("interval", interval)
 	set_property_in_all_materials("height_offset", height_offset)
@@ -27,6 +29,10 @@ func set_everything():
 
 
 # Setget functions
+func set_wind(new_value: Vector2):
+	wind = new_value
+	set_everything()
+
 func set_resistance(new_value: float):
 	resistance = new_value
 	set_everything()

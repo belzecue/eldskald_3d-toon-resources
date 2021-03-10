@@ -5,15 +5,15 @@
 [ext_resource path="res://shader-codes/wind-shader/swaying-outline.tres" type="Material" id=3]
 [ext_resource path="res://scripts/sway.gd" type="Script" id=4]
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=1]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.247104, 0.481818 ), 0.0, 0.0, 0, 0, Vector2( 0.749035, 0.481818 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
+[sub_resource type="CurveTexture" id=2]
 resource_local_to_scene = true
-curve = SubResource( 5 )
+curve = SubResource( 1 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 next_pass = ExtResource( 3 )
 shader = ExtResource( 2 )
@@ -42,9 +42,9 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/wind_var_curve = SubResource( 6 )
+shader_param/wind_var_curve = SubResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 next_pass = ExtResource( 3 )
 shader = ExtResource( 2 )
@@ -73,9 +73,9 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/wind_var_curve = SubResource( 6 )
+shader_param/wind_var_curve = SubResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
 next_pass = ExtResource( 3 )
 shader = ExtResource( 2 )
@@ -104,44 +104,45 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/wind_var_curve = SubResource( 6 )
+shader_param/wind_var_curve = SubResource( 2 )
 
 [node name="PalmTree" type="MeshInstance"]
 mesh = ExtResource( 1 )
-material/0 = SubResource( 2 )
-material/1 = SubResource( 3 )
-material/2 = SubResource( 2 )
-material/3 = SubResource( 3 )
-material/4 = SubResource( 2 )
-material/5 = SubResource( 3 )
-material/6 = SubResource( 2 )
-material/7 = SubResource( 3 )
-material/8 = SubResource( 2 )
-material/9 = SubResource( 3 )
-material/10 = SubResource( 2 )
-material/11 = SubResource( 3 )
-material/12 = SubResource( 2 )
-material/13 = SubResource( 3 )
-material/14 = SubResource( 2 )
-material/15 = SubResource( 3 )
-material/16 = SubResource( 2 )
-material/17 = SubResource( 3 )
-material/18 = SubResource( 2 )
-material/19 = SubResource( 3 )
-material/20 = SubResource( 4 )
-material/21 = SubResource( 4 )
-material/22 = SubResource( 4 )
-material/23 = SubResource( 4 )
-material/24 = SubResource( 4 )
-material/25 = SubResource( 4 )
-material/26 = SubResource( 4 )
-material/27 = SubResource( 4 )
-material/28 = SubResource( 4 )
-material/29 = SubResource( 4 )
-material/30 = SubResource( 4 )
+material/0 = SubResource( 3 )
+material/1 = SubResource( 4 )
+material/2 = SubResource( 3 )
+material/3 = SubResource( 4 )
+material/4 = SubResource( 3 )
+material/5 = SubResource( 4 )
+material/6 = SubResource( 3 )
+material/7 = SubResource( 4 )
+material/8 = SubResource( 3 )
+material/9 = SubResource( 4 )
+material/10 = SubResource( 3 )
+material/11 = SubResource( 4 )
+material/12 = SubResource( 3 )
+material/13 = SubResource( 4 )
+material/14 = SubResource( 3 )
+material/15 = SubResource( 4 )
+material/16 = SubResource( 3 )
+material/17 = SubResource( 4 )
+material/18 = SubResource( 3 )
+material/19 = SubResource( 4 )
+material/20 = SubResource( 5 )
+material/21 = SubResource( 5 )
+material/22 = SubResource( 5 )
+material/23 = SubResource( 5 )
+material/24 = SubResource( 5 )
+material/25 = SubResource( 5 )
+material/26 = SubResource( 5 )
+material/27 = SubResource( 5 )
+material/28 = SubResource( 5 )
+material/29 = SubResource( 5 )
+material/30 = SubResource( 5 )
 script = ExtResource( 4 )
+wind = Vector2( 1, 0 )
 resistance = 1.0
 interval = 3.5
 var_intensity = 1.0
 var_frequency = 0.5
-wind_var_curve = SubResource( 6 )
+wind_var_curve = SubResource( 2 )
