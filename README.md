@@ -10,8 +10,10 @@ I read code from a lot of people around to learn their techniques, adapt and app
 - GDQuest's [Godot Shaders](https://github.com/GDQuest/godot-shaders) for the flames, outlines, and possibly more.
 - Miziziziz's [water](https://youtu.be/PLCGL3RW548), adapted from [Harry Alisavakis's](https://halisavakis.com/category/blog-posts/my-take-on-shaders/) Unity tutorials.
 - godotshaders's [2D fire](https://godotshaders.com/shader/2d-fire/) for flames.
+- godotshaders's [2D wind sway](https://godotshaders.com/shader/2d-wind-sway/) for the wind sway.
 
 Other than code, I took some textures as well. Some are noise textures for the MIT shaders above available on their source codes, others are CC0 normal maps freely available from the following pages:
 
-- All water normal maps on assets/water are from [3dtextures.me](https://3dtextures.me/).
-- Everything at assets/textures is from [cc0textures.com](https://cc0textures.com/).
+- All water normal maps in assets/water are from [3dtextures.me](https://3dtextures.me/).
+- All normal maps in assets/textures are from [cc0textures.com](https://cc0textures.com/).
+- Anisotropy flow maps in assets/textures are from [sketchfab.com](https://help.sketchfab.com/hc/en-us/articles/360020687812-Anisotropy)

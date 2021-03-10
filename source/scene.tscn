@@ -905,7 +905,7 @@ emission_shape = 1
 emission_sphere_radius = 0.1
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
-gravity = Vector3( 0, 0, 0 )
+gravity = Vector3( 0.1, 0, 0 )
 initial_velocity = 0.75
 scale = 1.5
 scale_random = 1.0
@@ -1019,7 +1019,6 @@ environment = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1000, 0 )
 light_color = Color( 0.776471, 0.862745, 0.964706, 1 )
 light_energy = 0.25
-shadow_bias = 0.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 4.13264e-07, 0, 1, 0, -4.13264e-07, 0, 1, 0, 0.6, 4 )
