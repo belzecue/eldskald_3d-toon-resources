@@ -1,6 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
-[ext_resource path="res://shader-codes/wind-shader/swaying-outline.shader" type="Shader" id=1]
+[ext_resource path="res://shader-codes/wind-shader/swaying-outline.tres" type="Material" id=1]
+[ext_resource path="res://shader-codes/wind-shader/grass.shader" type="Shader" id=2]
 
 [sub_resource type="Curve" id=1]
 resource_local_to_scene = true
@@ -12,9 +13,8 @@ curve = SubResource( 1 )
 
 [resource]
 resource_local_to_scene = true
-shader = ExtResource( 1 )
-shader_param/outline_color = Color( 0, 0, 0, 1 )
-shader_param/outline_width = 2.0
+next_pass = ExtResource( 1 )
+shader = ExtResource( 2 )
 shader_param/wind = Vector2( 1, 0 )
 shader_param/resistance = 0.5
 shader_param/interval = 3.5
@@ -23,4 +23,5 @@ shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
 shader_param/var_frequency = 1.0
+shader_param/albedo = Color( 0.117647, 0.184314, 0.0705882, 1 )
 shader_param/wind_var_curve = SubResource( 2 )

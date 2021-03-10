@@ -1,16 +1,8 @@
-// Outline with wind sway code, so it can accompany the model as it sways.
+// Grass shader. This is the wind code with only the application of albedo.
+// We're not gonna process specular, and the diffuse is independant of light
+// and normal vectors, it is only affected by attenuation. 
 shader_type spatial;
-render_mode cull_front, unshaded;
 
-
-
-// Outline uniform variables.
-uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_width = 1.0;
-
-
-
-// Wind uniform variables.
 uniform vec2 wind = vec2(1.0, 0.0);
 uniform float resistance = 1.0;
 uniform float interval = 3.5;
@@ -22,9 +14,11 @@ uniform sampler2D wind_var_curve : hint_white;
 uniform float var_intensity = 1.0;
 uniform float var_frequency = 1.0;
 
+uniform vec4 albedo : hint_color = vec4(1.0); // The only non-wind related uniform we need.
 
 
-// Helper functions from wind shader.
+
+// Wind functions.
 float rand(vec2 st) {
 	return fract(sin(dot(st, vec2(12.9898,78.233))) * 43758.5453123);
 }
@@ -41,24 +35,21 @@ float get_wind(float height, float time) {
 	return deform * deform_type;
 }
 
-
-
 void vertex() {
 	vec3 worldcoords = (WORLD_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	vec2 wind_local_coords = (inverse(WORLD_MATRIX) * vec4(wind.x, 0.0, wind.y, 0.0)).xz;
 	VERTEX.xz += wind_local_coords * get_wind(VERTEX.y, TIME * length(wind) + rand(fract(seed)) * 256.0);
-	
-	// Outline code.
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	clip_position.xy += normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	POSITION = clip_position;
 }
 
 
 
+// This is all we need for a cheap, good looking grass.
 void fragment() {
-	ALBEDO = outline_color.rgb;
+	ALBEDO = albedo.rgb;
+}
+
+void light() {
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * ATTENUATION;
 }
 
 

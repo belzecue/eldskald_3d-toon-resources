@@ -17,6 +17,7 @@ uniform vec2 wind = vec2(1.0, 0.0);
 uniform float resistance = 1.0;
 uniform float interval = 3.5;
 uniform float height_offset = 0.0;
+uniform bool quadratic_deformation = false;
 uniform vec2 seed;
 
 uniform sampler2D wind_var_curve : hint_white;
@@ -74,8 +75,11 @@ float get_wind(float height, float time) {
 	float min_strength = length(wind) * 0.001 / resistance;
 	float diff = pow(max_strength - min_strength, 2.0);
 	float strength = clamp(min_strength + diff + sin(time / interval) * diff, min_strength, max_strength) * 40.0;
-	float var = texture(wind_var_curve, vec2(mod(time * var_frequency, 1.0), 0.0)).r * var_intensity;
-	return (2.0 + sin(time) + var) * strength * max(0.0, height - height_offset);
+	float var = (2.0 * texture(wind_var_curve, vec2(mod(time * var_frequency, 1.0), 0.0)).r - 1.0 ) * var_intensity;
+	float deform = (1.0 + sin(time) + var) * strength;
+	float height_scale = max(0.0, height - height_offset);
+	float deform_type = quadratic_deformation ? height_scale * height_scale : height_scale;
+	return deform * deform_type;
 }
 
 
