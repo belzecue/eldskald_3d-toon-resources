@@ -1105,7 +1105,6 @@ material/28 = SubResource( 9 )
 material/29 = SubResource( 9 )
 material/30 = SubResource( 9 )
 resistance = 2.0
-deformation_type = ""
 var_frequency = 0.3
 wind_var_curve = SubResource( 5 )
 
