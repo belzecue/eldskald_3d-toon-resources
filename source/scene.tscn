@@ -1057,7 +1057,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 2.05682, 4.07866 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/wind_var_curve = SubResource( 67 )
 
 [sub_resource type="ShaderMaterial" id=69]
@@ -1071,7 +1071,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 2.05682, 4.07866 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/albedo = Color( 0.0823529, 0.172549, 0.027451, 1 )
 shader_param/roughness = 1.0
 shader_param/metallic = 0.0
@@ -1202,7 +1202,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 5.04318, 1.20556 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/wind_var_curve = SubResource( 75 )
 
 [sub_resource type="ShaderMaterial" id=77]
@@ -1216,7 +1216,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 5.04318, 1.20556 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/albedo = Color( 0.0823529, 0.172549, 0.027451, 1 )
 shader_param/roughness = 1.0
 shader_param/metallic = 0.0
@@ -1257,7 +1257,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( -4.33412, -1.26521 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/wind_var_curve = SubResource( 79 )
 
 [sub_resource type="ShaderMaterial" id=81]
@@ -1271,7 +1271,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( -4.33412, -1.26521 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/albedo = Color( 0.0823529, 0.172549, 0.027451, 1 )
 shader_param/roughness = 1.0
 shader_param/metallic = 0.0
@@ -1402,7 +1402,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( -3.55051, 2.95853 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/wind_var_curve = SubResource( 87 )
 
 [sub_resource type="ShaderMaterial" id=89]
@@ -1416,7 +1416,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( -3.55051, 2.95853 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/albedo = Color( 0.0823529, 0.172549, 0.027451, 1 )
 shader_param/roughness = 1.0
 shader_param/metallic = 0.0

@@ -1,11 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://shader-codes/water-shaders/opaque-pool.shader" type="Shader" id=1]
 [ext_resource path="res://assets/water/pool/edge-noise.png" type="Texture" id=2]
 [ext_resource path="res://assets/water/pool/Water_001_NORM.jpg" type="Texture" id=3]
+[ext_resource path="res://shader-codes/toon-shader/outline.tres" type="Material" id=4]
 
 [resource]
 resource_local_to_scene = true
+next_pass = ExtResource( 4 )
 shader = ExtResource( 1 )
 shader_param/water_color = Color( 0.513726, 0.835294, 0.854902, 1 )
 shader_param/reflectiveness = 1.0

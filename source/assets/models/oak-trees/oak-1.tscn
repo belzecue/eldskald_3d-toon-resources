@@ -70,7 +70,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/wind_var_curve = SubResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=6]
@@ -84,7 +84,7 @@ shader_param/height_offset = 0.0
 shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
-shader_param/var_frequency = 1.0
+shader_param/var_frequency = 0.5
 shader_param/albedo = Color( 0.0823529, 0.172549, 0.027451, 1 )
 shader_param/roughness = 1.0
 shader_param/metallic = 0.0
@@ -120,5 +120,5 @@ wind_sec = Vector2( 1, 0 )
 resistance_sec = 1.0
 interval_sec = 3.5
 var_intensity_sec = 1.0
-var_frequency_sec = 1.0
+var_frequency_sec = 0.5
 wind_var_curve_sec = SubResource( 4 )
