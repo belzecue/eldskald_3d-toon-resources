@@ -44,18 +44,6 @@ func set_everything():
 	set_property_in_all_materials("wind_var_curve", wind_var_curve, wind_var_curve_sec)
 	set_property_in_all_materials("seed", Vector2(translation.x, translation.z),
 										  Vector2(translation.x, translation.z))
-	
-#	var deform_bool
-#	match deformation_type:
-#		"Linear":
-#			deform_bool = false
-#		"Quadratic":
-#			deform_bool = true
-#	match deformation_type_sec:
-#		"Linear":
-#			set_property_in_all_materials("quadratic_deformation", deform_bool, false)
-#		"Quadratic":
-#			set_property_in_all_materials("quadratic_deformation", deform_bool, true)
 
 
 

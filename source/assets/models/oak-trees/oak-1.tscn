@@ -1,10 +1,124 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/materials/bark-dark.tres" type="Material" id=1]
+[ext_resource path="res://scripts/sway.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/oak-trees/oak-1.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://assets/materials/leaf-dark.tres" type="Material" id=3]
+[ext_resource path="res://shader-codes/wind-shader/swaying.shader" type="Shader" id=4]
+[ext_resource path="res://shader-codes/wind-shader/swaying-outline.shader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+shader_param/wind = Vector2( 1, 0 )
+shader_param/resistance = 4.0
+shader_param/interval = 3.5
+shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
+shader_param/seed = Vector2( 0, 0 )
+shader_param/var_intensity = 1.0
+shader_param/var_frequency = 1.0
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+next_pass = SubResource( 1 )
+shader = ExtResource( 4 )
+shader_param/wind = Vector2( 1, 0 )
+shader_param/resistance = 4.0
+shader_param/interval = 3.5
+shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
+shader_param/seed = Vector2( 0, 0 )
+shader_param/var_intensity = 1.0
+shader_param/var_frequency = 1.0
+shader_param/albedo = Color( 0.215686, 0.14902, 0.054902, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_amount = 0.5
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/anisotropy_ratio = 0.0
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+
+[sub_resource type="Curve" id=3]
+resource_local_to_scene = true
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.262548, 0.520455 ), 0.0, 0.0, 0, 0, Vector2( 0.749035, 0.502273 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+resource_local_to_scene = true
+curve = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+shader_param/wind = Vector2( 1, 0 )
+shader_param/resistance = 1.0
+shader_param/interval = 3.5
+shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
+shader_param/seed = Vector2( 0, 0 )
+shader_param/var_intensity = 1.0
+shader_param/var_frequency = 1.0
+shader_param/wind_var_curve = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+next_pass = SubResource( 5 )
+shader = ExtResource( 4 )
+shader_param/wind = Vector2( 1, 0 )
+shader_param/resistance = 1.0
+shader_param/interval = 3.5
+shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
+shader_param/seed = Vector2( 0, 0 )
+shader_param/var_intensity = 1.0
+shader_param/var_frequency = 1.0
+shader_param/albedo = Color( 0.0823529, 0.172549, 0.027451, 1 )
+shader_param/roughness = 1.0
+shader_param/metallic = 0.0
+shader_param/lighting = 0.0
+shader_param/lighting_half_band = 0.0
+shader_param/lighting_smoothness = 0.02
+shader_param/specular = 0.0
+shader_param/specular_amount = 0.5
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 0.05
+shader_param/rim_amount = 0.3
+shader_param/rim_smoothness = 0.05
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/ao_light_affect = 0.0
+shader_param/anisotropy_ratio = 0.0
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/wind_var_curve = SubResource( 4 )
 
 [node name="OakTree" type="MeshInstance"]
 mesh = ExtResource( 2 )
-material/0 = ExtResource( 1 )
-material/1 = ExtResource( 3 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 6 )
+script = ExtResource( 1 )
+wind = Vector2( 1, 0 )
+resistance = 4.0
+interval = 3.5
+var_intensity = 1.0
+var_frequency = 1.0
+secondary_set_of_surfaces = [ 1 ]
+wind_sec = Vector2( 1, 0 )
+resistance_sec = 1.0
+interval_sec = 3.5
+var_intensity_sec = 1.0
+var_frequency_sec = 1.0
+wind_var_curve_sec = SubResource( 4 )
