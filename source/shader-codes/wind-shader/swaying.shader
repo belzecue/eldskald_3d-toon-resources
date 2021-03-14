@@ -35,9 +35,6 @@ uniform float roughness : hint_range(0,1) = 1.0;
 uniform float metallic : hint_range(0,1) = 0.0;
 uniform sampler2D texture_surface : hint_white;
 
-uniform float lighting : hint_range(0,1) = 0.0;
-uniform float lighting_half_band : hint_range(0,1) = 0.25;
-uniform float lighting_smoothness : hint_range(0,1) = 0.02;
 uniform sampler2D lighting_curve : hint_white;
 
 uniform float specular : hint_range(0,1) = 0.5;

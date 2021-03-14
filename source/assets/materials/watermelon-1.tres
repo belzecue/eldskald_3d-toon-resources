@@ -3,11 +3,11 @@
 [ext_resource path="res://shader-codes/toon-shader/base-toon.shader" type="Shader" id=1]
 [ext_resource path="res://shader-codes/toon-shader/outline.tres" type="Material" id=2]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.02 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
 [resource]
 next_pass = ExtResource( 2 )
@@ -27,4 +27,4 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/lighting_curve = SubResource( 5 )
+shader_param/lighting_curve = SubResource( 2 )

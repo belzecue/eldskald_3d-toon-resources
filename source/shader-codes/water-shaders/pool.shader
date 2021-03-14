@@ -78,7 +78,7 @@ void fragment() {
 	// refraction off by replacing these last three lines by ALPHA = water_color.a.
 	// Maybe Godot 4 has a proposition to fix our problems? We're waiting for Godot.
 	vec3 normal = 2.0 * NORMALMAP - vec3(1.0);
-	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.12;
+	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.32 / length(VERTEX);
 	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, 0.0).rgb * (1.0 - water_color.a);
 }
 
