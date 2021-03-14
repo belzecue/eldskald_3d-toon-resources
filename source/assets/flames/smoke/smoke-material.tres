@@ -2,7 +2,7 @@
 
 [ext_resource path="res://shader-codes/toon-shader/alpha-outline.tres" type="Material" id=1]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "// Toon smoke shader.
 // It's a simplified version of the refraction shader on fragment and light,
 // with an added vertex function to morph its shape with time.
@@ -62,7 +62,7 @@ void light() {
 
 [resource]
 next_pass = ExtResource( 1 )
-shader = SubResource( 3 )
+shader = SubResource( 1 )
 shader_param/lighting = 0.0
 shader_param/lighting_half_band = 0.0
 shader_param/lighting_smoothness = 0.02

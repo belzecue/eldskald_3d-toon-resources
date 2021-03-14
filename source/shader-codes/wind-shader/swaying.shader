@@ -38,6 +38,7 @@ uniform sampler2D texture_surface : hint_white;
 uniform float lighting : hint_range(0,1) = 0.0;
 uniform float lighting_half_band : hint_range(0,1) = 0.25;
 uniform float lighting_smoothness : hint_range(0,1) = 0.02;
+uniform sampler2D lighting_curve : hint_white;
 
 uniform float specular : hint_range(0,1) = 0.5;
 uniform float specular_amount : hint_range(0,1) = 0.5;
@@ -114,13 +115,8 @@ void light() {
 	float rim_width = rim_amount * texture(texture_rim, UV).g;
 	float rim_smooth = rim_smoothness * texture(texture_rim, UV).b;
 	
-	float shade = dot(NORMAL, LIGHT);
-	float dark_shade = smoothstep(0.0, lighting_smoothness, shade);
-	float half_shade = smoothstep(lighting_half_band, lighting_half_band + lighting_smoothness, shade);
-	vec3 litness = (dark_shade/2.0 + half_shade/2.0) * ATTENUATION;
-	DIFFUSE_LIGHT.r += ALBEDO.r * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);
-	DIFFUSE_LIGHT.g += ALBEDO.g * LIGHT_COLOR.g * mix(lighting, 1.0, litness.g);
-	DIFFUSE_LIGHT.b += ALBEDO.b * LIGHT_COLOR.b * mix(lighting, 1.0, litness.b);
+	vec3 litness = texture(lighting_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
 	
 	vec3 aniso_dir = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
 	vec3 half = normalize(VIEW + LIGHT);
@@ -131,7 +127,7 @@ void light() {
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, spec_value) * spec_intensity * litness;
 	
 	float rim_dot = 1.0 - dot(NORMAL, VIEW);
-	float rim_threshold = pow((1.0 - rim_width), shade);
+	float rim_threshold = pow((1.0 - rim_width), dot(LIGHT, NORMAL));
 	float rim_intensity = smoothstep(rim_threshold - rim_smooth/2.0, rim_threshold + rim_smooth/2.0, rim_dot);
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness;
 }

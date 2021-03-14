@@ -100,8 +100,6 @@ void light() {
 	// Lighting, specular and rim directly from base toon shader. The agitation
 	// value controls rim and specular values. We use water color instead of albedo
 	// to keep albedo solely for edge detection.
-	
-	// Litness has no half band, and we add 0.5 to it to make better shaded parts.
 	float shade = clamp(dot(NORMAL, LIGHT), 0.0, 1.0);
 	vec3 litness = (smoothstep(0.0, lighting_smoothness, shade)/2.0 + 0.5) * ATTENUATION;
 	DIFFUSE_LIGHT.r += water_color.r * water_color.a * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);

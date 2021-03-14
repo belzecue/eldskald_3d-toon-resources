@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/sway.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/oak-trees/oak-2.obj" type="ArrayMesh" id=2]
@@ -28,7 +28,13 @@ shader_param/var_intensity = 1.0
 shader_param/var_frequency = 0.5
 shader_param/wind_var_curve = SubResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.02 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
 next_pass = SubResource( 3 )
 shader = ExtResource( 3 )
@@ -59,8 +65,9 @@ shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/wind_var_curve = SubResource( 2 )
+shader_param/lighting_curve = SubResource( 5 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
@@ -74,9 +81,12 @@ shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
 shader_param/var_frequency = 1.0
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
-next_pass = SubResource( 5 )
+next_pass = SubResource( 7 )
 shader = ExtResource( 3 )
 shader_param/wind = Vector2( 1, 0 )
 shader_param/resistance = 4.0
@@ -104,11 +114,12 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/lighting_curve = SubResource( 8 )
 
 [node name="OakTree" type="MeshInstance"]
 mesh = ExtResource( 2 )
-material/0 = SubResource( 4 )
-material/1 = SubResource( 6 )
+material/0 = SubResource( 6 )
+material/1 = SubResource( 9 )
 script = ExtResource( 1 )
 wind = Vector2( 1, 0 )
 resistance = 4.0

@@ -1,19 +1,25 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/models/palm-trees/palm-tree-1.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://shader-codes/wind-shader/swaying.shader" type="Shader" id=2]
 [ext_resource path="res://shader-codes/wind-shader/swaying-outline.tres" type="Material" id=3]
 [ext_resource path="res://scripts/sway.gd" type="Script" id=4]
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Gradient" id=471]
+offsets = PoolRealArray( 0, 0.02 )
+
+[sub_resource type="GradientTexture" id=472]
+gradient = SubResource( 471 )
+
+[sub_resource type="Curve" id=473]
 resource_local_to_scene = true
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.247104, 0.481818 ), 0.0, 0.0, 0, 0, Vector2( 0.749035, 0.481818 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=2]
+[sub_resource type="CurveTexture" id=474]
 resource_local_to_scene = true
-curve = SubResource( 1 )
+curve = SubResource( 473 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=475]
 resource_local_to_scene = true
 next_pass = ExtResource( 3 )
 shader = ExtResource( 2 )
@@ -21,6 +27,7 @@ shader_param/wind = Vector2( 1, 0 )
 shader_param/resistance = 1.0
 shader_param/interval = 3.5
 shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
 shader_param/var_frequency = 0.5
@@ -42,9 +49,13 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/wind_var_curve = SubResource( 2 )
+shader_param/wind_var_curve = SubResource( 474 )
+shader_param/lighting_curve = SubResource( 472 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="GradientTexture" id=476]
+gradient = SubResource( 471 )
+
+[sub_resource type="ShaderMaterial" id=477]
 resource_local_to_scene = true
 next_pass = ExtResource( 3 )
 shader = ExtResource( 2 )
@@ -52,6 +63,7 @@ shader_param/wind = Vector2( 1, 0 )
 shader_param/resistance = 1.0
 shader_param/interval = 3.5
 shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
 shader_param/var_frequency = 0.5
@@ -73,9 +85,13 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/wind_var_curve = SubResource( 2 )
+shader_param/wind_var_curve = SubResource( 474 )
+shader_param/lighting_curve = SubResource( 476 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="GradientTexture" id=478]
+gradient = SubResource( 471 )
+
+[sub_resource type="ShaderMaterial" id=479]
 resource_local_to_scene = true
 next_pass = ExtResource( 3 )
 shader = ExtResource( 2 )
@@ -83,6 +99,7 @@ shader_param/wind = Vector2( 1, 0 )
 shader_param/resistance = 1.0
 shader_param/interval = 3.5
 shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
 shader_param/seed = Vector2( 0, 0 )
 shader_param/var_intensity = 1.0
 shader_param/var_frequency = 0.5
@@ -104,45 +121,46 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/wind_var_curve = SubResource( 2 )
+shader_param/wind_var_curve = SubResource( 474 )
+shader_param/lighting_curve = SubResource( 478 )
 
 [node name="PalmTree" type="MeshInstance"]
 mesh = ExtResource( 1 )
-material/0 = SubResource( 3 )
-material/1 = SubResource( 4 )
-material/2 = SubResource( 3 )
-material/3 = SubResource( 4 )
-material/4 = SubResource( 3 )
-material/5 = SubResource( 4 )
-material/6 = SubResource( 3 )
-material/7 = SubResource( 4 )
-material/8 = SubResource( 3 )
-material/9 = SubResource( 4 )
-material/10 = SubResource( 3 )
-material/11 = SubResource( 4 )
-material/12 = SubResource( 3 )
-material/13 = SubResource( 4 )
-material/14 = SubResource( 3 )
-material/15 = SubResource( 4 )
-material/16 = SubResource( 3 )
-material/17 = SubResource( 4 )
-material/18 = SubResource( 3 )
-material/19 = SubResource( 4 )
-material/20 = SubResource( 5 )
-material/21 = SubResource( 5 )
-material/22 = SubResource( 5 )
-material/23 = SubResource( 5 )
-material/24 = SubResource( 5 )
-material/25 = SubResource( 5 )
-material/26 = SubResource( 5 )
-material/27 = SubResource( 5 )
-material/28 = SubResource( 5 )
-material/29 = SubResource( 5 )
-material/30 = SubResource( 5 )
+material/0 = SubResource( 475 )
+material/1 = SubResource( 477 )
+material/2 = SubResource( 475 )
+material/3 = SubResource( 477 )
+material/4 = SubResource( 475 )
+material/5 = SubResource( 477 )
+material/6 = SubResource( 475 )
+material/7 = SubResource( 477 )
+material/8 = SubResource( 475 )
+material/9 = SubResource( 477 )
+material/10 = SubResource( 475 )
+material/11 = SubResource( 477 )
+material/12 = SubResource( 475 )
+material/13 = SubResource( 477 )
+material/14 = SubResource( 475 )
+material/15 = SubResource( 477 )
+material/16 = SubResource( 475 )
+material/17 = SubResource( 477 )
+material/18 = SubResource( 475 )
+material/19 = SubResource( 477 )
+material/20 = SubResource( 479 )
+material/21 = SubResource( 479 )
+material/22 = SubResource( 479 )
+material/23 = SubResource( 479 )
+material/24 = SubResource( 479 )
+material/25 = SubResource( 479 )
+material/26 = SubResource( 479 )
+material/27 = SubResource( 479 )
+material/28 = SubResource( 479 )
+material/29 = SubResource( 479 )
+material/30 = SubResource( 479 )
 script = ExtResource( 4 )
 wind = Vector2( 1, 0 )
 resistance = 1.0
 interval = 3.5
 var_intensity = 1.0
 var_frequency = 0.5
-wind_var_curve = SubResource( 2 )
+wind_var_curve = SubResource( 474 )

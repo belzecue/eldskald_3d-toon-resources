@@ -1,98 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/models/tools/guitar/guitar.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://shader-codes/toon-shader/outline.tres" type="Material" id=2]
-[ext_resource path="res://shader-codes/toon-shader/base-toon.shader" type="Shader" id=3]
+[ext_resource path="res://assets/materials/guitar-1.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/guitar-3.tres" type="Material" id=3]
 [ext_resource path="res://assets/materials/iron-light.tres" type="Material" id=4]
-
-
-[sub_resource type="ShaderMaterial" id=1]
-next_pass = ExtResource( 2 )
-shader = ExtResource( 3 )
-shader_param/albedo = Color( 0.34902, 0.25098, 0.0862745, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = null
-shader_param/uv1_offset = null
-
-[sub_resource type="ShaderMaterial" id=2]
-next_pass = ExtResource( 2 )
-shader = ExtResource( 3 )
-shader_param/albedo = Color( 0.172549, 0.0901961, 0.0313726, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = null
-shader_param/uv1_offset = null
-
-[sub_resource type="ShaderMaterial" id=3]
-next_pass = ExtResource( 2 )
-shader = ExtResource( 3 )
-shader_param/albedo = Color( 0.0313726, 0.0196078, 0.0156863, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 8.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.3
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = null
-shader_param/uv1_offset = null
-
-[sub_resource type="ShaderMaterial" id=4]
-resource_local_to_scene = true
-shader = ExtResource( 3 )
-shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
-shader_param/specular = 0.0
-shader_param/specular_glossiness = 16.0
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.2
-shader_param/rim_smoothness = 0.05
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
+[ext_resource path="res://assets/materials/guitar-4.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/guitar-2.tres" type="Material" id=6]
 
 [node name="Guitar" type="MeshInstance"]
 mesh = ExtResource( 1 )
-material/0 = SubResource( 1 )
-material/1 = SubResource( 2 )
-material/2 = SubResource( 3 )
-material/3 = SubResource( 2 )
-material/4 = SubResource( 3 )
+material/0 = ExtResource( 2 )
+material/1 = ExtResource( 6 )
+material/2 = ExtResource( 3 )
+material/3 = ExtResource( 6 )
+material/4 = ExtResource( 3 )
 material/5 = ExtResource( 4 )
 material/6 = ExtResource( 4 )
-material/7 = SubResource( 4 )
+material/7 = ExtResource( 5 )

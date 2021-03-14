@@ -1,7 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://shader-codes/toon-shader/base-toon.shader" type="Shader" id=1]
 [ext_resource path="res://shader-codes/toon-shader/outline.tres" type="Material" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.02 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
 [resource]
 next_pass = ExtResource( 2 )
@@ -9,9 +15,6 @@ shader = ExtResource( 1 )
 shader_param/albedo = Color( 0.223529, 0.188235, 0.176471, 1 )
 shader_param/roughness = 1.0
 shader_param/metallic = 0.0
-shader_param/lighting = 0.0
-shader_param/lighting_half_band = 0.0
-shader_param/lighting_smoothness = 0.02
 shader_param/specular = 0.0
 shader_param/specular_amount = 0.5
 shader_param/specular_smoothness = 0.05
@@ -24,3 +27,4 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/lighting_curve = SubResource( 2 )

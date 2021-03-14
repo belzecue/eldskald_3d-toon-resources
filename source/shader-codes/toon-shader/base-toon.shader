@@ -18,9 +18,7 @@ uniform sampler2D texture_surface : hint_white;
 
 // Lighting uniforms. Set a high lighting value to make shaded parts brighter,
 // and set the half band to zero to turn it off.
-uniform float lighting : hint_range(0,1) = 0.0;
-uniform float lighting_half_band : hint_range(0,1) = 0.25;
-uniform float lighting_smoothness : hint_range(0,1) = 0.02;
+uniform sampler2D lighting_curve : hint_white;
 
 // Specular reflection uniforms. Set specular to zero to turn off the effect.
 // The texture map uses the red channel for the specular value, green for amount
@@ -91,15 +89,14 @@ void light() {
 	float rim_width = rim_amount * texture(texture_rim, UV).g;
 	float rim_smooth = rim_smoothness * texture(texture_rim, UV).b;
 	
-	// Lighting part. We smoothstep the dot product for each band then interpolate the sum
-	// between the lighting value and 1. Mess with the lighting uniforms to see.
-	float shade = dot(NORMAL, LIGHT);
-	float dark_shade = smoothstep(0.0, lighting_smoothness, shade);
-	float half_shade = smoothstep(lighting_half_band, lighting_half_band + lighting_smoothness, shade);
-	vec3 litness = (dark_shade/2.0 + half_shade/2.0) * ATTENUATION;
-	DIFFUSE_LIGHT.r += ALBEDO.r * LIGHT_COLOR.r * mix(lighting, 1.0, litness.r);
-	DIFFUSE_LIGHT.g += ALBEDO.g * LIGHT_COLOR.g * mix(lighting, 1.0, litness.g);
-	DIFFUSE_LIGHT.b += ALBEDO.b * LIGHT_COLOR.b * mix(lighting, 1.0, litness.b);
+	// Lighting part. We take the dot product between light and normal, multiply it by attenuation
+	// and apply it to the lighting curve. This means the lighting curve gets to do the dot product
+	// smoothing, set multiple light bands each with its own tone and smoothing, etc etc. I reccomend
+	// using the gradient tool to make a curve, since it gives you control of each point's position
+	// and color with precision. The curve tool works too, it gives you control of different
+	// interpolation methods but you have less control of each point's exact position and value.
+	vec3 litness = texture(lighting_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.
@@ -116,7 +113,7 @@ void light() {
 	// at a pixel from the edge of the object or not. We add the final value to specular
 	// light values so that Godot treats it as specular.
 	float rim_dot = 1.0 - dot(NORMAL, VIEW);
-	float rim_threshold = pow((1.0 - rim_width), shade);
+	float rim_threshold = pow((1.0 - rim_width), dot(LIGHT, NORMAL));
 	float rim_intensity = smoothstep(rim_threshold - rim_smooth/2.0, rim_threshold + rim_smooth/2.0, rim_dot);
 	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness;
 }
