@@ -15,5 +15,5 @@ I read code from a lot of people around to learn their techniques, adapt and app
 Other than code, I took some textures as well. Some are noise textures for the MIT shaders above available on their source codes, others are CC0 normal maps freely available from the following pages:
 
 - All water normal maps in assets/water are from [3dtextures.me](https://3dtextures.me/).
-- All normal maps in assets/textures are from [cc0textures.com](https://cc0textures.com/).
+- All folders inside assets/textures are from [3dtextures.me](https://3dtextures.me/).
 - Anisotropy flow maps in assets/textures are from [sketchfab.com](https://help.sketchfab.com/hc/en-us/articles/360020687812-Anisotropy)

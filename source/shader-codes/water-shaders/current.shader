@@ -34,7 +34,7 @@ void fragment() {
 	NORMALMAP_DEPTH = agitation*4.0;
 	
 	vec3 normal = 2.0 * NORMALMAP - vec3(1.0);
-	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.12;
+	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.32 / length(VERTEX);
 	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, 0.0).rgb * (1.0 - water_color.a);
 	ALBEDO = water_color.rgb * water_color.a;
 }
