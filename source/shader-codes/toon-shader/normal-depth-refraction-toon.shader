@@ -56,6 +56,8 @@ uniform sampler2D ao_map : hint_white;
 
 // Anisotropy from base code.
 uniform float anisotropy_ratio: hint_range(-1,1) = 0.0;
+uniform vec3 anisotropy_direction = vec3(0.0, -1.0, 0.0);
+uniform float aniso_map_dir_ratio: hint_range(0,1) = 0.0;
 uniform sampler2D anisotropy_flowmap : hint_aniso;
 
 // Refraction from base code.
@@ -144,8 +146,8 @@ void light() {
 	float rim_width = rim_amount * texture(texture_rim, UV).g;
 	float rim_smooth = rim_smoothness * texture(texture_rim, UV).b;
 	
-	// Lighting part. We take the dot product between light and normal, multiply it by attenuation
-	// and apply it to the lighting curve. This means the lighting curve gets to do the dot product
+	// Lighting part. We take the dot product between light and normal, apply it to the lighting curve
+	// and multiply it by attenuation. This means the lighting curve gets to do the dot product
 	// smoothing, set multiple light bands each with its own tone and smoothing, etc etc. I reccomend
 	// using the gradient tool to make a curve, since it gives you control of each point's position
 	// and color with precision. The curve tool works too, it gives you control of different
@@ -155,9 +157,11 @@ void light() {
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.
-	// It also deals with anisotropy.
-	vec3 aniso_dir = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
+	// It also deals with anisotropy. If you want to remove anisotropy calculations,
+	// remove flowchart, aniso_dir, aniso and replace spec by dot(NORMAL, half).
 	vec3 half = normalize(VIEW + LIGHT);
+	vec3 flowchart = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
+	vec3 aniso_dir = mix(normalize(anisotropy_direction), flowchart, aniso_map_dir_ratio);
 	float aniso = max(0, sin(dot(normalize(NORMAL + aniso_dir), half) * PI));
 	float spec = mix(dot(NORMAL, half), aniso, anisotropy_ratio * texture(anisotropy_flowmap, UV).a);
 	float spec_intensity = pow(spec, spec_gloss * spec_gloss);

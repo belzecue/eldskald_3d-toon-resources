@@ -55,6 +55,8 @@ uniform float ao_light_affect: hint_range(0,1) = 0.0;
 uniform sampler2D ao_map : hint_white;
 
 uniform float anisotropy_ratio: hint_range(-1,1) = 0.0;
+uniform vec3 anisotropy_direction = vec3(0.0, -1.0, 0.0);
+uniform float aniso_map_dir_ratio = 0.0;
 uniform sampler2D anisotropy_flowmap : hint_aniso;
 
 uniform vec2 uv_scale = vec2(1,1);
@@ -115,8 +117,9 @@ void light() {
 	vec3 litness = texture(lighting_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
 	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
 	
-	vec3 aniso_dir = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
 	vec3 half = normalize(VIEW + LIGHT);
+	vec3 flowchart = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
+	vec3 aniso_dir = mix(normalize(anisotropy_direction), flowchart, aniso_map_dir_ratio);
 	float aniso = max(0, sin(dot(normalize(NORMAL + aniso_dir), half) * PI));
 	float spec = mix(dot(NORMAL, half), aniso, anisotropy_ratio * texture(anisotropy_flowmap, UV).a);
 	float spec_intensity = pow(spec, spec_gloss * spec_gloss);

@@ -49,6 +49,8 @@ uniform sampler2D ao_map : hint_white;
 
 // Anisotropy from base code.
 uniform float anisotropy_ratio: hint_range(-1,1) = 0.0;
+uniform vec3 anisotropy_direction = vec3(0.0, -1.0, 0.0);
+uniform float aniso_map_dir_ratio: hint_range(0,1) = 0.0;
 uniform sampler2D anisotropy_flowmap : hint_aniso;
 
 // Refraction from base code.
@@ -115,9 +117,11 @@ void light() {
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.
-	// It also deals with anisotropy.
-	vec3 aniso_dir = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
+	// It also deals with anisotropy. If you want to remove anisotropy calculations,
+	// remove flowchart, aniso_dir, aniso and replace spec by dot(NORMAL, half).
 	vec3 half = normalize(VIEW + LIGHT);
+	vec3 flowchart = (texture(anisotropy_flowmap, UV).rgb * 2.0 - 1.0);
+	vec3 aniso_dir = mix(normalize(anisotropy_direction), flowchart, aniso_map_dir_ratio);
 	float aniso = max(0, sin(dot(normalize(NORMAL + aniso_dir), half) * PI));
 	float spec = mix(dot(NORMAL, half), aniso, anisotropy_ratio * texture(anisotropy_flowmap, UV).a);
 	float spec_intensity = pow(spec, spec_gloss * spec_gloss);
