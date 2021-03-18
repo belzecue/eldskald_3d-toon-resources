@@ -1,4 +1,4 @@
-// Toon shader with transparency and refraction.
+// Toon shader with transparency, refraction, transmission and subsurface scattering.
 // It has to be separated because assigning a value to alpha automatically puts
 // it into the transparency pipeline, causing it to not cast shadows.
 shader_type spatial;
@@ -127,7 +127,7 @@ void light() {
 	// and color with precision. The curve tool works too, it gives you control of different
 	// interpolation methods but you have less control of each point's exact position and value.
 	vec3 litness = texture(lighting_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
-	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * (litness + TRANSMISSION * (1.0 * ATTENUATION - litness));
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.

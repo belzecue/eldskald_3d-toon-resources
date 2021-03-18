@@ -842,8 +842,6 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/anisotropy_direction = Vector3( 0, -1, 0 )
 shader_param/aniso_map_dir_ratio = 0.0
-shader_param/subsurface_scattering = 0.0
-shader_param/transmission = Color( 0, 0, 0, 1 )
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/lighting_curve = SubResource( 45 )
@@ -908,8 +906,6 @@ shader_param/ao_light_affect = 0.0
 shader_param/anisotropy_ratio = 0.0
 shader_param/anisotropy_direction = Vector3( 0, -1, 0 )
 shader_param/aniso_map_dir_ratio = 0.0
-shader_param/subsurface_scattering = 0.0
-shader_param/transmission = Color( 0, 0, 0, 1 )
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 
@@ -6193,7 +6189,7 @@ cast_shadow = 3
 transform = Transform( 0.779546, 0, -0.626345, 0, 1, 0, 0.626345, 0, 0.779546, -3.87214, 0.00882436, -3.18381 )
 
 [node name="Boulder3" parent="Isle/Terrain" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44629, -0.00881804, -2.06949 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4932, -0.00881804, -2.24279 )
 
 [node name="Boulder4" parent="Isle/Terrain" instance=ExtResource( 20 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.27151, -1.49042, 9.30804 )
