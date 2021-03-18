@@ -62,6 +62,14 @@ uniform vec3 anisotropy_direction = vec3(0.0, -1.0, 0.0);
 uniform float aniso_map_dir_ratio: hint_range(0,1) = 0.0;
 uniform sampler2D anisotropy_flowmap : hint_aniso;
 
+// Subsurface scattering, from base code.
+uniform float subsurface_scattering : hint_range(0,1) = 0.0;
+uniform sampler2D texture_sss : hint_white;
+
+// Transmission, from base code.
+uniform vec4 transmission : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform sampler2D texture_transmission : hint_black;
+
 // UV scale and offset from base code.
 uniform vec2 uv_scale = vec2(1,1);
 uniform vec2 uv_offset = vec2(0,0);
@@ -119,6 +127,12 @@ void fragment() {
 	// Ambient occlusion, straight out of base code on the red channel.
 	AO = texture(ao_map, base_uv).r;
 	AO_LIGHT_AFFECT = ao_light_affect;
+	
+	// Subsurface scattering, straight out of base code.
+	SSS_STRENGTH = subsurface_scattering * texture(texture_sss, base_uv).r;
+
+	// Transmission, straight out of base code.
+	TRANSMISSION = transmission.rgb + texture(texture_transmission, base_uv).rgb;
 }
 
 

@@ -42,14 +42,22 @@ uniform float emission_energy = 1.0;
 uniform sampler2D texture_emission : hint_black_albedo;
 
 // Ambient occlusion from base code.
-uniform float ao_light_affect: hint_range(0,1) = 0.0;
+uniform float ao_light_affect : hint_range(0,1) = 0.0;
 uniform sampler2D ao_map : hint_white;
 
-// Anisotropy from base code.
-uniform float anisotropy_ratio: hint_range(-1,1) = 0.0;
+// Anisotropy, a little modified.
+uniform float anisotropy_ratio : hint_range(-1,1) = 0.0;
 uniform vec3 anisotropy_direction = vec3(0.0, -1.0, 0.0);
-uniform float aniso_map_dir_ratio: hint_range(0,1) = 0.0;
+uniform float aniso_map_dir_ratio : hint_range(0,1) = 0.0;
 uniform sampler2D anisotropy_flowmap : hint_aniso;
+
+// Subsurface scattering, from base code.
+uniform float subsurface_scattering : hint_range(0,1) = 0.0;
+uniform sampler2D texture_sss : hint_white;
+
+// Transmission, from base code.
+uniform vec4 transmission : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform sampler2D texture_transmission : hint_black;
 
 // UV scale and offset from base code.
 uniform vec2 uv_scale = vec2(1,1);
@@ -75,6 +83,12 @@ void fragment() {
 	// Ambient occlusion, straight out of base code on the red channel.
 	AO = texture(ao_map, UV).r;
 	AO_LIGHT_AFFECT = ao_light_affect;
+	
+	// Subsurface scattering, straight out of base code.
+	SSS_STRENGTH = subsurface_scattering * texture(texture_sss, UV).r;
+
+	// Transmission, straight out of base code.
+	TRANSMISSION = transmission.rgb + texture(texture_transmission, UV).rgb;
 }
 
 
@@ -96,9 +110,9 @@ void light() {
 	// smoothing, set multiple light bands each with its own tone and smoothing, etc etc. I reccomend
 	// using the gradient tool to make a curve, since it gives you control of each point's position
 	// and color with precision. The curve tool works too, it gives you control of different
-	// interpolation methods but you have less control of each point's exact position and value.
+	// interpolation methods but you have less control over each point's exact position and value.
 	vec3 litness = texture(lighting_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
-	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * (litness + TRANSMISSION * (1.0 - litness));
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.
