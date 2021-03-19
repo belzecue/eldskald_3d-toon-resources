@@ -1,4 +1,6 @@
-// Toon shader with normal maps, depth maps and transparency/refraction.
+// Toon shader with transparency, refraction, transmission and subsurface scattering.
+// It has to be separated because assigning a value to alpha automatically puts
+// it into the transparency pipeline, causing it to not cast shadows.
 shader_type spatial;
 render_mode depth_draw_always;
 
@@ -15,6 +17,9 @@ uniform sampler2D texture_surface : hint_white;
 
 // Lighting uniforms. Set a high lighting value to make shaded parts brighter,
 // and set the half band to zero to turn it off.
+uniform float lighting : hint_range(0,1) = 0.0;
+uniform float lighting_half_band : hint_range(0,1) = 0.25;
+uniform float lighting_smoothness : hint_range(0,1) = 0.02;
 uniform sampler2D lighting_curve : hint_white;
 
 // Specular reflection uniforms. Set specular to zero to turn off the effect.
@@ -37,18 +42,6 @@ uniform sampler2D texture_rim : hint_white;
 uniform vec4 emission : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float emission_energy = 1.0;
 uniform sampler2D texture_emission : hint_black_albedo;
-
-// Normal map from base code.
-uniform float normal_scale : hint_range(-16,16) = 1.0;
-uniform sampler2D texture_normal : hint_normal;
-
-// Depth map from base code.
-uniform float depth_scale = 0.0;
-uniform int depth_min_layers = 8;
-uniform int depth_max_layers = 32;
-uniform bool flip_tangent = false;
-uniform bool flip_binormal = false;
-uniform sampler2D texture_depth : hint_black;
 
 // Ambient occlusion from base code.
 uniform float ao_light_affect: hint_range(0,1) = 0.0;
@@ -87,63 +80,36 @@ void vertex() {
 
 
 void fragment() {
-	vec2 base_uv = UV;
-	
-	// Depth from base code, with deep parallax enabled. Slightly modified so that
-	// black are deeps and white are peaks, as well as turning depth flip into bools.
-	// It is very intense on the GPU, so keep depth scale at zero to turn this off.
-	if (depth_scale != 0.0) {
-		vec2 depth_flip = vec2(flip_tangent ? -1.0 : 1.0, flip_binormal ? -1.0 : 1.0);
-		vec3 view_dir = normalize(normalize(-VERTEX)*mat3(TANGENT*depth_flip.x,-BINORMAL*depth_flip.y,NORMAL));
-		float num_layers = mix(float(depth_max_layers),float(depth_min_layers), abs(dot(vec3(0.0, 0.0, 1.0), view_dir)));
-		float layer_depth = 1.0 / num_layers;
-		float current_layer_depth = 0.0;
-		vec2 P = view_dir.xy * depth_scale;
-		vec2 delta = P / num_layers;
-		vec2  ofs = base_uv;
-		float depth = 1.0 - textureLod(texture_depth, ofs,0.0).r;
-		float current_depth = 0.0;
-		while(current_depth < depth) {
-			ofs -= delta;
-			depth = 1.0 - textureLod(texture_depth, ofs,0.0).r;
-			current_depth += layer_depth;
-		}
-		vec2 prev_ofs = ofs + delta;
-		float after_depth  = depth - current_depth;
-		float before_depth = 1.0 - textureLod(texture_depth, prev_ofs, 0.0).r - current_depth + layer_depth;
-		float weight = after_depth / (after_depth - before_depth);
-		ofs = mix(ofs,prev_ofs,weight);
-		base_uv=ofs;
-	}
-	
-	ALBEDO = albedo.rgb * texture(texture_albedo, base_uv).rgb;
-	ROUGHNESS = roughness * texture(texture_surface, base_uv).r;
-	METALLIC = metallic * texture(texture_surface, base_uv).g;
-	
-	// Normal map, straight out of base code.
-	NORMALMAP = texture(texture_normal, base_uv).rgb;
-	NORMALMAP_DEPTH = normal_scale;
+	ROUGHNESS = roughness * texture(texture_surface, UV).r;
+	METALLIC = metallic * texture(texture_surface, UV).g;
 	
 	// Emission, straight out of base code with additive mode.
-	EMISSION = (emission.rgb + texture(texture_emission, base_uv).rgb) * emission_energy;
+	EMISSION = (emission.rgb + texture(texture_emission, UV).rgb) * emission_energy;
 	
 	// Ambient occlusion, straight out of base code on the red channel.
-	AO = texture(ao_map, base_uv).r;
+	AO = texture(ao_map, UV).r;
 	AO_LIGHT_AFFECT = ao_light_affect;
 	
 	// Subsurface scattering, straight out of base code.
-	SSS_STRENGTH = subsurface_scattering * texture(texture_sss, base_uv).r;
+	SSS_STRENGTH = subsurface_scattering * texture(texture_sss, UV).r;
 
 	// Transmission, straight out of base code.
-	TRANSMISSION = transmission.rgb + texture(texture_transmission, base_uv).rgb;
+	TRANSMISSION = transmission.rgb + texture(texture_transmission, UV).rgb;
 	
-	// Refraction, straight out of base code.
-	vec3 normal = normalize(mix(NORMAL,TANGENT*NORMALMAP.x + BINORMAL*NORMALMAP.y + NORMAL*NORMALMAP.z,NORMALMAP_DEPTH));
-	vec2 ref_ofs = SCREEN_UV - normal.xy*dot(texture(texture_refraction,base_uv),refraction_texture_channel)*refraction;
-	float ref_amount = 1.0 - albedo.a * texture(texture_albedo, base_uv).a;
+	// Refraction, slightly modified. It doesn't actually uses the alpha value, instead
+	// it reads from the screen texture in order to distort the image to make refraction.
+	// This means nothing else that reads from it will appear through it, and things on the
+	// alpha channel also have troubles showing behind them. If you want to disable refraction
+	// and just use the alpha channel, just take out all of the following uncommented lines
+	// and uncomment the commented ones.
+	vec3 normal = NORMAL;
+	vec2 ref_ofs = SCREEN_UV - normal.xy * dot(texture(texture_refraction, UV), refraction_texture_channel) * refraction;
+	float ref_amount = 1.0 - albedo.a * texture(texture_albedo, UV).a;
 	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, 0.0).rgb * ref_amount;
-	ALBEDO *= 1.0 - ref_amount;
+	ALBEDO = (1.0 - ref_amount) * albedo.rgb * texture(texture_albedo, UV).rgb;
 	ALPHA = 1.0;
+//	ALBEDO = albedo.rgb * texture(texture_albedo, UV).rgb;
+//	ALPHA = albedo.a * texture(texture_albedo, UV).a;
 }
 
 
@@ -160,14 +126,14 @@ void light() {
 	float rim_width = rim_amount * texture(texture_rim, UV).g;
 	float rim_smooth = rim_smoothness * texture(texture_rim, UV).b;
 	
-	// Lighting part. We take the dot product between light and normal, apply it to the lighting curve
-	// and multiply it by attenuation. This means the lighting curve gets to do the dot product
+	// Lighting part. We take the dot product between light and normal, multiply it by attenuation
+	// and apply it to the lighting curve. This means the lighting curve gets to do the dot product
 	// smoothing, set multiple light bands each with its own tone and smoothing, etc etc. I reccomend
 	// using the gradient tool to make a curve, since it gives you control of each point's position
 	// and color with precision. The curve tool works too, it gives you control of different
 	// interpolation methods but you have less control of each point's exact position and value.
 	vec3 litness = texture(lighting_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
-	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * (litness + TRANSMISSION * (1.0 * ATTENUATION - litness));
+	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * (litness + TRANSMISSION * (ATTENUATION - litness));
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep
 	// function to toonify. Mess with the specular uniforms to see what each one does.

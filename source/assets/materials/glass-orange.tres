@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
-[ext_resource path="res://shader-codes/toon-shader/refraction-toon.shader" type="Shader" id=1]
+[ext_resource path="res://shader-codes/toon-shader/transparency-toon.shader" type="Shader" id=1]
 [ext_resource path="res://shader-codes/toon-shader/alpha-outline.tres" type="Material" id=2]
 
 [sub_resource type="Gradient" id=1]

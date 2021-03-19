@@ -6,7 +6,7 @@ code = "// Outline modified for transparent materials. It has to be sent
 // and block everything, rendering transparency useless. Won't show behind
 // other transparent materials.
 shader_type spatial;
-render_mode cull_front, unshaded;
+render_mode cull_front, unshaded, depth_draw_always;
 
 uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float outline_width = 1.0;
