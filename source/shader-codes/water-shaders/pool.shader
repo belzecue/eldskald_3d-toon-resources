@@ -9,6 +9,7 @@ render_mode depth_draw_always;
 uniform vec4 water_color : hint_color = vec4(1.0);
 uniform float reflectiveness: hint_range(0,1) = 0.8;
 uniform float agitation: hint_range(0,1) = 0.0;
+uniform float refraction: hint_range(0,1) = 0.16;
 uniform float brightness = 1.0;
 uniform float edge_brightness = 1.0;
 uniform bool fixed_edge_lighting = false;
@@ -78,7 +79,7 @@ void fragment() {
 	// refraction off by replacing these last three lines by ALPHA = water_color.a.
 	// Maybe Godot 4 has a proposition to fix our problems? We're waiting for Godot.
 	vec3 normal = 2.0 * NORMALMAP - vec3(1.0);
-	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.32 / length(VERTEX);
+	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * refraction / length(VERTEX);
 	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, 0.0).rgb * (1.0 - water_color.a);
 }
 

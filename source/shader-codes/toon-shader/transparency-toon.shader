@@ -17,9 +17,6 @@ uniform sampler2D texture_surface : hint_white;
 
 // Lighting uniforms. Set a high lighting value to make shaded parts brighter,
 // and set the half band to zero to turn it off.
-uniform float lighting : hint_range(0,1) = 0.0;
-uniform float lighting_half_band : hint_range(0,1) = 0.25;
-uniform float lighting_smoothness : hint_range(0,1) = 0.02;
 uniform sampler2D lighting_curve : hint_white;
 
 // Specular reflection uniforms. Set specular to zero to turn off the effect.

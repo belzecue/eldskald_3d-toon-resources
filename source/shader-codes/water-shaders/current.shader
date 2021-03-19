@@ -8,6 +8,7 @@ render_mode depth_draw_always;
 uniform vec4 water_color : hint_color = vec4(1.0);
 uniform float reflectiveness: hint_range(0,1) = 0.8;
 uniform float agitation: hint_range(0,1) = 0.2;
+uniform float refraction: hint_range(0,1) = 0.16;
 uniform float brightness = 1.0;
 uniform float flow_speed = 1.0;
 uniform sampler2D normal_map: hint_normal;
@@ -34,7 +35,7 @@ void fragment() {
 	NORMALMAP_DEPTH = agitation*4.0;
 	
 	vec3 normal = 2.0 * NORMALMAP - vec3(1.0);
-	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * 0.32 / length(VERTEX);
+	vec2 ref_ofs = SCREEN_UV - normal.xy * agitation * refraction / length(VERTEX);
 	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, 0.0).rgb * (1.0 - water_color.a);
 	ALBEDO = water_color.rgb * water_color.a;
 }
