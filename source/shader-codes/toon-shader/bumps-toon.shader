@@ -1,7 +1,10 @@
-// Toon shader with normal maps and depth maps. It has to be
-// separated because assigning values to the normal map may
-// cause geometry to break. If all your models are well made,
-// you can use this one in place of the base toon shader.
+// Toon shader with normal map, depth map, occlusion map and
+// anisotropy maps. It has to be separated because assigning
+// values to the normal map may cause geometry to break.
+// If all your models are well made, you can use this one
+// in place of the base toon shader, though they might be
+// less efficient, so unless you're using them there is
+// little reason to not use the base toon shader instead.
 shader_type spatial;
 
 
@@ -9,17 +12,16 @@ shader_type spatial;
 uniform vec4 albedo : hint_color = vec4(1.0);
 uniform sampler2D texture_albedo : hint_albedo;
 
-// Roughness and metallic here are only for reflection purposes. The surface
-// texture maps the red channel to roughness and the green channel to metallic.
-uniform float roughness : hint_range(0,1) = 1.0;
-uniform float metallic : hint_range(0,1) = 0.0;
-uniform sampler2D texture_surface : hint_white;
+// Diffuse curve. This is, in my opinion, what defines a toon shader. A
+// photo-realistic shader should have a linear curve starting at 0 and
+// finishing at 1, and a toon shader should start at 0 and get to 1 almost
+// instantaneously. The length of this transition is its smoothing, working
+// the same way as the specular and rim light smoothing uniforms. Another
+// common curve is to make it a staircase, which would result in multiple
+// shading bands. Check the video for a more detailed explanation.
+uniform sampler2D diffuse_curve : hint_white;
 
-// Lighting uniforms. Set a high lighting value to make shaded parts brighter,
-// and set the half band to zero to turn it off.
-uniform sampler2D lighting_curve : hint_white;
-
-// Specular reflection uniforms. Set specular to zero to turn off the effect.
+// Specular light uniforms. Set specular to zero to turn off the effect.
 // The texture map uses the red channel for the specular value, green for amount
 // and blue for smoothness.
 uniform float specular : hint_range(0,1) = 0.5;
@@ -27,13 +29,21 @@ uniform float specular_amount : hint_range(0,1) = 0.5;
 uniform float specular_smoothness : hint_range(0,1) = 0.05;
 uniform sampler2D texture_specular : hint_white;
 
-// Rim lighting uniforms. Set rim to zero to turn off the effect.
+// Rim light uniforms. Set rim to zero to turn off the effect.
 // The texture map uses the red channel for the rim value, green for rim amount
 // and blue for smoothness.
 uniform float rim : hint_range(0,1) = 0.5;
 uniform float rim_amount : hint_range(0,1) = 0.2;
 uniform float rim_smoothness : hint_range(0,1) = 0.05;
 uniform sampler2D texture_rim : hint_white;
+
+// Roughness and metallic here are only for reflection purposes if you are
+// using SS reflections or want the sky reflected on your material. In most
+// cases you don't want to change those, but you can try them. The surface
+// texture maps the red channel to roughness and the green channel to metallic.
+uniform float metallic : hint_range(0,1) = 0.0;
+uniform float roughness : hint_range(0,1) = 1.0;
+uniform sampler2D texture_surface : hint_white;
 
 // Emission from base code.
 uniform vec4 emission : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
@@ -113,12 +123,12 @@ void fragment() {
 	NORMALMAP = texture(texture_normal, base_uv).rgb;
 	NORMALMAP_DEPTH = normal_scale;
 	
-	// Emission, straight out of base code with additive mode.
-	EMISSION = (emission.rgb + texture(texture_emission, base_uv).rgb) * emission_energy;
-	
 	// Ambient occlusion, straight out of base code on the red channel.
 	AO = texture(ao_map, base_uv).r;
 	AO_LIGHT_AFFECT = ao_light_affect;
+	
+	// Emission, straight out of base code with additive mode.
+	EMISSION = (emission.rgb + texture(texture_emission, base_uv).rgb) * emission_energy;
 }
 
 
@@ -135,13 +145,13 @@ void light() {
 	float rim_width = rim_amount * texture(texture_rim, UV).g;
 	float rim_smooth = rim_smoothness * texture(texture_rim, UV).b;
 	
-	// Lighting part. We take the dot product between light and normal, multiply it by attenuation
-	// and apply it to the lighting curve. This means the lighting curve gets to do the dot product
+	// Diffuse part. We take the dot product between light and normal, multiply it by attenuation
+	// and apply it to the diffuse curve. This means the diffuse curve gets to do the dot product
 	// smoothing, set multiple light bands each with its own tone and smoothing, etc etc. I reccomend
 	// using the gradient tool to make a curve, since it gives you control of each point's position
 	// and color with precision. The curve tool works too, it gives you control of different
-	// interpolation methods but you have less control of each point's exact position and value.
-	vec3 litness = texture(lighting_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
+	// interpolation methods but you have less control over each point's exact position and value.
+	vec3 litness = texture(diffuse_curve, vec2(dot(LIGHT, NORMAL), 0.0)).r * ATTENUATION;
 	DIFFUSE_LIGHT += ALBEDO * LIGHT_COLOR * litness;
 	
 	// Specular part. We use the Blinn-Phong specular calculations with a smoothstep

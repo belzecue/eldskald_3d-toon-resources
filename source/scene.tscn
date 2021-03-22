@@ -1,4 +1,4 @@
-[gd_scene load_steps=531 format=2]
+[gd_scene load_steps=529 format=2]
 
 [ext_resource path="res://player/kinematic-player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/flames/febucci-flames/febucci-flames.tscn" type="PackedScene" id=2]
@@ -818,33 +818,22 @@ shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/wind_var_curve = SubResource( 39 )
 shader_param/lighting_curve = SubResource( 12 )
 
-[sub_resource type="Gradient" id=44]
-offsets = PoolRealArray( 0, 0.02 )
-
-[sub_resource type="GradientTexture" id=45]
-gradient = SubResource( 44 )
-
 [sub_resource type="ShaderMaterial" id=46]
 resource_local_to_scene = true
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.152941, 0.133333, 0.121569, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
 shader_param/specular = 0.0
 shader_param/specular_amount = 0.5
 shader_param/specular_smoothness = 0.05
 shader_param/rim = 0.0
 shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/anisotropy_ratio = 0.0
-shader_param/anisotropy_direction = Vector3( 0, -1, 0 )
-shader_param/aniso_map_dir_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/lighting_curve = SubResource( 45 )
 
 [sub_resource type="Shader" id=47]
 code = "// Outline, by GDQuest
@@ -892,20 +881,16 @@ resource_local_to_scene = true
 next_pass = SubResource( 48 )
 shader = ExtResource( 31 )
 shader_param/albedo = Color( 0.364706, 0.333333, 0.313726, 1 )
-shader_param/roughness = 1.0
-shader_param/metallic = 0.0
 shader_param/specular = 0.5
 shader_param/specular_amount = 0.5
 shader_param/specular_smoothness = 0.05
 shader_param/rim = 0.25
 shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/emission_energy = 1.0
-shader_param/ao_light_affect = 0.0
-shader_param/anisotropy_ratio = 0.0
-shader_param/anisotropy_direction = Vector3( 0, -1, 0 )
-shader_param/aniso_map_dir_ratio = 0.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 
@@ -967,8 +952,9 @@ curve = SubResource( 58 )
 
 [sub_resource type="ParticlesMaterial" id=60]
 resource_local_to_scene = true
+lifetime_randomness = 1.0
 emission_shape = 2
-emission_box_extents = Vector3( 0.02, 0.02, 0.6 )
+emission_box_extents = Vector3( 0.1, 0.02, 0.6 )
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
@@ -6380,7 +6366,7 @@ material/3 = ExtResource( 34 )
 material/4 = ExtResource( 36 )
 
 [node name="WaterfallFoam" parent="CliffIsland" instance=ExtResource( 45 )]
-transform = Transform( 0.41409, 0, 0.910236, 0, 1, 0, -0.910236, 0, 0.41409, 1.08799, 2.72369, -2.24648 )
+transform = Transform( 0.41409, 0, 0.910236, 0, 1, 0, -0.910236, 0, 0.41409, 1.05896, 2.72369, -2.17826 )
 process_material = SubResource( 60 )
 
 [node name="Lake" type="MeshInstance" parent="CliffIsland"]
