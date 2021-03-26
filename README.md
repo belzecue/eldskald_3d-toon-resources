@@ -1,6 +1,6 @@
 # 3D Toon Resources
 
-WIP
+This project is a gathering of works for stylized toon shaded games. It has a toon shader with support for everything the Godot shaders have to offer and a couple of other stylized effects, like fire, wind, smoke, water, sea and more. Everything is built on the Godot Engine.
 
 ## Open source resources
 
@@ -17,3 +17,5 @@ Other than code, I took some textures as well. Some are noise textures for the M
 - All water normal maps in assets/water are from [3dtextures.me](https://3dtextures.me/).
 - All folders inside assets/textures are from [3dtextures.me](https://3dtextures.me/).
 - Anisotropy flow maps in assets/textures are from [sketchfab.com](https://help.sketchfab.com/hc/en-us/articles/360020687812-Anisotropy)
+
+And of course, we cannot leave the [Godot Engine](https://godotengine.org/) development team out.
