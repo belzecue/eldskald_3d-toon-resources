@@ -137,7 +137,10 @@ void fragment() {
 	// Emission, straight out of base code with additive mode.
 	EMISSION = (emission.rgb + texture(texture_emission, base_uv).rgb) * emission_energy;
 	
-	// Subsurface scattering, straight out of base code.
+	// Subsurface scattering, straight out of base code. I put it on the transparency
+	// shader because it is a transparency effect, but it actually doesn't work if the
+	// object is on the transparent pipeline. If you want to use that effect, comment
+	// out the refraction code and leave the alpha value commented out as well.
 	SSS_STRENGTH = subsurface_scattering * texture(texture_sss, base_uv).r;
 
 	// Transmission, straight out of base code.
