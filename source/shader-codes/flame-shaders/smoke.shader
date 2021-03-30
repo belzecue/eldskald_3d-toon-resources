@@ -48,7 +48,7 @@ void light() {
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
 	vec3 specular = vec3(0.0);
-	specular += mix(vec3(0.0), LIGHT_COLOR, rim) * rim_intensity * litness;
+	specular += LIGHT_COLOR * rim * rim_intensity * litness;
 	SPECULAR_LIGHT += mix(ALBEDO, specular, alpha) * rim_intensity * rim; // This last line is to add transparency.
 }
 

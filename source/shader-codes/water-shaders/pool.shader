@@ -111,7 +111,7 @@ void light() {
 	vec3 half = normalize(VIEW + LIGHT);
 	float spec_intensity = pow(dot(NORMAL, half), specular_glossiness * specular_glossiness);
 	spec_intensity = smoothstep(0.05, 0.05 + specular_smoothness, spec_intensity);
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, agitation * reflectiveness) * spec_intensity * litness * brightness;
+	SPECULAR_LIGHT += LIGHT_COLOR * agitation * reflectiveness * spec_intensity * litness * brightness;
 	
 	// Rim lighting with agitation and reflectiveness controling its amount.
 	// We also blend it with specular by multiplying the final value by
@@ -120,14 +120,14 @@ void light() {
 	float rim_threshold = pow((1.0 - rim_amount), shade);
 	float rim_intensity = smoothstep(rim_threshold - rim_smoothness/2.0, rim_threshold + rim_smoothness/2.0, rim_dot);
 	float rim_value = agitation * reflectiveness;
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness * (1.0 - spec_intensity) * brightness;
+	SPECULAR_LIGHT += LIGHT_COLOR * rim_value * rim_intensity * litness * (1.0 - spec_intensity) * brightness;
 	
 	// We detect edge here by reading the albedo. If it's black
 	// it's not edge, if it's white it's edge, and every shade of
 	// gray in between is smoothing.
 	float edge_factor = edge_brightness * (1.0 - rim_intensity) * (1.0 - spec_intensity);
 	float edge_value = fixed_edge_lighting ? 0.5 : agitation * reflectiveness;
-	SPECULAR_LIGHT += ALBEDO.r * mix(vec3(0.0), LIGHT_COLOR, edge_value) * edge_factor * litness;
+	SPECULAR_LIGHT += ALBEDO.r * LIGHT_COLOR * edge_value * edge_factor * litness;
 }
 
 

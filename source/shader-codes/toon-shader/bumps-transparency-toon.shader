@@ -196,7 +196,7 @@ void light() {
 	float spec = mix(dot(NORMAL, half), aniso, anisotropy_ratio * texture(anisotropy_flowmap, UV).a);
 	float spec_intensity = pow(spec, spec_gloss * spec_gloss);
 	spec_intensity = smoothstep(0.05, 0.05 + spec_smooth, spec_intensity);
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, spec_value) * spec_intensity * litness;
+	SPECULAR_LIGHT += LIGHT_COLOR * spec_value * spec_intensity * litness;
 	
 	// Rim part. We use the view and normal vectors only to find out if we're looking
 	// at a pixel from the edge of the object or not. We add the final value to specular
@@ -204,7 +204,7 @@ void light() {
 	float rim_dot = 1.0 - dot(NORMAL, VIEW);
 	float rim_threshold = pow((1.0 - rim_width), dot(LIGHT, NORMAL));
 	float rim_intensity = smoothstep(rim_threshold - rim_smooth/2.0, rim_threshold + rim_smooth/2.0, rim_dot);
-	SPECULAR_LIGHT += mix(vec3(0.0), LIGHT_COLOR, rim_value) * rim_intensity * litness;
+	SPECULAR_LIGHT += LIGHT_COLOR * rim_value * rim_intensity * litness;
 }
 
 
