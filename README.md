@@ -2,6 +2,8 @@
 
 This project is a gathering of works for stylized toon shaded games. It has a toon shader with support for everything the Godot shaders have to offer and a couple of other stylized effects, like fire, wind, smoke, water, sea and more. Everything is built on the Godot Engine.
 
+The purpose of this project is mostly to teach, for people to use as a base to create their own shaders. Of course, you can use everything as is, all the code is MIT so you can use and modify everything as long as you properly credit everyone.
+
 ## Open source resources
 
 I read code from a lot of people around to learn their techniques, adapt and apply them in other places. Some code remains mostly unmodified, others are heavily changed, others are somewhat used in other places, mostly adapting the technique.
